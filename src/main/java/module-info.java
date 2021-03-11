@@ -3,5 +3,6 @@ module ColourTheWorldApp {
     requires javafx.fxml;
     requires javafx.controls;
 
-    exports pl.magdalena.brejna.colourtheworldapp to javafx.graphics;
+    opens pl.magdalena.brejna.colourtheworldapp.controllers to javafx.fxml;
+    exports pl.magdalena.brejna.colourtheworldapp;
 }
