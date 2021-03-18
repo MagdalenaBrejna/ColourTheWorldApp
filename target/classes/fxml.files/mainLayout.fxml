@@ -19,7 +19,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="%file">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="%close" />
+                    <MenuItem mnemonicParsing="false" onAction="#closeApplication" text="%close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="%edit">

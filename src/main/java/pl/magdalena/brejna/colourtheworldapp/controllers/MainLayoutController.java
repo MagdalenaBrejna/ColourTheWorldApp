@@ -1,7 +1,9 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
+import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
 public class MainLayoutController {
@@ -14,6 +16,13 @@ public class MainLayoutController {
 
     public void setCenter(String centerFxmlPath){
         mainPane.setCenter(FxmlUtils.fxmlLoader(centerFxmlPath));
+    }
+
+    @FXML
+    public void closeApplication() {
+        DialogsUtils.confirmationDialog()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> System.exit(0));
     }
 
     @FXML
