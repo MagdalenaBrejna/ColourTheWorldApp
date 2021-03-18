@@ -9,14 +9,14 @@
    <children>
       <VBox>
          <children>
-            <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" text="%add.project">
+            <Button mnemonicParsing="false" onAction="#openNewProject" prefHeight="250.0" prefWidth="250.0" text="%add.project">
                <VBox.margin>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                  <Insets bottom="30.0" left="110.0" right="30.0" top="30.0" />
                </VBox.margin>
             </Button>
             <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" text="%sign.in">
                <VBox.margin>
-                  <Insets bottom="30.0" left="30.0" right="30.0" />
+                  <Insets bottom="30.0" left="110.0" right="30.0" />
                </VBox.margin>
             </Button>
          </children>

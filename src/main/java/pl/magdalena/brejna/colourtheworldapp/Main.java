@@ -8,15 +8,17 @@ import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
 public class Main extends Application {
 
-    private static final String MAIN_FXML = "/fxml.files/MainLayout.fxml";
+    private static final String MainFXML = "/fxml.files/MainLayout.fxml";
 
     public static void main(String[] args) {
         launch(args);
     }
 
     public void start(Stage primaryStage)  {
-        Parent root = FxmlUtils.fxmlLoader(MAIN_FXML);
+        Parent root = FxmlUtils.fxmlLoader(MainFXML);
         Scene scene = new Scene(root);
+        primaryStage.setMinHeight(450);
+        primaryStage.setMinWidth(750);
         primaryStage.setScene(scene);
         primaryStage.setTitle(FxmlUtils.getResourceBundle().getString("title.application"));
         primaryStage.show();
