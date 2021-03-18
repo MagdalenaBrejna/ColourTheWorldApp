@@ -7,12 +7,12 @@ public class MainLayoutController {
     @FXML
     private MainMenuButtonsController mainMenuButtonsController;
 
-    @FXML
-    private UserChoiceController userChoiceController;
+    // @FXML
+    //private UserChoiceController userChoiceController;
 
     @FXML
     private void initialize() {
         mainMenuButtonsController.setMainLayoutController(this);
-        userChoiceController.setMainLayoutController(this);
+       // userChoiceController.setMainLayoutController(this);
     }
 }
