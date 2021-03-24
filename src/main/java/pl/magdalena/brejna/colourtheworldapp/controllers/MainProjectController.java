@@ -10,13 +10,13 @@ public class MainProjectController {
     @FXML
     private ProjectMenuController projectMenuController;
 
-    @FXML
-    private ProjectButtonsController projectButtonsController;
+   // @FXML
+   // private SplitPane splitPane;
 
     @FXML
     private void initialize() {
         imageViewController.setMainProjectController(this);
         projectMenuController.setMainProjectController(this);
-        projectButtonsController.setMainProjectController(this);
+        //splitPane.getDividers().get(0).positionProperty().addListener((obs, oldVal, newVal) -> {});
     }
 }

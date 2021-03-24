@@ -14,7 +14,5 @@
          </children>
       </VBox>
    </top>
-   <left>
-        <fx:include fx:id="projectButtons" source="ProjectButtons.fxml" />
-   </left>
+
 </BorderPane>

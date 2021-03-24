@@ -15,6 +15,5 @@ public class MainMenuButtonsController {
     @FXML
     public void openNewProject(){
         mainLayoutController.setCenter(mainProjectFXML);
-
     }
 }
