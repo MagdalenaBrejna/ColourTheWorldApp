@@ -90,7 +90,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="40.0" layoutY="269.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" text="%close.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="280.0">
+      <Button layoutX="40.0" layoutY="269.0" mnemonicParsing="false" onAction="#closeProject" prefHeight="30.0" prefWidth="140.0" text="%close.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="280.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>

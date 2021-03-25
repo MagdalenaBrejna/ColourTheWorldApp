@@ -40,5 +40,11 @@ public class ImageViewController {
        }
     }
 
+    @FXML
+    private void closeProject(){
+        App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
+    }
+
+
 
 }
