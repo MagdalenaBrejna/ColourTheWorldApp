@@ -1,10 +1,12 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageSettingException;
 import pl.magdalena.brejna.colourtheworldapp.models.ImageFxModel;
+import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 
 public class ImageViewController {
 
@@ -42,7 +44,9 @@ public class ImageViewController {
 
     @FXML
     private void closeProject(){
-        App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
+        DialogsUtils.confirmationDialog()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
     }
 
 
