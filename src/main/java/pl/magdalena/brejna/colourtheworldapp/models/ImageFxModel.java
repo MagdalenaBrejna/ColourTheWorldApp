@@ -47,4 +47,5 @@ public class ImageFxModel {
             throw new ImageSettingException("file exception");
         }
     }
+
 }

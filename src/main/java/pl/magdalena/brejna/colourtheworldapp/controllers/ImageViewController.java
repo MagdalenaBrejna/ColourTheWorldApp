@@ -43,12 +43,14 @@ public class ImageViewController {
     }
 
     @FXML
+    private void deletePhoto(){
+        imageViewBefore.setImage(null);
+    }
+
+    @FXML
     private void closeProject(){
         DialogsUtils.confirmationDialog()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
     }
-
-
-
 }
