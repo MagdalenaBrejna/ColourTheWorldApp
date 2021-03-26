@@ -2,6 +2,7 @@ package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageSettingException;
@@ -19,10 +20,14 @@ public class ImageViewController {
     @FXML
     private ImageView imageViewBefore;
 
+    @FXML
+    private SplitPane splitPane;
+
     public void initialize(){
         this.imageFxModel = new ImageFxModel();
         this.imageFxModel.init();
         bindings();
+        splitPane.getDividers().get(0).positionProperty().addListener((obs, oldVal, newVal) -> {});
     }
 
     public void bindings(){

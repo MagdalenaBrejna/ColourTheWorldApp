@@ -10,21 +10,27 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.ImageViewController">
    <children>
-      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+      <SplitPane fx:id="splitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
          <items>
             <ScrollPane prefHeight="201.0" prefWidth="189.0">
               <content>
-                <AnchorPane prefHeight="319.0" prefWidth="238.0">
+                <AnchorPane prefHeight="455.0" prefWidth="647.0">
                      <children>
-                        <ImageView fx:id="imageViewBefore" fitHeight="313.0" fitWidth="237.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imageViewBefore" fitHeight="320.0" fitWidth="485.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../Users/magda/Pictures/Saved%20Pictures/NYC.jpg" />
+                           </image></ImageView>
                      </children></AnchorPane>
               </content>
             </ScrollPane>
             <ScrollPane prefHeight="214.0" prefWidth="211.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="319.0" prefWidth="237.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="662.0">
                      <children>
-                        <ImageView fx:id="imageViewAfter" fitHeight="313.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imageViewAfter" fitHeight="517.0" fitWidth="663.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../Users/magda/Pictures/Obraz1.jpg" />
+                           </image></ImageView>
                      </children></AnchorPane>
               </content>
             </ScrollPane>
