@@ -4,10 +4,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import pl.magdalena.brejna.colourtheworldapp.App;
-import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageSettingException;
+import pl.magdalena.brejna.colourtheworldapp.Main;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.models.ImageFxModel;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
+
+import java.io.File;
+import java.io.IOException;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
+import javax.imageio.ImageIO;
 
 public class ImageViewController {
 
@@ -19,6 +28,8 @@ public class ImageViewController {
 
     @FXML
     private ImageView imageViewBefore;
+    @FXML
+    private ImageView imageViewAfter;
 
     @FXML
     private SplitPane splitPane;
@@ -42,9 +53,18 @@ public class ImageViewController {
     private void choosePhoto(){
        try {
            imageViewBefore.setImage(imageFxModel.loadImage());
-       }catch(ImageSettingException e){
+       }catch(ImageException e){
            e.printStackTrace();
        }
+    }
+
+    @FXML
+    private void savePhoto(){
+        try {
+            imageFxModel.saveImage(imageViewAfter.getImage());
+        } catch (ImageException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

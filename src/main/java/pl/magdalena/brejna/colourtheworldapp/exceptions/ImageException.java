@@ -1,8 +1,8 @@
 package pl.magdalena.brejna.colourtheworldapp.exceptions;
 
-public class ImageSettingException extends Exception{
+public class ImageException extends Exception{
 
-    public ImageSettingException(String s){
+    public ImageException(String s){
         super(s);
     }
 

@@ -2,12 +2,15 @@ package pl.magdalena.brejna.colourtheworldapp.models;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import pl.magdalena.brejna.colourtheworldapp.Main;
-import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageSettingException;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 
+import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.IOException;
 
 public class ImageFxModel {
 
@@ -27,7 +30,20 @@ public class ImageFxModel {
         this.imageFxObjectProperty.set(imageFxObjectProperty);
     }
 
-    public Image loadImage () throws ImageSettingException {
+    public void saveImage(Image imageAfter) throws ImageException, IOException{
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png"));
+
+        File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
+        if (file != null)
+            ImageIO.write(SwingFXUtils.fromFXImage(imageAfter, null), "png", file);
+        else
+            throw new ImageException("Save file exception.");
+    }
+
+    public Image loadImage () throws ImageException {
 
         ImageFX imageBefore = new ImageFX();
         try {
@@ -41,11 +57,10 @@ public class ImageFxModel {
                 imageBefore.setImage(image);
                 return imageBefore.getImage();
             }else
-                throw new ImageSettingException("file exception");
+                throw new ImageException("open file exception");
 
         } catch (NullPointerException e) {
-            throw new ImageSettingException("file exception");
+            throw new ImageException("open file exception");
         }
     }
-
 }
