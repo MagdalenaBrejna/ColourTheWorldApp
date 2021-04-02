@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
 
 public class ImageFX {
 
-    private SimpleStringProperty  imageProjectName = new SimpleStringProperty();
-    private ObjectProperty<Image> image = new SimpleObjectProperty<>();
+    private SimpleStringProperty imageProjectName = new SimpleStringProperty();
+    private ObjectProperty<Image> projectImage = new SimpleObjectProperty<>();
 
     public String getImageProjectName() {
         return imageProjectName.get();
@@ -22,15 +22,15 @@ public class ImageFX {
         this.imageProjectName.set(imageProjectName);
     }
 
-    public Image getImage() {
-        return image.get();
+    public Image getProjectImage() {
+        return projectImage.get();
     }
 
-    public ObjectProperty<Image> imageProperty() {
-        return image;
+    public ObjectProperty<Image> projectImageProperty() {
+        return projectImage;
     }
 
-    public void setImage(Image image) {
-        this.image.set(image);
+    public void setProjectImage(Image projectImage) {
+        this.projectImage.set(projectImage);
     }
 }

@@ -1,22 +1,15 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import pl.magdalena.brejna.colourtheworldapp.App;
-import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.models.ImageFxModel;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
-
-import java.io.File;
 import java.io.IOException;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-import javafx.embed.swing.SwingFXUtils;
-import javax.imageio.ImageIO;
 
 public class ImageViewController {
 
@@ -32,6 +25,19 @@ public class ImageViewController {
     private ImageView imageViewAfter;
 
     @FXML
+    private Button openImageButton;
+    @FXML
+    private Button createProjectButton;
+    @FXML
+    private Button zoomButton;
+    @FXML
+    private Button saveAsButton;
+    @FXML
+    private Button closeProjectButton;
+    @FXML
+    private Button deleteButton;
+
+    @FXML
     private SplitPane splitPane;
 
     public void initialize(){
@@ -42,7 +48,12 @@ public class ImageViewController {
     }
 
     public void bindings(){
-        //this.imageViewBefore.bindBidarectional(this.imageFxModel.getImageFxObjectProperty().imageProperty());
+        this.createProjectButton.disableProperty().bind(this.imageViewBefore.imageProperty().isNull());
+        this.zoomButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
+        this.saveAsButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
+        this.deleteButton.disableProperty().bind(this.imageViewBefore.imageProperty().isNull());
+        this.zoomButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
+        //this.imageViewBefore.imageProperty().bindBidirectional(imageFxModel.getImageFxObjectProperty().projectImageProperty());
     }
 
     public void setMainProjectController(MainProjectController mainController) {

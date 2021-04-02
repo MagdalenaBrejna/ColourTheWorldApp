@@ -27,12 +27,12 @@
             </ImageView>
          </graphic>
       </MenuButton>
-      <TextField prefHeight="30.0" prefWidth="230.0">
+      <TextField fx:id="projectNameField" prefHeight="30.0" prefWidth="230.0">
          <HBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </HBox.margin>
       </TextField>
-      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="%save.button">
+      <Button fx:id="saveNameButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="%save.button">
          <HBox.margin>
             <Insets bottom="20.0" top="20.0" />
          </HBox.margin>
@@ -53,7 +53,7 @@
             </ImageView>
          </graphic>
       </MenuButton>
-      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="%edit.button">
+      <Button fx:id="editButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="%edit.button">
          <HBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </HBox.margin>

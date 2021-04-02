@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
-
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -54,8 +53,9 @@ public class ImageFxModel {
 
             Image image = new Image(file.toURI().toString());
             if(!image.isError()) {
-                imageBefore.setImage(image);
-                return imageBefore.getImage();
+                imageBefore.setProjectImage(image);
+                setImageFxObjectProperty(imageBefore);
+                return imageBefore.getProjectImage();
             }else
                 throw new ImageException("open file exception");
 
