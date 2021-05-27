@@ -1,7 +1,6 @@
 package pl.magdalena.brejna.colourtheworldapp.models;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -10,25 +9,25 @@ import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class ImageFxModel {
+public class ImageFxProjectModel {
 
-    private ObjectProperty<ImageFX> imageFxObjectProperty = new SimpleObjectProperty<>(new ImageFX());
+    //ImageFxProjectModel contains active project and a list of created project
+    ArrayList<ImageFxProject> imageFxProjectObservableList = new ArrayList<>();
+    ImageFxProject activeProject;
 
+    //class initialization
     public void init(){ }
 
-    public ImageFX getImageFxObjectProperty() {
-        return imageFxObjectProperty.get();
+    //create current active project, add it to the list, set its name with text stored in textField
+    public void save(StringProperty textProperty){
+        activeProject = new ImageFxProject();
+        imageFxProjectObservableList.add(activeProject);
+        imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
     }
 
-    public ObjectProperty<ImageFX> imageFxObjectPropertyProperty() {
-        return imageFxObjectProperty;
-    }
-
-    public void setImageFxObjectProperty(ImageFX imageFxObjectProperty) {
-        this.imageFxObjectProperty.set(imageFxObjectProperty);
-    }
-
+    //open file chooser to let choose location and name of saving file, save photo as a png
     public void saveImage(Image imageAfter) throws ImageException, IOException{
 
         FileChooser fileChooser = new FileChooser();
@@ -42,9 +41,9 @@ public class ImageFxModel {
             throw new ImageException("Save file exception.");
     }
 
+    //open file chooser to let find photo (jpg or png), add it to the active project
     public Image loadImage () throws ImageException {
 
-        ImageFX imageBefore = new ImageFX();
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().add(
@@ -53,9 +52,8 @@ public class ImageFxModel {
 
             Image image = new Image(file.toURI().toString());
             if(!image.isError()) {
-                imageBefore.setProjectImage(image);
-                setImageFxObjectProperty(imageBefore);
-                return imageBefore.getProjectImage();
+                imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setProjectImage(image);
+                return imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).getProjectImage();
             }else
                 throw new ImageException("open file exception");
 

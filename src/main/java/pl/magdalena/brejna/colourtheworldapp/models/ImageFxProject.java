@@ -5,10 +5,30 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
-public class ImageFX {
+public class ImageFxProject {
 
     private SimpleStringProperty imageProjectName = new SimpleStringProperty();
     private ObjectProperty<Image> projectImage = new SimpleObjectProperty<>();
+    private ObjectProperty<Image> readyImage = new SimpleObjectProperty<>();
+
+    @Override
+    public String toString() {
+        return "imageProjectName = " + imageProjectName;
+    }
+
+    public Image getReadyImage() {
+        return readyImage.get();
+    }
+
+    public ObjectProperty<Image> readyImageProperty() {
+        return readyImage;
+    }
+
+    public void setReadyImage(Image readyImage) {
+        this.readyImage.set(readyImage);
+    }
+
+
 
     public String getImageProjectName() {
         return imageProjectName.get();
@@ -21,6 +41,7 @@ public class ImageFX {
     public void setImageProjectName(String imageProjectName) {
         this.imageProjectName.set(imageProjectName);
     }
+
 
     public Image getProjectImage() {
         return projectImage.get();
