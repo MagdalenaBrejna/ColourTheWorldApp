@@ -5,6 +5,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import pl.magdalena.brejna.colourtheworldapp.Main;
+import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class ImageFxProjectModel {
 
-    //ImageFxProjectModel contains active project and a list of created project
+    //ImageFxProjectModel contains an active project and a list of created project
     ArrayList<ImageFxProject> imageFxProjectObservableList = new ArrayList<>();
     ImageFxProject activeProject;
 
@@ -25,6 +26,13 @@ public class ImageFxProjectModel {
         activeProject = new ImageFxProject();
         imageFxProjectObservableList.add(activeProject);
         imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
+    }
+
+    //transform the project photo to colouring book
+    public Image createPhoto(){
+        Image newImage = EdgeDetection.detectEdges(activeProject.getProjectImage());
+        activeProject.setReadyImage(newImage);
+        return activeProject.getReadyImage();
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png

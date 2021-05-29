@@ -69,7 +69,7 @@ public class MainProjectController {
     //create colouring based on uploaded photo
     @FXML
     private void createNewPhoto(){
-
+        imageViewAfter.setImage(imageFxProjectModel.createPhoto());
     }
 
     //set uploadd photo to the imageViewBefore
