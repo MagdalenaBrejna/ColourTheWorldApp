@@ -95,7 +95,9 @@ public class MainProjectController {
     //delete photo stored in imageViewBefore
     @FXML
     private void deletePhoto(){
+        imageFxProjectModel.delete();
         imageViewBefore.setImage(null);
+        imageViewAfter.setImage(null);
     }
 
     //ask for confirmation and if the answer is OK close an active project

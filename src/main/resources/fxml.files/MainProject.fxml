@@ -81,7 +81,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="662.0">
                            <children>
-                              <ImageView fx:id="imageViewAfter" fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageViewAfter" fitHeight="412.0" fitWidth="564.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </content>

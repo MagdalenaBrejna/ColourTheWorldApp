@@ -28,6 +28,12 @@ public class ImageFxProjectModel {
         imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
     }
 
+    //delete photos from active project
+    public void delete(){
+        activeProject.setProjectImage(null);
+        activeProject.setReadyImage(null);
+    }
+
     //transform the project photo to colouring book
     public Image createPhoto(){
         Image newImage = EdgeDetection.detectEdges(activeProject.getProjectImage());
