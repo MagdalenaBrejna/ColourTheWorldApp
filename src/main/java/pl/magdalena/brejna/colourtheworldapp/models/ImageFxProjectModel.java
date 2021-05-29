@@ -42,7 +42,7 @@ public class ImageFxProjectModel {
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
-    public void saveImage(Image imageAfter) throws ImageException, IOException{
+    public void saveImage() throws ImageException, IOException{
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
@@ -50,7 +50,7 @@ public class ImageFxProjectModel {
 
         File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
         if (file != null)
-            ImageIO.write(SwingFXUtils.fromFXImage(imageAfter, null), "png", file);
+            ImageIO.write(SwingFXUtils.fromFXImage(activeProject.getReadyImage(), null), "png", file);
         else
             throw new ImageException("Save file exception.");
     }

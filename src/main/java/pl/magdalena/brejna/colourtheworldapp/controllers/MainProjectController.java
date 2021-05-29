@@ -86,7 +86,7 @@ public class MainProjectController {
     @FXML
     private void savePhoto(){
        try {
-            imageFxProjectModel.saveImage(imageViewAfter.getImage());
+            imageFxProjectModel.saveImage();
         } catch (ImageException | IOException e) {
             e.printStackTrace();
         }
