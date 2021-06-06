@@ -34,6 +34,7 @@ public class EdgeDetection {
 
         sourceImage.copyTo(dst, edges);
         BufferedImage img = (BufferedImage) HighGui.toBufferedImage(dst);
+        img = NegativeFilter.makeNegativePhoto(img);
 
         WritableImage readyImage = SwingFXUtils.toFXImage((BufferedImage) img, null);
 
