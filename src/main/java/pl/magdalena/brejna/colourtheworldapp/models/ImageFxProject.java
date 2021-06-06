@@ -5,11 +5,22 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
+import java.io.File;
+
 public class ImageFxProject {
 
     private SimpleStringProperty imageProjectName = new SimpleStringProperty();
     private ObjectProperty<Image> projectImage = new SimpleObjectProperty<>();
     private ObjectProperty<Image> readyImage = new SimpleObjectProperty<>();
+    private File sourceFile;
+
+    public File getSourceFile() {
+        return sourceFile;
+    }
+
+    public void setSourceFile(File sourceFile) {
+        this.sourceFile = sourceFile;
+    }
 
     @Override
     public String toString() {

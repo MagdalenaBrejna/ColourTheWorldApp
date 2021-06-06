@@ -36,7 +36,7 @@ public class ImageFxProjectModel {
 
     //transform the project photo to colouring book
     public Image createPhoto(){
-        Image newImage = EdgeDetection.detectEdges(activeProject.getProjectImage());
+        Image newImage = EdgeDetection.detectEdges(activeProject.getSourceFile());
         activeProject.setReadyImage(newImage);
         return activeProject.getReadyImage();
     }
@@ -49,9 +49,9 @@ public class ImageFxProjectModel {
                 new FileChooser.ExtensionFilter("Image Files", "*.png"));
 
         File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
-        if (file != null)
+        if (file != null) {
             ImageIO.write(SwingFXUtils.fromFXImage(activeProject.getReadyImage(), null), "png", file);
-        else
+        }else
             throw new ImageException("Save file exception.");
     }
 
@@ -65,10 +65,11 @@ public class ImageFxProjectModel {
             File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
 
             Image image = new Image(file.toURI().toString());
-            if(!image.isError()) {
+            if (!image.isError()) {
+                activeProject.setSourceFile(file);
                 imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setProjectImage(image);
                 return imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).getProjectImage();
-            }else
+            } else
                 throw new ImageException("open file exception");
 
         } catch (NullPointerException e) {

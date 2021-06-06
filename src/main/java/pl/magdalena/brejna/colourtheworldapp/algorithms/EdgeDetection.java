@@ -1,10 +1,42 @@
 package pl.magdalena.brejna.colourtheworldapp.algorithms;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.highgui.HighGui;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class EdgeDetection {
 
-    public static Image detectEdges(Image projectImage){
-        return projectImage;
+    //Laplacian of Gauss algorithm - edge detection
+    public static Image detectEdges(File sourceFile){
+
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME );
+
+        Mat sourceImage = Imgcodecs.imread(sourceFile.getPath());
+
+        Mat gray = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
+        Mat edges = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
+        Mat dst = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type(), new Scalar(0));
+
+        Imgproc.cvtColor(sourceImage, gray, Imgproc.COLOR_RGB2GRAY);
+
+        Imgproc.GaussianBlur(sourceImage, dst, new Size(3,3), 0.5);
+
+        Imgproc.Laplacian(sourceImage, dst, -10, 3);
+
+        sourceImage.copyTo(dst, edges);
+        BufferedImage img = (BufferedImage) HighGui.toBufferedImage(dst);
+
+        WritableImage readyImage = SwingFXUtils.toFXImage((BufferedImage) img, null);
+
+        return readyImage;
     }
 }
