@@ -52,6 +52,7 @@ public class MainProjectController {
     public void initialize(){
         this.imageFxProjectModel = new ImageFxProjectModel();
         this.imageFxProjectModel.init();
+        this.projectNameField.setText("newProject");
         bindings();
         splitPane.getDividers().get(0).positionProperty().addListener((obs, oldVal, newVal) -> {});
     }
@@ -62,8 +63,6 @@ public class MainProjectController {
         this.zoomButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
         this.saveAsButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
         this.deleteButton.disableProperty().bind(this.imageViewBefore.imageProperty().isNull());
-        this.saveNameButton.disableProperty().bind(projectNameField.textProperty().isEmpty());
-        this.openImageButton.disableProperty().bind(this.projectNameField.textProperty().isEmpty());
     }
 
     //create colouring based on uploaded photo
@@ -77,6 +76,7 @@ public class MainProjectController {
     private void choosePhoto(){
         try {
             imageViewBefore.setImage(imageFxProjectModel.loadImage());
+            openImageButton.setDisable(true);
         }catch(ImageException e){
             e.printStackTrace();
         }
@@ -98,6 +98,7 @@ public class MainProjectController {
         imageFxProjectModel.delete();
         imageViewBefore.setImage(null);
         imageViewAfter.setImage(null);
+        openImageButton.setDisable(false);
     }
 
     //ask for confirmation and if the answer is OK close an active project

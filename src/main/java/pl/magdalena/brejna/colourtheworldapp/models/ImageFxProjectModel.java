@@ -19,11 +19,12 @@ public class ImageFxProjectModel {
     ImageFxProject activeProject;
 
     //class initialization
-    public void init(){ }
+    public void init(){
+        activeProject = new ImageFxProject();
+    }
 
     //create current active project, add it to the list, set its name with text stored in textField
     public void save(StringProperty textProperty){
-        activeProject = new ImageFxProject();
         imageFxProjectObservableList.add(activeProject);
         imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
     }
@@ -67,8 +68,8 @@ public class ImageFxProjectModel {
             Image image = new Image(file.toURI().toString());
             if (!image.isError()) {
                 activeProject.setSourceFile(file);
-                imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setProjectImage(image);
-                return imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).getProjectImage();
+                activeProject.setProjectImage(image);
+                return activeProject.getProjectImage();
             } else
                 throw new ImageException("open file exception");
 
