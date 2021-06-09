@@ -31,7 +31,7 @@ public class Main extends Application {
         Scene scene = new Scene(mainPane);
 
         primaryStage.setMinHeight(500);
-        primaryStage.setMinWidth(750);
+        primaryStage.setMinWidth(850);
         primaryStage.setScene(scene);
         primaryStage.setTitle(FxmlUtils.getResourceBundle().getString("title.application"));
         primaryStage.show();

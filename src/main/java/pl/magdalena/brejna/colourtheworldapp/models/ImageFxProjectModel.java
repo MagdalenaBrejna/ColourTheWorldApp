@@ -37,7 +37,7 @@ public class ImageFxProjectModel {
 
     //transform the project photo to colouring book
     public Image createPhoto(){
-        Image newImage = EdgeDetection.detectEdges(activeProject.getSourceFile());
+        Image newImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), 0.0);
         activeProject.setReadyImage(newImage);
         return activeProject.getReadyImage();
     }
@@ -54,6 +54,17 @@ public class ImageFxProjectModel {
             ImageIO.write(SwingFXUtils.fromFXImage(activeProject.getReadyImage(), null), "png", file);
         }else
             throw new ImageException("Save file exception.");
+    }
+
+    //update readyImage with parameter set using slider
+    public Image dilate(Double sliderValue){
+        Image updatedImage =  null;
+        if(activeProject.getReadyImage() != null) {
+            activeProject.setDilationValue(sliderValue);
+            updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue());
+            activeProject.setReadyImage(updatedImage);
+        }
+        return updatedImage;
     }
 
     //open file chooser to let find photo (jpg or png), add it to the active project

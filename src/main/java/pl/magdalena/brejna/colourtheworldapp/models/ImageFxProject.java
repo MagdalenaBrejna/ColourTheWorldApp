@@ -12,6 +12,21 @@ public class ImageFxProject {
     private ObjectProperty<Image> projectImage = new SimpleObjectProperty<>();
     private ObjectProperty<Image> readyImage = new SimpleObjectProperty<>();
     private File sourceFile;
+    private Double dilationValue;
+
+    public String toString() {
+        return "imageProjectName = " + imageProjectName;
+    }
+
+
+    public void setDilationValue(Double newValue){
+        dilationValue = newValue;
+    }
+
+    public Double getDilationValue(){
+        return dilationValue;
+    }
+
 
     public File getSourceFile() {
         return sourceFile;
@@ -21,10 +36,6 @@ public class ImageFxProject {
         this.sourceFile = sourceFile;
     }
 
-    @Override
-    public String toString() {
-        return "imageProjectName = " + imageProjectName;
-    }
 
     public Image getReadyImage() {
         return readyImage.get();
@@ -37,7 +48,6 @@ public class ImageFxProject {
     public void setReadyImage(Image readyImage) {
         this.readyImage.set(readyImage);
     }
-
 
 
     public String getImageProjectName() {

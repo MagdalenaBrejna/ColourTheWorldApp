@@ -48,13 +48,22 @@ public class MainProjectController {
     @FXML
     private SplitPane splitPane;
 
+    @FXML
+    private Slider slider;
+
     //class initialization - set bindings, set movement of splitPane
     public void initialize(){
         this.imageFxProjectModel = new ImageFxProjectModel();
         this.imageFxProjectModel.init();
         this.projectNameField.setText("newProject");
+
         bindings();
+
         splitPane.getDividers().get(0).positionProperty().addListener((obs, oldVal, newVal) -> {});
+
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+           imageViewAfter.setImage(imageFxProjectModel.dilate((Double) newValue));
+        });
     }
 
     //set bindings - make some controls disabled in special conditions
@@ -69,6 +78,7 @@ public class MainProjectController {
     @FXML
     private void createNewPhoto(){
         imageViewAfter.setImage(imageFxProjectModel.createPhoto());
+       // createProjectButton.setDisable(true);
     }
 
     //set uploadd photo to the imageViewBefore
@@ -77,6 +87,7 @@ public class MainProjectController {
         try {
             imageViewBefore.setImage(imageFxProjectModel.loadImage());
             openImageButton.setDisable(true);
+            //createProjectButton.setDisable(false);
         }catch(ImageException e){
             e.printStackTrace();
         }

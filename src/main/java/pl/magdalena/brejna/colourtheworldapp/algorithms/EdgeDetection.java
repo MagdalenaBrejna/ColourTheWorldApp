@@ -3,10 +3,7 @@ package pl.magdalena.brejna.colourtheworldapp.algorithms;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
+import org.opencv.core.*;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -16,7 +13,7 @@ import java.io.File;
 public class EdgeDetection {
 
     //Laplacian of Gauss algorithm - edge detection
-    public static Image detectEdges(File sourceFile){
+    public static Image detectEdges(File sourceFile, Double dilationFactor){
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME );
 
@@ -33,6 +30,10 @@ public class EdgeDetection {
         Imgproc.Laplacian(sourceImage, dst, -10, 3);
 
         sourceImage.copyTo(dst, edges);
+
+        Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size((2*dilationFactor) + 1, (2*dilationFactor)+1), new Point(dilationFactor, dilationFactor));
+        Imgproc.dilate(dst, dst, kernel);
+
         BufferedImage img = (BufferedImage) HighGui.toBufferedImage(dst);
         img = NegativeFilter.makeNegativePhoto(img);
 
