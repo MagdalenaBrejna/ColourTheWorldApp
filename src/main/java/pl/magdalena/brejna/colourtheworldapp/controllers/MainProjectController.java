@@ -116,12 +116,15 @@ public class MainProjectController {
         openImageButton.setDisable(false);
     }
 
-    //ask for confirmation and if the answer is OK close an active project
+    //ask for confirmation if the project is unsaved and if the answer is OK close an active project
     @FXML
     private void closeProject(){
-        DialogsUtils.confirmationDialog()
-                .filter(response -> response == ButtonType.OK)
-                .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
+        if(!imageFxProjectModel.isSaved()) {
+            DialogsUtils.confirmationDialog()
+                    .filter(response -> response == ButtonType.OK)
+                    .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
+        }else
+            App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
     }
 
     //create current project and save its name

@@ -29,6 +29,14 @@ public class ImageFxProjectModel {
         imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
     }
 
+    //check if the active project is saved
+    public boolean isSaved(){
+        if(activeProject.getImageProjectName() == null)
+            return false;
+        return true;
+    }
+
+
     //delete photos from active project
     public void delete(){
         activeProject.setProjectImage(null);
