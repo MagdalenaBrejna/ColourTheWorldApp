@@ -5,14 +5,14 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
-import pl.magdalena.brejna.colourtheworldapp.models.ImageFxProject;
-import pl.magdalena.brejna.colourtheworldapp.models.ImageFxProjectModel;
+import pl.magdalena.brejna.colourtheworldapp.models.UserProject;
+import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import java.io.IOException;
 
 public class MainProjectController {
 
-    private ImageFxProjectModel imageFxProjectModel;
+    private ProjectModel projectModel;
     private static final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtons.fxml";
 
     //controls connected with saving new project
@@ -21,7 +21,7 @@ public class MainProjectController {
     @FXML
     private TextField projectNameField;
     @FXML
-    private ComboBox<ImageFxProject> projectChoiceComboBox;
+    private ComboBox<UserProject> projectChoiceComboBox;
     @FXML
     private Button editButton;
 
@@ -55,8 +55,8 @@ public class MainProjectController {
 
     //class initialization - set bindings, set movement of splitPane
     public void initialize(){
-        this.imageFxProjectModel = new ImageFxProjectModel();
-        this.imageFxProjectModel.init();
+        this.projectModel = new ProjectModel();
+        this.projectModel.init();
         this.projectNameField.setText("newProject");
 
         bindings();
@@ -64,11 +64,11 @@ public class MainProjectController {
         splitPane.getDividers().get(0).positionProperty().addListener((obs, oldVal, newVal) -> {});
 
         slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-           imageViewAfter.setImage(imageFxProjectModel.dilate((Double) newValue));
+           imageViewAfter.setImage(projectModel.dilate((Double) newValue));
         });
 
         contrastSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            imageViewAfter.setImage(imageFxProjectModel.makeContrast((Double) newValue));
+            imageViewAfter.setImage(projectModel.makeContrast((Double) newValue));
         });
     }
 
@@ -83,14 +83,14 @@ public class MainProjectController {
     //create colouring based on uploaded photo
     @FXML
     private void createNewPhoto(){
-        imageViewAfter.setImage(imageFxProjectModel.createPhoto());
+        imageViewAfter.setImage(projectModel.createPhoto());
     }
 
     //set uploadd photo to the imageViewBefore
     @FXML
     private void choosePhoto(){
         try {
-            imageViewBefore.setImage(imageFxProjectModel.loadImage());
+            imageViewBefore.setImage(projectModel.loadImage());
             openImageButton.setDisable(true);
         }catch(ImageException e){
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class MainProjectController {
     @FXML
     private void savePhoto(){
        try {
-            imageFxProjectModel.saveImage();
+            projectModel.saveImage();
         } catch (ImageException | IOException e) {
             e.printStackTrace();
         }
@@ -110,7 +110,7 @@ public class MainProjectController {
     //delete photo stored in imageViewBefore
     @FXML
     private void deletePhoto(){
-        imageFxProjectModel.delete();
+        projectModel.delete();
         imageViewBefore.setImage(null);
         imageViewAfter.setImage(null);
         openImageButton.setDisable(false);
@@ -119,7 +119,7 @@ public class MainProjectController {
     //ask for confirmation if the project is unsaved and if the answer is OK close an active project
     @FXML
     private void closeProject(){
-        if(!imageFxProjectModel.isSaved()) {
+        if(!projectModel.isSaved()) {
             DialogsUtils.confirmationDialog()
                     .filter(response -> response == ButtonType.OK)
                     .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
@@ -130,7 +130,7 @@ public class MainProjectController {
     //create current project and save its name
     @FXML
     private void saveProject(){
-        imageFxProjectModel.save(projectNameField.textProperty());
+        projectModel.save(projectNameField.textProperty());
         projectNameField.setDisable(true);
         this.saveNameButton.disableProperty().unbind();
         saveNameButton.setDisable(true);

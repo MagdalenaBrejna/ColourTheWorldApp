@@ -12,21 +12,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ImageFxProjectModel {
+public class ProjectModel {
 
     //ImageFxProjectModel contains an active project and a list of created project
-    ArrayList<ImageFxProject> imageFxProjectObservableList = new ArrayList<>();
-    ImageFxProject activeProject;
+    ArrayList<UserProject> projectObservableList = new ArrayList<>();
+    UserProject activeProject;
 
     //class initialization
     public void init(){
-        activeProject = new ImageFxProject();
+        activeProject = new UserProject();
     }
 
     //create current active project, add it to the list, set its name with text stored in textField
     public void save(StringProperty textProperty){
-        imageFxProjectObservableList.add(activeProject);
-        imageFxProjectObservableList.get(imageFxProjectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
+        projectObservableList.add(activeProject);
+        projectObservableList.get(projectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
     }
 
     //check if the active project is saved

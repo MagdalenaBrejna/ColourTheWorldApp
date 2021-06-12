@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import java.io.File;
 
-public class ImageFxProject {
+public class UserProject {
 
     private SimpleStringProperty imageProjectName = new SimpleStringProperty();
     private ObjectProperty<Image> projectImage = new SimpleObjectProperty<>();
