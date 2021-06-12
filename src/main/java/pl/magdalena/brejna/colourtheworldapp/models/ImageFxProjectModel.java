@@ -37,7 +37,7 @@ public class ImageFxProjectModel {
 
     //transform the project photo to colouring book
     public Image createPhoto(){
-        Image newImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), 0.0);
+        Image newImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), 0.0, 150.0);
         activeProject.setReadyImage(newImage);
         return activeProject.getReadyImage();
     }
@@ -61,7 +61,18 @@ public class ImageFxProjectModel {
         Image updatedImage =  null;
         if(activeProject.getReadyImage() != null) {
             activeProject.setDilationValue(sliderValue);
-            updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue());
+            updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue(), activeProject.getContrastValue());
+            activeProject.setReadyImage(updatedImage);
+        }
+        return updatedImage;
+    }
+
+    //update readyImage with contrast parameter set using slider
+    public Image makeContrast(Double sliderValue){
+        Image updatedImage =  null;
+        if(activeProject.getReadyImage() != null) {
+            activeProject.setContrastValue(sliderValue);
+            updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue(), activeProject.getContrastValue());
             activeProject.setReadyImage(updatedImage);
         }
         return updatedImage;

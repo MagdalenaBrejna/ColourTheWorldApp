@@ -50,6 +50,8 @@ public class MainProjectController {
 
     @FXML
     private Slider slider;
+    @FXML
+    private Slider contrastSlider;
 
     //class initialization - set bindings, set movement of splitPane
     public void initialize(){
@@ -63,6 +65,10 @@ public class MainProjectController {
 
         slider.valueProperty().addListener((observable, oldValue, newValue) -> {
            imageViewAfter.setImage(imageFxProjectModel.dilate((Double) newValue));
+        });
+
+        contrastSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            imageViewAfter.setImage(imageFxProjectModel.makeContrast((Double) newValue));
         });
     }
 
@@ -78,7 +84,6 @@ public class MainProjectController {
     @FXML
     private void createNewPhoto(){
         imageViewAfter.setImage(imageFxProjectModel.createPhoto());
-       // createProjectButton.setDisable(true);
     }
 
     //set uploadd photo to the imageViewBefore
@@ -87,7 +92,6 @@ public class MainProjectController {
         try {
             imageViewBefore.setImage(imageFxProjectModel.loadImage());
             openImageButton.setDisable(true);
-            //createProjectButton.setDisable(false);
         }catch(ImageException e){
             e.printStackTrace();
         }

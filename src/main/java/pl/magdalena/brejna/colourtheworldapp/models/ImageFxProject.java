@@ -12,10 +12,20 @@ public class ImageFxProject {
     private ObjectProperty<Image> projectImage = new SimpleObjectProperty<>();
     private ObjectProperty<Image> readyImage = new SimpleObjectProperty<>();
     private File sourceFile;
-    private Double dilationValue;
+    private Double dilationValue = 0.0;
+    private Double contrastValue = 0.0;
 
     public String toString() {
         return "imageProjectName = " + imageProjectName;
+    }
+
+
+    public Double getContrastValue() {
+        return contrastValue;
+    }
+
+    public void setContrastValue(Double contrastValue) {
+        this.contrastValue = contrastValue;
     }
 
 

@@ -29,7 +29,7 @@
                         <MenuItem mnemonicParsing="false" text="Action 2" />
                      </items>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                        <Insets bottom="20.0" left="30.0" top="30.0" />
                      </HBox.margin>
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -41,32 +41,37 @@
                   </MenuButton>
                   <TextField fx:id="projectNameField" prefHeight="30.0" prefWidth="230.0">
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
                      </HBox.margin>
                   </TextField>
                   <Button fx:id="saveNameButton" mnemonicParsing="false" onAction="#saveProject" prefHeight="30.0" prefWidth="60.0" text="%save.button">
                      <HBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets bottom="30.0" top="30.0" />
                      </HBox.margin>
                   </Button>
                   <ComboBox fx:id="projectChoiceComboBox" prefHeight="30.0" prefWidth="150.0" promptText="Choose">
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                        <Insets bottom="30.0" left="20.0" top="30.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <Button fx:id="editButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="%edit.button">
+                  <Button fx:id="editButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" text="%edit.button">
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
                      </HBox.margin>
                   </Button>
-                  <Slider fx:id="slider" blockIncrement="0.5" majorTickUnit="1.0" max="3.0" minorTickCount="5" prefHeight="78.0" prefWidth="203.0" showTickMarks="true">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  <VBox prefHeight="91.0" prefWidth="171.0">
+                     <children>
+                        <Slider fx:id="slider" blockIncrement="0.5" majorTickUnit="1.0" max="3.0" minorTickCount="5" prefHeight="58.0" prefWidth="171.0" showTickMarks="true">
+                           <padding>
+                              <Insets bottom="20.0" top="15.0" />
+                           </padding>
+                        </Slider>
+                        <Slider fx:id="contrastSlider" blockIncrement="5.0" max="255.0" minorTickCount="1" showTickMarks="true" />
+                     </children>
                      <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="30.0" />
+                        <Insets left="20.0" right="20.0" />
                      </padding>
-                  </Slider>
+                  </VBox>
                </children>
             </HBox>
          </children>
