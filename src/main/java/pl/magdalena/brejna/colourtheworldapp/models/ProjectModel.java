@@ -56,6 +56,14 @@ public class ProjectModel {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png"));
+        if(activeProject.getImageProjectName() != null)
+            fileChooser.setInitialFileName(activeProject.getImageProjectName());
+        fileChooser.setTitle("Save project...");
+
+        File directory = new File(System.getProperty("user.home"), "Pictures/ColourTheWorld");
+        if(!directory.exists())
+            directory.mkdirs();
+        fileChooser.setInitialDirectory(directory);
 
         File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
         if (file != null) {
@@ -91,6 +99,12 @@ public class ProjectModel {
 
         try {
             FileChooser fileChooser = new FileChooser();
+
+            File directory = new File(System.getProperty("user.home"), "Pictures");
+            fileChooser.setInitialDirectory(directory);
+
+            fileChooser.setTitle("Open picture...");
+
             fileChooser.getExtensionFilters().add(
                     new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
             File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
