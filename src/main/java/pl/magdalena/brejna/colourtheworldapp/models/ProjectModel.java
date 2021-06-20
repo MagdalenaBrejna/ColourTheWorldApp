@@ -2,11 +2,17 @@ package pl.magdalena.brejna.colourtheworldapp.models;
 
 import javafx.beans.property.StringProperty;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
+import pl.magdalena.brejna.colourtheworldapp.controllers.ZoomController;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
+import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -14,13 +20,21 @@ import java.util.ArrayList;
 
 public class ProjectModel {
 
+    private static final String ZOOM_FXML = "/fxml.files/ZoomWindow.fxml";
+
     //ImageFxProjectModel contains an active project and a list of created project
     ArrayList<UserProject> projectObservableList = new ArrayList<>();
     UserProject activeProject;
 
+    //elemnts necessary to serve zoomWindow
+    FXMLLoader loader;
+    ZoomController zoomController;
+    Stage newWindow;
+
     //class initialization
     public void init(){
         activeProject = new UserProject();
+        setZoom();
     }
 
     //create current active project, add it to the list, set its name with text stored in textField
@@ -35,7 +49,6 @@ public class ProjectModel {
             return false;
         return true;
     }
-
 
     //delete photos from active project
     public void delete(){
@@ -79,6 +92,9 @@ public class ProjectModel {
             activeProject.setDilationValue(sliderValue);
             updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue(), activeProject.getContrastValue());
             activeProject.setReadyImage(updatedImage);
+
+            zoomController = loader.getController();
+            zoomController.initData(updatedImage);
         }
         return updatedImage;
     }
@@ -90,6 +106,9 @@ public class ProjectModel {
             activeProject.setContrastValue(sliderValue);
             updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue(), activeProject.getContrastValue());
             activeProject.setReadyImage(updatedImage);
+
+            zoomController = loader.getController();
+            zoomController.initData(updatedImage);
         }
         return updatedImage;
     }
@@ -120,5 +139,36 @@ public class ProjectModel {
         } catch (NullPointerException e) {
             throw new ImageException("open file exception");
         }
+    }
+
+    //Create initial stage for the zoomWindow
+    public void setZoom(){
+
+        loader = new FXMLLoader(getClass().getResource(ZOOM_FXML));
+        loader.setResources(FxmlUtils.getResourceBundle());
+
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        zoomController = loader.getController();
+        zoomController.initData(null);
+
+        newWindow = new Stage();
+        newWindow.setTitle("Zoom");
+        newWindow.setScene(new Scene(root));
+    }
+
+    //Show adjusted zoomWindow with readyImage
+    public void showZoom(){
+        zoomController = loader.getController();
+        zoomController.initData(activeProject.getReadyImage());
+
+        newWindow.setWidth(activeProject.getReadyImage().getWidth());
+        newWindow.setHeight(activeProject.getReadyImage().getHeight());
+        newWindow.show();
     }
 }

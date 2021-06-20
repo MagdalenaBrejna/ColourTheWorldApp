@@ -135,4 +135,10 @@ public class MainProjectController {
         this.saveNameButton.disableProperty().unbind();
         saveNameButton.setDisable(true);
     }
+
+    //open new Window with readyImage
+    @FXML
+    private void openZoom(){
+        projectModel.showZoom();
+    }
 }
