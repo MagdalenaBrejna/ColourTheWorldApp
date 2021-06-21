@@ -16,7 +16,7 @@ public class UserProject {
     private Double contrastValue = 0.0;
 
     public String toString() {
-        return "imageProjectName = " + imageProjectName;
+        return imageProjectName.getValue();
     }
 
 

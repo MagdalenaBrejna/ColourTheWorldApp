@@ -11,4 +11,8 @@ public class ProjectList {
         projectObservableList.add(project);
     }
 
+    public ObservableList getProjectObservableList(){
+        return projectObservableList;
+    }
+
 }

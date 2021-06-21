@@ -59,6 +59,7 @@ public class MainProjectController {
         this.projectModel = new ProjectModel();
         this.projectModel.init();
         this.projectNameField.setText("newProject");
+        projectChoiceComboBox.setItems(ProjectListModel.getList());
 
         bindings();
 
