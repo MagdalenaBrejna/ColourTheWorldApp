@@ -1,6 +1,8 @@
 package pl.magdalena.brejna.colourtheworldapp.models;
 
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,8 +24,7 @@ public class ProjectModel {
 
     private static final String ZOOM_FXML = "/fxml.files/ZoomWindow.fxml";
 
-    //ImageFxProjectModel contains an active project and a list of created project
-    ArrayList<UserProject> projectObservableList = new ArrayList<>();
+    //ProjectModel contains an active project
     UserProject activeProject;
 
     //elemnts necessary to serve zoomWindow
@@ -31,16 +32,20 @@ public class ProjectModel {
     ZoomController zoomController;
     Stage newWindow;
 
+    //return active project
+    public UserProject getActiveProject(){
+        return activeProject;
+    }
+
     //class initialization
     public void init(){
         activeProject = new UserProject();
         setZoom();
     }
 
-    //create current active project, add it to the list, set its name with text stored in textField
+    //set name of the activeProject with a text stored in textField
     public void save(StringProperty textProperty){
-        projectObservableList.add(activeProject);
-        projectObservableList.get(projectObservableList.size() - 1).setImageProjectName(textProperty.getValue());
+        activeProject.setImageProjectName(textProperty.getValue());
     }
 
     //check if the active project is saved
@@ -150,7 +155,7 @@ public class ProjectModel {
         Parent root = null;
         try {
             root = loader.load();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

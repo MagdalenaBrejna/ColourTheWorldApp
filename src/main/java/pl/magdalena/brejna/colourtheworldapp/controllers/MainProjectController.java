@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
+import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
 import pl.magdalena.brejna.colourtheworldapp.models.UserProject;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
@@ -131,6 +132,7 @@ public class MainProjectController {
     @FXML
     private void saveProject(){
         projectModel.save(projectNameField.textProperty());
+        ProjectListModel.addProject(projectModel.getActiveProject());
         projectNameField.setDisable(true);
         this.saveNameButton.disableProperty().unbind();
         saveNameButton.setDisable(true);
