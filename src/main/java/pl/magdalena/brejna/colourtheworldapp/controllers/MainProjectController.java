@@ -15,7 +15,6 @@ public class MainProjectController {
 
     private ProjectModel projectModel;
     private static final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtons.fxml";
-    private static final String MAIN_PROJECT_FXML = "/fxml.files/MainProject.fxml";
 
     //controls connected with saving new project
     @FXML
@@ -80,7 +79,7 @@ public class MainProjectController {
     }
 
     //open project selected in ComboBox
-    public void loadSelectedProject(UserProject newProject){
+    private void loadSelectedProject(UserProject newProject){
         projectModel.updateProject(newProject);
         imageViewBefore.setImage(projectModel.getActiveProject().getProjectImage());
         imageViewAfter.setImage(projectModel.getActiveProject().getReadyImage());
@@ -88,7 +87,7 @@ public class MainProjectController {
     }
 
     //set bindings - make some controls disabled in special conditions
-    public void bindings(){
+    private void bindings(){
         this.createProjectButton.disableProperty().bind(this.imageViewBefore.imageProperty().isNull());
         this.zoomButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
         this.saveAsButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());

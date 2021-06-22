@@ -10,11 +10,15 @@ public class Main extends Application {
 
     private static final String MAIN_LAYOUT_FXML = "/fxml.files/MainLayout.fxml";
 
-    public static Stage primaryStage;
-    public static BorderPane mainPane;
+    private static Stage primaryStage;
+    private static BorderPane mainPane;
 
     public static Stage getPrimaryStage(){
         return primaryStage;
+    }
+
+    public static BorderPane getMainPane(){
+        return mainPane;
     }
 
     public void setPrimaryStage(Stage stage){

@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 
 public class ProjectListModel {
 
-    public static ProjectList list = new ProjectList();
+    private static ProjectList list = new ProjectList();
 
     public static void addProject(UserProject project){
         list.addNewProject(project);

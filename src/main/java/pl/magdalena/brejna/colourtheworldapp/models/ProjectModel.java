@@ -22,12 +22,12 @@ public class ProjectModel {
     private static final String ZOOM_FXML = "/fxml.files/ZoomWindow.fxml";
 
     //ProjectModel contains an active project
-    UserProject activeProject;
+    private UserProject activeProject;
 
     //elemnts necessary to serve zoomWindow
-    FXMLLoader loader;
-    ZoomController zoomController;
-    Stage newWindow;
+    private FXMLLoader loader;
+    private ZoomController zoomController;
+    private Stage newWindow;
 
     //return active project
     public UserProject getActiveProject(){
@@ -149,7 +149,7 @@ public class ProjectModel {
     }
 
     //Create initial stage for the zoomWindow
-    public void setZoom(){
+    private void setZoom(){
 
         loader = new FXMLLoader(getClass().getResource(ZOOM_FXML));
         loader.setResources(FxmlUtils.getResourceBundle());

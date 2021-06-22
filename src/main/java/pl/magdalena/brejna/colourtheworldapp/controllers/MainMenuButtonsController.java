@@ -11,10 +11,10 @@ public class MainMenuButtonsController {
 
    public void setMainLayoutController(MainLayoutController mainController) {
        this.mainLayoutController = mainController;
-    }
+   }
 
-    @FXML
-    public void openProject(){
+   @FXML
+   private void openProject(){
        App.setCenterLayout(MAIN_PROJECT_FXML);
-    }
+   }
 }

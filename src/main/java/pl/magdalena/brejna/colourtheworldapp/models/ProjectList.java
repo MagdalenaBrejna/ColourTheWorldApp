@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 public class ProjectList {
 
-    ObservableList<UserProject> projectObservableList = FXCollections.observableArrayList();
+    private ObservableList<UserProject> projectObservableList = FXCollections.observableArrayList();
 
     public void addNewProject(UserProject project){
         projectObservableList.add(project);
