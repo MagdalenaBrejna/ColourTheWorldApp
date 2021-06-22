@@ -15,6 +15,7 @@ public class MainProjectController {
 
     private ProjectModel projectModel;
     private static final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtons.fxml";
+    private static final String MAIN_PROJECT_FXML = "/fxml.files/MainProject.fxml";
 
     //controls connected with saving new project
     @FXML
@@ -72,6 +73,18 @@ public class MainProjectController {
         contrastSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             imageViewAfter.setImage(projectModel.makeContrast((Double) newValue));
         });
+
+        projectChoiceComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            loadSelectedProject(newValue);
+        });
+    }
+
+    //open project selected in ComboBox
+    public void loadSelectedProject(UserProject newProject){
+        projectModel.updateProject(newProject);
+        imageViewBefore.setImage(projectModel.getActiveProject().getProjectImage());
+        imageViewAfter.setImage(projectModel.getActiveProject().getReadyImage());
+        projectNameField.setText(projectModel.getActiveProject().getImageProjectName());
     }
 
     //set bindings - make some controls disabled in special conditions

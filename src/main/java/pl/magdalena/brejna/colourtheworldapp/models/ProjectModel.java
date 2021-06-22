@@ -1,8 +1,6 @@
 package pl.magdalena.brejna.colourtheworldapp.models;
 
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +16,6 @@ import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ProjectModel {
 
@@ -66,6 +63,11 @@ public class ProjectModel {
         Image newImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), 0.0, 150.0);
         activeProject.setReadyImage(newImage);
         return activeProject.getReadyImage();
+    }
+
+    //set project selected in ComboBox as activeProject
+    public void updateProject(UserProject project){
+        activeProject = project;
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
