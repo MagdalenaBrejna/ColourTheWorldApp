@@ -1,8 +1,11 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
@@ -15,6 +18,7 @@ public class MainProjectController {
 
     private ProjectModel projectModel;
     private static final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtons.fxml";
+    private static final String MAIN_PROJECT_FXML = "/fxml.files/MainProject.fxml";
 
     //controls connected with saving new project
     @FXML
@@ -74,8 +78,16 @@ public class MainProjectController {
         });
 
         projectChoiceComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            loadSelectedProject(newValue);
+            if(oldValue == null || ProjectListModel.containsProject(oldValue))
+                loadSelectedProject(newValue);
+            else
+                loadBlankProject();
         });
+    }
+
+    //load empty project layout
+    private void loadBlankProject(){
+        App.setCenterLayout(MAIN_PROJECT_FXML);
     }
 
     //open project selected in ComboBox
@@ -155,5 +167,12 @@ public class MainProjectController {
     @FXML
     private void openZoom(){
         projectModel.showZoom();
+    }
+
+    //delete project selected in ComboBox
+    @FXML
+    private void clickProjectChoiceComboBox(MouseEvent event){
+        if(event.getButton().equals(MouseButton.SECONDARY))
+            ProjectListModel.deleteProjectOnRightClick(projectChoiceComboBox.getValue());
     }
 }

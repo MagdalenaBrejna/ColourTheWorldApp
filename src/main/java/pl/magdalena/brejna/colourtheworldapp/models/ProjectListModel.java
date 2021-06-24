@@ -13,4 +13,12 @@ public class ProjectListModel {
     public static ObservableList getList(){
         return list.getProjectObservableList();
     }
+
+    public static void deleteProjectOnRightClick(UserProject project){
+        list.deleteProjectOnMouseEvent(project);
+    }
+
+    public static boolean containsProject(UserProject project){
+        return list.containsProject(project);
+    }
 }

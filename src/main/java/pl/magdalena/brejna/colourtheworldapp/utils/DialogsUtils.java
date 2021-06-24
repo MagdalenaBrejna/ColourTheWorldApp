@@ -16,4 +16,12 @@ public class DialogsUtils {
         Optional<ButtonType> result = confirmationDialog.showAndWait();
         return result;
     }
+
+    public static Optional<ButtonType> showDeleteConfirmationDialog() {
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.setTitle(bundle.getString("delete.title"));
+        confirmationDialog.setHeaderText(bundle.getString("delete.text"));
+        Optional<ButtonType> result = confirmationDialog.showAndWait();
+        return result;
+    }
 }
