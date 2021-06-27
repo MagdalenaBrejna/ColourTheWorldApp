@@ -13,21 +13,8 @@ public class NegativeFilter {
                 //Retrieving the values of a pixel
                 int pixel = img.getRGB(x,y);
 
-                //Creating a Color object from pixel value
-                Color color = new Color(pixel, true);
-
-                //Retrieving the RGB values
-                int red = color.getRed();
-                int green = color.getGreen();
-                int blue = color.getBlue();
-
-                //Subtracting RGB from 255 to convert into negative
-                red = 255 - red;
-                green = 255 - green;
-                blue = 255 - blue;
-
                 //Creating new Color object
-                color = new Color(red, green, blue);
+                Color color = setPixelColor(pixel);
                 int newPixel = color.getRGB();
 
                 //Setting new Color object to the image
@@ -35,5 +22,17 @@ public class NegativeFilter {
             }
         }
         return img;
+    }
+
+    private static Color setPixelColor(int pixel){
+        Color color = new Color(pixel, true);
+
+        //Subtracting RGB from 255 to convert into negative
+        int red = 255 - color.getRed();
+        int green = 255 - color.getGreen();
+        int blue = 255 - color.getBlue();
+
+        //Creating new Color object
+        return new Color(red, green, blue);
     }
 }

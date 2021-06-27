@@ -7,9 +7,9 @@ import javafx.scene.image.ImageView;
 public class ZoomController {
 
     @FXML
-    private ImageView zoomImage;
+    private ImageView zoomImageView;
 
-    public void initData(Image image){
-        zoomImage.setImage(image);
+    public void setZoomImage(Image image){
+        zoomImageView.setImage(image);
     }
 }

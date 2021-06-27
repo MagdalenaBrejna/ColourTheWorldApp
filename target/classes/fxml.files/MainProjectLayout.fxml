@@ -39,29 +39,24 @@
                         </ImageView>
                      </graphic>
                   </MenuButton>
-                  <TextField fx:id="projectNameField" prefHeight="30.0" prefWidth="230.0">
+                  <TextField fx:id="projectNameTextField" prefHeight="30.0" prefWidth="230.0">
                      <HBox.margin>
                         <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="saveNameButton" mnemonicParsing="false" onAction="#saveProject" prefHeight="30.0" prefWidth="60.0" text="%save.button">
+                  <Button fx:id="saveProjectButton" mnemonicParsing="false" onAction="#saveProject" prefHeight="30.0" prefWidth="60.0" text="%save.button">
                      <HBox.margin>
                         <Insets bottom="30.0" top="30.0" />
                      </HBox.margin>
                   </Button>
-                  <ComboBox fx:id="projectChoiceComboBox" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="30.0" prefWidth="150.0" promptText="Choose">
+                  <ComboBox fx:id="projectChoiceComboBox" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="31.0" prefWidth="221.0" promptText="Choose">
                      <HBox.margin>
                         <Insets bottom="30.0" left="20.0" top="30.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <Button fx:id="editButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="74.0" text="%edit.button">
-                     <HBox.margin>
-                        <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
-                     </HBox.margin>
-                  </Button>
-                  <VBox prefHeight="91.0" prefWidth="171.0">
+                  <VBox prefHeight="91.0" prefWidth="241.0">
                      <children>
-                        <Slider fx:id="slider" blockIncrement="0.5" majorTickUnit="1.0" max="3.0" minorTickCount="5" prefHeight="58.0" prefWidth="171.0" showTickMarks="true">
+                        <Slider fx:id="dilationSlider" blockIncrement="0.5" majorTickUnit="1.0" max="3.0" minorTickCount="5" prefHeight="63.0" prefWidth="158.0" showTickMarks="true">
                            <padding>
                               <Insets bottom="20.0" top="15.0" />
                            </padding>
@@ -86,7 +81,7 @@
                      <content>
                         <AnchorPane prefHeight="455.0" prefWidth="647.0">
                            <children>
-                              <ImageView fx:id="imageViewBefore" fitHeight="412.0" fitWidth="564.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="photoImageView" fitHeight="412.0" fitWidth="564.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -95,14 +90,14 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="662.0">
                            <children>
-                              <ImageView fx:id="imageViewAfter" fitHeight="412.0" fitWidth="564.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="colouringBookImageView" fitHeight="412.0" fitWidth="564.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </content>
                   </ScrollPane>
                </items>
             </SplitPane>
-            <Button fx:id="zoomButton" mnemonicParsing="false" onAction="#openZoom" prefHeight="30.0" prefWidth="140.0" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="130.0">
+            <Button fx:id="openZoomButton" mnemonicParsing="false" onAction="#openZoomWindow" prefHeight="30.0" prefWidth="140.0" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="130.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -114,7 +109,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="createProjectButton" mnemonicParsing="false" onAction="#createNewPhoto" prefHeight="30.0" prefWidth="140.0" text="%create.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
+            <Button fx:id="createColouringBookButton" mnemonicParsing="false" onAction="#createColouringBook" prefHeight="30.0" prefWidth="140.0" text="%create.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -126,7 +121,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="openImageButton" mnemonicParsing="false" onAction="#choosePhoto" prefHeight="30.0" prefWidth="140.0" text="%choose.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
+            <Button fx:id="openImageButton" mnemonicParsing="false" onAction="#selectImage" prefHeight="30.0" prefWidth="140.0" text="%choose.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -138,7 +133,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="saveAsButton" mnemonicParsing="false" onAction="#savePhoto" prefHeight="30.0" prefWidth="140.0" text="%saveAs.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="180.0">
+            <Button fx:id="saveColouringBookButton" mnemonicParsing="false" onAction="#saveColouringBook" prefHeight="30.0" prefWidth="140.0" text="%saveAs.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="180.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -150,7 +145,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deletePhoto" prefHeight="30.0" prefWidth="140.0" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="230.0">
+            <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="140.0" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="230.0">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

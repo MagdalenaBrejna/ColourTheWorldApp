@@ -5,10 +5,10 @@ import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
 public class App {
 
-    private static BorderPane pane;
+    private static BorderPane appPane;
 
     public static void setCenterLayout(String fxml){
-        pane = Main.getMainPane();
-        pane.setCenter(FxmlUtils.fxmlLoader(fxml));
+        appPane = Main.getMainPane();
+        appPane.setCenter(FxmlUtils.fxmlLoader(fxml));
     }
 }

@@ -49,6 +49,6 @@
       </VBox>
    </top>
    <center>
-       <fx:include fx:id="mainMenuButtons" layoutX="50.0" source="MainMenuButtons.fxml" BorderPane.alignment="CENTER_RIGHT" />
+       <fx:include fx:id="mainMenuButtons" layoutX="50.0" source="MainMenuButtonsLayout.fxml" BorderPane.alignment="CENTER_RIGHT" />
    </center>
 </BorderPane>

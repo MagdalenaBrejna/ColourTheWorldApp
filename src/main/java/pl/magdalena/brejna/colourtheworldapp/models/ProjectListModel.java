@@ -6,19 +6,19 @@ public class ProjectListModel {
 
     private static ProjectList list = new ProjectList();
 
-    public static void addProject(UserProject project){
+    public static void addProjectToList(Project project){
         list.addNewProject(project);
     }
 
-    public static ObservableList getList(){
+    public static ObservableList getProjectList(){
         return list.getProjectObservableList();
     }
 
-    public static void deleteProjectOnRightClick(UserProject project){
-        list.deleteProjectOnMouseEvent(project);
+    public static void deleteProjectOnRightClick(Project project){
+        list.deleteProjectOnMouseClick(project);
     }
 
-    public static boolean containsProject(UserProject project){
+    public static boolean containsProject(Project project){
         return list.containsProject(project);
     }
 }

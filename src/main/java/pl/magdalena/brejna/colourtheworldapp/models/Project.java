@@ -6,17 +6,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import java.io.File;
 
-public class UserProject {
+public class Project {
 
-    private SimpleStringProperty imageProjectName = new SimpleStringProperty();
+    private SimpleStringProperty projectName = new SimpleStringProperty();
     private ObjectProperty<Image> projectImage = new SimpleObjectProperty<>();
-    private ObjectProperty<Image> readyImage = new SimpleObjectProperty<>();
+    private ObjectProperty<Image> colouringBookImage = new SimpleObjectProperty<>();
     private File sourceFile;
     private Double dilationValue = 0.0;
     private Double contrastValue = 0.0;
 
     public String toString() {
-        return imageProjectName.getValue();
+        return projectName.getValue();
     }
 
 
@@ -47,29 +47,29 @@ public class UserProject {
     }
 
 
-    public Image getReadyImage() {
-        return readyImage.get();
+    public Image getColouringBookImage() {
+        return colouringBookImage.get();
     }
 
-    public ObjectProperty<Image> readyImageProperty() {
-        return readyImage;
+    public ObjectProperty<Image> colouringBookImageProperty() {
+        return colouringBookImage;
     }
 
-    public void setReadyImage(Image readyImage) {
-        this.readyImage.set(readyImage);
+    public void setColouringBookImage(Image colouringBookImage) {
+        this.colouringBookImage.set(colouringBookImage);
     }
 
 
-    public String getImageProjectName() {
-        return imageProjectName.get();
+    public String getProjectName() {
+        return projectName.get();
     }
 
-    public SimpleStringProperty imageProjectNameProperty() {
-        return imageProjectName;
+    public SimpleStringProperty projectNameProperty() {
+        return projectName;
     }
 
-    public void setImageProjectName(String imageProjectName) {
-        this.imageProjectName.set(imageProjectName);
+    public void setProjectName(String projectName) {
+        this.projectName.set(projectName);
     }
 
 

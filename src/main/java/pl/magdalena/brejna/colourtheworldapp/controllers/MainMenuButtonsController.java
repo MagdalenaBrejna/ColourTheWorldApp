@@ -5,7 +5,7 @@ import pl.magdalena.brejna.colourtheworldapp.App;
 
 public class MainMenuButtonsController {
 
-   private static final String MAIN_PROJECT_FXML = "/fxml.files/MainProject.fxml";
+   private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
 
    private MainLayoutController mainLayoutController;
 

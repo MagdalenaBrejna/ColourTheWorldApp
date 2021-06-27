@@ -3,14 +3,13 @@ package pl.magdalena.brejna.colourtheworldapp.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
-import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 
 public class ProjectList {
 
-    private ObservableList<UserProject> projectObservableList = FXCollections.observableArrayList();
+    private ObservableList<Project> projectObservableList = FXCollections.observableArrayList();
 
-    public void addNewProject(UserProject project){
+    public void addNewProject(Project project){
         projectObservableList.add(project);
     }
 
@@ -18,18 +17,21 @@ public class ProjectList {
         return projectObservableList;
     }
 
-    public void deleteProjectOnMouseEvent(UserProject project){
+    public void deleteProjectOnMouseClick(Project project){
         showDeleteConfirmationDialog(project);
     }
-    private void showDeleteConfirmationDialog(UserProject project){
+
+    private void showDeleteConfirmationDialog(Project project){
         DialogsUtils.showDeleteConfirmationDialog()
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> deleteProject(project));
     }
-    private void deleteProject(UserProject project){
+
+    private void deleteProject(Project project){
         projectObservableList.remove(project);
     }
-    public boolean containsProject(UserProject project){
+
+    public boolean containsProject(Project project){
         return projectObservableList.contains(project);
     }
 

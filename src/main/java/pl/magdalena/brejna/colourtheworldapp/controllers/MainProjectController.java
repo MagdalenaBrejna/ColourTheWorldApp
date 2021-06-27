@@ -1,6 +1,5 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -9,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
-import pl.magdalena.brejna.colourtheworldapp.models.UserProject;
+import pl.magdalena.brejna.colourtheworldapp.models.Project;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import java.io.IOException;
@@ -17,66 +16,97 @@ import java.io.IOException;
 public class MainProjectController {
 
     private ProjectModel projectModel;
-    private static final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtons.fxml";
-    private static final String MAIN_PROJECT_FXML = "/fxml.files/MainProject.fxml";
+    private final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtonsLayout.fxml";
+    private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
 
     //controls connected with saving new project
     @FXML
-    private Button saveNameButton;
+    private Button saveProjectButton;
     @FXML
-    private TextField projectNameField;
+    private TextField projectNameTextField;
     @FXML
-    private ComboBox<UserProject> projectChoiceComboBox;
-    @FXML
-    private Button editButton;
+    private ComboBox<Project> projectChoiceComboBox;
 
     //controls containing photos
     @FXML
-    private ImageView imageViewBefore;
+    private ImageView photoImageView;
     @FXML
-    private ImageView imageViewAfter;
+    private ImageView colouringBookImageView;
 
     //controls connected with processing photo
     @FXML
     private Button openImageButton;
     @FXML
-    private Button createProjectButton;
+    private Button createColouringBookButton;
     @FXML
-    private Button zoomButton;
+    private Button openZoomButton;
     @FXML
-    private Button saveAsButton;
+    private Button saveColouringBookButton;
     @FXML
     private Button closeProjectButton;
     @FXML
-    private Button deleteButton;
+    private Button deleteImageButton;
 
     @FXML
     private SplitPane splitPane;
 
     @FXML
-    private Slider slider;
+    private Slider dilationSlider;
     @FXML
     private Slider contrastSlider;
 
-    //class initialization - set bindings, set movement of splitPane
+    //class initialization - init project, set bindings, set actionListeners
     public void initialize(){
+        initNewProject();
+        projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
+        bindings();
+        setActionListeners();
+    }
+
+    //init new project
+    private void initNewProject(){
         this.projectModel = new ProjectModel();
         this.projectModel.init();
-        this.projectNameField.setText("newProject");
-        projectChoiceComboBox.setItems(ProjectListModel.getList());
+        this.projectNameTextField.setText("newProject");
+    }
 
-        bindings();
+    //set bindings - make some controls disabled in special conditions
+    private void bindings(){
+        this.createColouringBookButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
+        this.openZoomButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
+        this.saveColouringBookButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
+        this.deleteImageButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
+    }
 
+    //set action listeners
+    private void setActionListeners(){
+        setSplitPaneListener();
+        setDilationSliderListener();
+        setContrastSliderListener();
+        setProjectChoiceComboBoxListener();
+    }
+
+    //set splitPane listener
+    private void setSplitPaneListener(){
         splitPane.getDividers().get(0).positionProperty().addListener((obs, oldVal, newVal) -> {});
+    }
 
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-           imageViewAfter.setImage(projectModel.dilate((Double) newValue));
+    //set dilationSlider listener
+    private void setDilationSliderListener(){
+        dilationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            colouringBookImageView.setImage(projectModel.dilate((Double) newValue));
         });
+    }
 
+    //set contrastSlider listener
+    private void setContrastSliderListener(){
         contrastSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            imageViewAfter.setImage(projectModel.makeContrast((Double) newValue));
+            colouringBookImageView.setImage(projectModel.makeContrast((Double) newValue));
         });
+    }
 
+    //set projectChoiceComboBox listener
+    private void setProjectChoiceComboBoxListener(){
         projectChoiceComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(oldValue == null || ProjectListModel.containsProject(oldValue))
                 loadSelectedProject(newValue);
@@ -85,94 +115,100 @@ public class MainProjectController {
         });
     }
 
+    //open project selected in ComboBox
+    private void loadSelectedProject(Project newProject){
+        projectModel.updateProject(newProject);
+        setProjectComponents();
+    }
+
+    //set selected project values to the project layout
+    private void setProjectComponents(){
+        photoImageView.setImage(projectModel.getActiveProject().getProjectImage());
+        colouringBookImageView.setImage(projectModel.getActiveProject().getColouringBookImage());
+        projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
+    }
+
     //load empty project layout
     private void loadBlankProject(){
         App.setCenterLayout(MAIN_PROJECT_FXML);
     }
 
-    //open project selected in ComboBox
-    private void loadSelectedProject(UserProject newProject){
-        projectModel.updateProject(newProject);
-        imageViewBefore.setImage(projectModel.getActiveProject().getProjectImage());
-        imageViewAfter.setImage(projectModel.getActiveProject().getReadyImage());
-        projectNameField.setText(projectModel.getActiveProject().getImageProjectName());
-    }
-
-    //set bindings - make some controls disabled in special conditions
-    private void bindings(){
-        this.createProjectButton.disableProperty().bind(this.imageViewBefore.imageProperty().isNull());
-        this.zoomButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
-        this.saveAsButton.disableProperty().bind(this.imageViewAfter.imageProperty().isNull());
-        this.deleteButton.disableProperty().bind(this.imageViewBefore.imageProperty().isNull());
-    }
-
-    //create colouring based on uploaded photo
+    //create colouring book based on uploaded photo
     @FXML
-    private void createNewPhoto(){
-        imageViewAfter.setImage(projectModel.createPhoto());
+    private void createColouringBook(){
+        colouringBookImageView.setImage(projectModel.createColouringBook());
     }
 
-    //set uploadd photo to the imageViewBefore
+    //set uploaded photo to the photoImageView
     @FXML
-    private void choosePhoto(){
+    private void selectImage(){
         try {
-            imageViewBefore.setImage(projectModel.loadImage());
+            photoImageView.setImage(projectModel.loadImage());
             openImageButton.setDisable(true);
         }catch(ImageException e){
             e.printStackTrace();
         }
     }
 
-    //save photo stored in imageViewAfter in computer files
+    //save photo stored in colouringBookImageView in computer files
     @FXML
-    private void savePhoto(){
+    private void saveColouringBook(){
        try {
-            projectModel.saveImage();
-        } catch (ImageException | IOException e) {
+            projectModel.saveColouringBook();
+       } catch (ImageException | IOException e) {
             e.printStackTrace();
-        }
+       }
     }
 
-    //delete photo stored in imageViewBefore
+    //delete photo stored in photoImageView
     @FXML
-    private void deletePhoto(){
-        projectModel.delete();
-        imageViewBefore.setImage(null);
-        imageViewAfter.setImage(null);
+    private void deleteImage(){
+        projectModel.deleteImage();
+        photoImageView.setImage(null);
+        colouringBookImageView.setImage(null);
         openImageButton.setDisable(false);
     }
 
-    //ask for confirmation if the project is unsaved and if the answer is OK close an active project
+    //if the project is unsaved ask for confirmation, else close project
     @FXML
     private void closeProject(){
         if(!projectModel.isSaved()) {
-            DialogsUtils.confirmationDialog()
-                    .filter(response -> response == ButtonType.OK)
-                    .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
+            showCloseConfirmationDialog();
         }else
             App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
     }
 
-    //create current project and save its name
-    @FXML
-    private void saveProject(){
-        projectModel.save(projectNameField.textProperty());
-        ProjectListModel.addProject(projectModel.getActiveProject());
-        projectNameField.setDisable(true);
-        this.saveNameButton.disableProperty().unbind();
-        saveNameButton.setDisable(true);
+    //ask for close confirmation
+    private void showCloseConfirmationDialog(){
+        DialogsUtils.confirmationDialog()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
     }
 
-    //open new Window with readyImage
+    //save current project
     @FXML
-    private void openZoom(){
+    private void saveProject(){
+        projectModel.saveActiveProject(projectNameTextField.textProperty());
+        blockNextSave();
+    }
+
+    //prevent saving for the second time
+    private void blockNextSave(){
+        projectNameTextField.setDisable(true);
+        this.saveProjectButton.disableProperty().unbind();
+        saveProjectButton.setDisable(true);
+    }
+
+    //open new Window with colouring book
+    @FXML
+    private void openZoomWindow(){
         projectModel.showZoom();
     }
 
     //delete project selected in ComboBox
     @FXML
-    private void clickProjectChoiceComboBox(MouseEvent event){
-        if(event.getButton().equals(MouseButton.SECONDARY))
+    private void clickProjectChoiceComboBox(MouseEvent mouseClickEvent){
+        if(mouseClickEvent.getButton().equals(MouseButton.SECONDARY))
             ProjectListModel.deleteProjectOnRightClick(projectChoiceComboBox.getValue());
     }
 }

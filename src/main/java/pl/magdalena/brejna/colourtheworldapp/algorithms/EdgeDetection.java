@@ -16,73 +16,54 @@ public class EdgeDetection {
 
     //Laplacian of Gauss algorithm - edge detection
     public static Image detectEdges(File sourceFile, Double dilationFactor, Double contrastFactor){
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME );
-
-        Mat sourceImage = Imgcodecs.imread(sourceFile.getPath());
-
-        Mat gray = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
-        Mat edges = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
-        Mat dst = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type(), new Scalar(0));
-
-        Imgproc.cvtColor(sourceImage, gray, Imgproc.COLOR_RGB2GRAY);
-
-        Imgproc.GaussianBlur(sourceImage, dst, new Size(3,3), 0.5);
-
-        Imgproc.Laplacian(sourceImage, dst, -10, 3);
-
-        sourceImage.copyTo(dst, edges);
-
+        Mat dst = detect(sourceFile);
         Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size((2*dilationFactor) + 1, (2*dilationFactor)+1), new Point(dilationFactor, dilationFactor));
         Imgproc.dilate(dst, dst, kernel);
 
         BufferedImage img = (BufferedImage) HighGui.toBufferedImage(dst);
         img = NegativeFilter.makeNegativePhoto(img);
-        img = contrast(img, contrastFactor);
+        img = makeContrastPixels(img, contrastFactor);
 
         WritableImage readyImage = SwingFXUtils.toFXImage((BufferedImage) img, null);
 
         return readyImage;
     }
 
-    private static BufferedImage contrast(BufferedImage img, Double contrastFactor){
+    //detect edges
+    private static Mat detect(File sourceFile){
+        Mat sourceImage = Imgcodecs.imread(sourceFile.getPath());
+        Mat gray = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
+        Mat edges = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
+        Mat dst = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type(), new Scalar(0));
 
-        for (int y = 0; y < img.getHeight(); y++) {
-            for (int x = 0; x < img.getWidth(); x++) {
+        Imgproc.cvtColor(sourceImage, gray, Imgproc.COLOR_RGB2GRAY);
+        Imgproc.GaussianBlur(sourceImage, dst, new Size(3,3), 0.5);
+        Imgproc.Laplacian(sourceImage, dst, -10, 3);
 
-                //Retrieving the values of a pixel
-                int pixel = img.getRGB(x,y);
+        sourceImage.copyTo(dst, edges);
 
-                //Creating a Color object from pixel value
+        return dst;
+    }
+
+    //make contrast
+    private static BufferedImage makeContrastPixels(BufferedImage image, Double contrastFactor){
+        for (int y = 0; y < image.getHeight(); y++)
+            for (int x = 0; x < image.getWidth(); x++) {
+
+                int pixel = image.getRGB(x,y);
                 Color color = new Color(pixel, true);
 
-                //Retrieving the RGB values
-                int red = color.getRed();
-                int green = color.getGreen();
-                int blue = color.getBlue();
+                if(color.getRed() >= contrastFactor)
+                    color = new Color(255, 255, 255);
+                else
+                    color = new Color(0, 0, 0);
 
-                if(contrastFactor == null)
-                    System.out.print("!");
-
-                //make black or white
-                if(red >= contrastFactor){
-                    red = 255;
-                    green = 255;
-                    blue = 255;
-                }else{
-                    red = 0;
-                    green = 0;
-                    blue = 0;
-                }
-
-                //Creating new Color object
-                color = new Color(red, green, blue);
                 int newPixel = color.getRGB();
-
-                //Setting new Color object to the image
-                img.setRGB(x, y, newPixel);
+                image.setRGB(x, y, newPixel);
             }
-        }
-        return img;
+
+        return image;
     }
 }
