@@ -51,6 +51,7 @@ public class ProjectModel {
         ProjectListModel.addProjectToList(activeProject);
     }
 
+    //close active project
     public void closeProject(){
         if(!isSaved())
             showCloseConfirmationDialog();
@@ -85,8 +86,22 @@ public class ProjectModel {
         return activeProject.getColouringBookImage();
     }
 
+    //check if current project is save. If yes update project, if not ask for a confirmation
+    public void loadProject(Project project){
+        if(!isSaved())
+            showReplaceConfirmationDialog(project);
+        else
+            updateProject(project);
+    }
+
+    private void showReplaceConfirmationDialog(Project project){
+        DialogsUtils.showConfirmationDialog("close.title", "close.text")
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> updateProject(project));
+    }
+
     //set project selected in ComboBox as activeProject
-    public void updateProject(Project project){
+    private void updateProject(Project project){
         activeProject = project;
     }
 

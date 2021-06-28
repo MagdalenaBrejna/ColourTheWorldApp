@@ -116,7 +116,7 @@ public class MainProjectController {
 
     //open project selected in ComboBox
     private void loadSelectedProject(Project newProject){
-        projectModel.updateProject(newProject);
+        projectModel.loadProject(newProject);
         setProjectComponents();
     }
 

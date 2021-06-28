@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 import java.io.File;
+import java.util.Objects;
 
 public class Project {
 
@@ -17,6 +18,22 @@ public class Project {
 
     public String toString() {
         return projectName.getValue();
+    }
+
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Project))
+            return false;
+        Project project = (Project) o;
+        return Objects.equals(getProjectName(), project.getProjectName()) &&
+                Objects.equals(getSourceFile(), project.getSourceFile()) &&
+                Objects.equals(getDilationValue(), project.getDilationValue()) &&
+                Objects.equals(getContrastValue(), project.getContrastValue());
+    }
+
+    public int hashCode() {
+        return Objects.hash(getProjectName(), getProjectImage(), getColouringBookImage(), getSourceFile(), getDilationValue(), getContrastValue());
     }
 
 
