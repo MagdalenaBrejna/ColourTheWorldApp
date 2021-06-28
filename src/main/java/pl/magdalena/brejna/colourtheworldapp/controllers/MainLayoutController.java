@@ -20,7 +20,7 @@ public class MainLayoutController {
     }
 
     private void showExitConfirmationDialog(){
-        DialogsUtils.confirmationDialog()
+        DialogsUtils.showConfirmationDialog("close.title", "close.text")
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> System.exit(0));
     }

@@ -16,7 +16,6 @@ import java.io.IOException;
 public class MainProjectController {
 
     private ProjectModel projectModel;
-    private final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtonsLayout.fxml";
     private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
 
     //controls connected with saving new project
@@ -172,17 +171,7 @@ public class MainProjectController {
     //if the project is unsaved ask for confirmation, else close project
     @FXML
     private void closeProject(){
-        if(!projectModel.isSaved()) {
-            showCloseConfirmationDialog();
-        }else
-            App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
-    }
-
-    //ask for close confirmation
-    private void showCloseConfirmationDialog(){
-        DialogsUtils.confirmationDialog()
-                .filter(response -> response == ButtonType.OK)
-                .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
+        projectModel.closeProject();
     }
 
     //save current project

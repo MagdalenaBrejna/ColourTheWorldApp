@@ -9,18 +9,10 @@ public class DialogsUtils {
 
     private static final ResourceBundle bundle = FxmlUtils.getResourceBundle();
 
-    public static Optional<ButtonType> confirmationDialog() {
+    public static Optional<ButtonType> showConfirmationDialog(String title, String message) {
         Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationDialog.setTitle(bundle.getString("close.title"));
-        confirmationDialog.setHeaderText(bundle.getString("close.text"));
-        Optional<ButtonType> result = confirmationDialog.showAndWait();
-        return result;
-    }
-
-    public static Optional<ButtonType> showDeleteConfirmationDialog() {
-        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationDialog.setTitle(bundle.getString("delete.title"));
-        confirmationDialog.setHeaderText(bundle.getString("delete.text"));
+        confirmationDialog.setTitle(bundle.getString(title));
+        confirmationDialog.setHeaderText(bundle.getString(message));
         Optional<ButtonType> result = confirmationDialog.showAndWait();
         return result;
     }

@@ -5,22 +5,26 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
 import pl.magdalena.brejna.colourtheworldapp.controllers.ZoomController;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
+import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class ProjectModel {
 
     private final String ZOOM_FXML = "/fxml.files/ZoomLayout.fxml";
+    private final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtonsLayout.fxml";
 
     //ProjectModel contains an active project
     private Project activeProject;
@@ -45,6 +49,20 @@ public class ProjectModel {
     public void saveActiveProject(StringProperty nameTextProperty){
         activeProject.setProjectName(nameTextProperty.getValue());
         ProjectListModel.addProjectToList(activeProject);
+    }
+
+    public void closeProject(){
+        if(!isSaved())
+            showCloseConfirmationDialog();
+        else
+            App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
+    }
+
+    //ask for close confirmation
+    private void showCloseConfirmationDialog(){
+        DialogsUtils.showConfirmationDialog("close.title", "close.text")
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
     }
 
     //check if the active project is saved

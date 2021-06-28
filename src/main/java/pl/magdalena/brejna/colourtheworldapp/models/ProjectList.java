@@ -22,7 +22,7 @@ public class ProjectList {
     }
 
     private void showDeleteConfirmationDialog(Project project){
-        DialogsUtils.showDeleteConfirmationDialog()
+        DialogsUtils.showConfirmationDialog("delete.title", "delete.text")
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> deleteProject(project));
     }
