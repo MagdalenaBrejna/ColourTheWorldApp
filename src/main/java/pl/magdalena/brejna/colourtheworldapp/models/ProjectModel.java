@@ -23,21 +23,16 @@ import java.util.ResourceBundle;
 
 public class ProjectModel {
 
-    private final String ZOOM_FXML = "/fxml.files/ZoomLayout.fxml";
     private final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtonsLayout.fxml";
 
-    //ProjectModel contains an active project
+    //ProjectModel contains an active project and zoom object
     private Project activeProject;
-
-    //elements necessary to serve zoomLayout
-    private FXMLLoader loader;
-    private ZoomController zoomController;
-    private Stage newWindow;
+    private Zoom zoom;
 
     //class initialization
     public void init(){
         activeProject = new Project();
-        setZoom();
+        zoom = new Zoom();
     }
 
     //return active project
@@ -94,6 +89,7 @@ public class ProjectModel {
             updateProject(project);
     }
 
+    //ask for confirmation
     private void showReplaceConfirmationDialog(Project project){
         DialogsUtils.showConfirmationDialog("close.title", "close.text")
                 .filter(response -> response == ButtonType.OK)
@@ -201,47 +197,13 @@ public class ProjectModel {
     private Image updateImage(){
         Image updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue(), activeProject.getContrastValue());
         activeProject.setColouringBookImage(updatedImage);
-        updateZoomImage(updatedImage);
+        zoom.updateZoomImage(updatedImage);
 
         return updatedImage;
     }
 
-    //update zoomImage
-    private void updateZoomImage(Image image){
-        zoomController = loader.getController();
-        zoomController.setZoomImage(image);
-    }
-
-    //Create initial stage for the zoomWindow
-    private void setZoom(){
-        loader = new FXMLLoader(getClass().getResource(ZOOM_FXML));
-        loader.setResources(FxmlUtils.getResourceBundle());
-
-        Parent root = setRoot();
-        updateZoomImage(null);
-
-        newWindow = new Stage();
-        newWindow.setTitle("Zoom");
-        newWindow.setScene(new Scene(root));
-    }
-
-    //Load root
-    private Parent setRoot(){
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return root;
-    }
-
-    //Show adjusted zoomWindow with readyImage
+    //show zoom window
     public void showZoom(){
-        updateZoomImage(activeProject.getColouringBookImage());
-
-        newWindow.setWidth(activeProject.getColouringBookImage().getWidth());
-        newWindow.setHeight(activeProject.getColouringBookImage().getHeight());
-        newWindow.show();
+        zoom.showZoom(activeProject);
     }
 }
