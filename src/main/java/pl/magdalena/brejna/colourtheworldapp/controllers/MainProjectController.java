@@ -5,12 +5,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import pl.magdalena.brejna.colourtheworldapp.App;
+import pl.magdalena.brejna.colourtheworldapp.algorithms.ImageSettings;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
-import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
+
 import java.io.IOException;
 
 public class MainProjectController {
@@ -31,6 +34,14 @@ public class MainProjectController {
     private ImageView photoImageView;
     @FXML
     private ImageView colouringBookImageView;
+    @FXML
+    private AnchorPane photoBasePane;
+    @FXML
+    private AnchorPane projectBasePane;
+    @FXML
+    private ScrollPane photoScrollPane;
+    @FXML
+    private ScrollPane projectScrollPane;
 
     //controls connected with processing photo
     @FXML
@@ -46,9 +57,9 @@ public class MainProjectController {
     @FXML
     private Button deleteImageButton;
 
+    //controls connected with slider
     @FXML
     private SplitPane splitPane;
-
     @FXML
     private Slider dilationSlider;
     @FXML
@@ -114,6 +125,12 @@ public class MainProjectController {
         });
     }
 
+    //set scroll start position
+    private void setScrollPaneLocation(ScrollPane scrollPane){
+        scrollPane.setHvalue(0.5);
+        scrollPane.setVvalue(0.5);
+    }
+
     //open project selected in ComboBox
     private void loadSelectedProject(Project newProject){
         projectModel.loadProject(newProject);
@@ -135,6 +152,7 @@ public class MainProjectController {
     //create colouring book based on uploaded photo
     @FXML
     private void createColouringBook(){
+        setScrollPaneLocation(projectScrollPane);
         colouringBookImageView.setImage(projectModel.createColouringBook());
     }
 
@@ -142,6 +160,7 @@ public class MainProjectController {
     @FXML
     private void selectImage(){
         try {
+            setScrollPaneLocation(photoScrollPane);
             photoImageView.setImage(projectModel.loadImage());
             openImageButton.setDisable(true);
         }catch(ImageException e){
@@ -199,5 +218,17 @@ public class MainProjectController {
     private void clickProjectChoiceComboBox(MouseEvent mouseClickEvent){
         if(mouseClickEvent.getButton().equals(MouseButton.SECONDARY))
             ProjectListModel.deleteProjectOnRightClick(projectChoiceComboBox.getValue());
+    }
+
+    //set zooming a photo in the photoScrollPane
+    @FXML
+    private void scrollPhoto(ScrollEvent mouseScrollEvent){
+        ImageSettings.scrollImage(mouseScrollEvent, photoBasePane);
+    }
+
+    //set zooming a photo in the projectScrollPane
+    @FXML
+    private void scrollProject(ScrollEvent mouseScrollEvent){
+        ImageSettings.scrollImage(mouseScrollEvent, projectBasePane);
     }
 }
