@@ -54,11 +54,10 @@ public class Zoom {
     }
 
     //show created zoom image
-    public void showZoom(Project activeProject){
-        updateZoomImage(activeProject.getColouringBookImage());
-
-        newWindow.setWidth(activeProject.getColouringBookImage().getWidth());
-        newWindow.setHeight(activeProject.getColouringBookImage().getHeight());
+    public void showZoom(Image projectImage){
+        updateZoomImage(projectImage);
+        newWindow.setWidth(projectImage.getWidth());
+        newWindow.setHeight(projectImage.getHeight());
         newWindow.show();
     }
 }

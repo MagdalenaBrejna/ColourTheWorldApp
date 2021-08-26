@@ -8,6 +8,8 @@ import org.opencv.core.Point;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import pl.magdalena.brejna.colourtheworldapp.models.Project;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,16 +17,16 @@ import java.io.File;
 public class EdgeDetection {
 
     //Laplacian of Gauss algorithm - edge detection
-    public static Image detectEdges(File sourceFile, Double dilationFactor, Double contrastFactor){
+    public static Image detectEdges(Project activeProject){
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        Mat dst = detect(sourceFile);
-        Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size((2*dilationFactor) + 1, (2*dilationFactor)+1), new Point(dilationFactor, dilationFactor));
+        Mat dst = detect(activeProject.getSourceFile());
+        Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size((2*activeProject.getDilationValue()) + 1, (2*activeProject.getDilationValue())+1), new Point(activeProject.getDilationValue(), activeProject.getDilationValue()));
         Imgproc.dilate(dst, dst, kernel);
 
         BufferedImage img = (BufferedImage) HighGui.toBufferedImage(dst);
         img = NegativeFilter.makeNegativePhoto(img);
-        img = makeContrastPixels(img, contrastFactor);
+        img = makeContrastPixels(img, activeProject.getContrastValue());
 
         WritableImage readyImage = SwingFXUtils.toFXImage((BufferedImage) img, null);
 

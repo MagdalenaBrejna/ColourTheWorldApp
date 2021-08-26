@@ -139,8 +139,8 @@ public class MainProjectController {
 
     //set selected project values to the project layout
     private void setProjectComponents(){
-        photoImageView.setImage(projectModel.getActiveProject().getProjectImage());
-        colouringBookImageView.setImage(projectModel.getActiveProject().getColouringBookImage());
+        photoImageView.setImage(projectModel.getPhotoImage());
+        colouringBookImageView.setImage(projectModel.getProjectImage());
         projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
     }
 

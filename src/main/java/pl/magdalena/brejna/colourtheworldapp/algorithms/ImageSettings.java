@@ -1,6 +1,5 @@
 package pl.magdalena.brejna.colourtheworldapp.algorithms;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 

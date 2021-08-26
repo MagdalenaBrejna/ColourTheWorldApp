@@ -2,24 +2,17 @@ package pl.magdalena.brejna.colourtheworldapp.models;
 
 import javafx.beans.property.StringProperty;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
-import pl.magdalena.brejna.colourtheworldapp.controllers.ZoomController;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
-import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 public class ProjectModel {
 
@@ -40,45 +33,72 @@ public class ProjectModel {
         return activeProject;
     }
 
-    //set name of the activeProject with a text stored in textField
-    public void saveActiveProject(StringProperty nameTextProperty){
-        activeProject.setProjectName(nameTextProperty.getValue());
-        ProjectListModel.addProjectToList(activeProject);
+    //return loaded photo
+    public Image getPhotoImage(){
+        if(isPhotoSelected())
+            return tryOpenFile();
+        return null;
     }
 
-    //close active project
-    public void closeProject(){
-        if(!isSaved())
-            showCloseConfirmationDialog();
-        else
-            App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
+    //get loaded photo
+    private Image tryOpenFile(){
+        try {
+            return openFile(activeProject.getSourceFile());
+        } catch (ImageException imageException) {
+            imageException.printStackTrace();
+            return null;
+        }
     }
 
-    //ask for close confirmation
-    private void showCloseConfirmationDialog(){
-        DialogsUtils.showConfirmationDialog("close.title", "close.text")
-                .filter(response -> response == ButtonType.OK)
-                .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
+    //return colouring book
+    public Image getProjectImage(){
+        if(isPhotoSelected())
+            return createColouringBook();
+        return null;
     }
 
-    //check if the active project is saved
-    public boolean isSaved(){
-        if(!ProjectListModel.containsProject(activeProject))
-            return false;
-        return true;
+    //check if active project contains photo
+    private boolean isPhotoSelected(){
+        if(activeProject.getSourceFile() != null)
+            return true;
+        return false;
     }
 
-    //delete photos from active project
-    public void deleteImage(){
-        activeProject.setProjectImage(null);
-        activeProject.setColouringBookImage(null);
+    //open file chooser to let find photo (jpg or png), add it to the active project
+    public Image loadImage () throws ImageException {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            setOpenFileChooserSettings(fileChooser);
+
+            File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
+            activeProject.setSourceFile(file);
+            Image image = openFile(file);
+            return image;
+
+        } catch (NullPointerException e) {
+            throw new ImageException("open file exception");
+        }
     }
 
-    //transform the project photo to colouring book
-    public Image createColouringBook(){
-        Image newImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), 0.0, 150.0);
-        activeProject.setColouringBookImage(newImage);
-        return activeProject.getColouringBookImage();
+    //set settings of FileChooser
+    private void setOpenFileChooserSettings(FileChooser fileChooser){
+        File directory = new File(System.getProperty("user.home"), "Pictures");
+        fileChooser.setInitialDirectory(directory);
+
+        fileChooser.setTitle("Open picture...");
+
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+    }
+
+    //open file
+    public Image openFile(File file) throws ImageException{
+        Image image = new Image(file.toURI().toString());
+        if (!image.isError()) {
+            activeProject.setSourceFile(file);
+            return image;
+        } else
+            throw new ImageException("open file exception");
     }
 
     //check if current project is save. If yes update project, if not ask for a confirmation
@@ -99,6 +119,17 @@ public class ProjectModel {
     //set project selected in ComboBox as activeProject
     private void updateProject(Project project){
         activeProject = project;
+    }
+
+    //transform the project photo to colouring book
+    public Image createColouringBook(){
+        return EdgeDetection.detectEdges(activeProject);
+    }
+
+    //set name of the activeProject with a text stored in textField
+    public void saveActiveProject(StringProperty nameTextProperty){
+        activeProject.setProjectName(nameTextProperty.getValue());
+        ProjectListModel.addProjectToList(activeProject);
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
@@ -132,51 +163,49 @@ public class ProjectModel {
     private void saveImage(FileChooser fileChooser) throws ImageException, IOException{
         File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
         if (file != null) {
-            ImageIO.write(SwingFXUtils.fromFXImage(activeProject.getColouringBookImage(), null), "png", file);
+            ImageIO.write(SwingFXUtils.fromFXImage(getProjectImage(), null), "png", file);
         }else
             throw new ImageException("Save file exception.");
     }
 
-    //open file chooser to let find photo (jpg or png), add it to the active project
-    public Image loadImage () throws ImageException {
-        try {
-            FileChooser fileChooser = new FileChooser();
-            setOpenFileChooserSettings(fileChooser);
-
-            File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
-            openFile(file);
-            return activeProject.getProjectImage();
-
-        } catch (NullPointerException e) {
-            throw new ImageException("open file exception");
-        }
+    //close active project
+    public void closeProject(){
+        if(!isSaved())
+            showCloseConfirmationDialog();
+        else
+            App.setCenterLayout(MAIN_MENU_BUTTONS_FXML);
     }
 
-    //set settings of FileChooser
-    private void setOpenFileChooserSettings(FileChooser fileChooser){
-        File directory = new File(System.getProperty("user.home"), "Pictures");
-        fileChooser.setInitialDirectory(directory);
-
-        fileChooser.setTitle("Open picture...");
-
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+    //ask for close confirmation
+    private void showCloseConfirmationDialog(){
+        DialogsUtils.showConfirmationDialog("close.title", "close.text")
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
     }
 
-    //open file
-    private void openFile(File file) throws ImageException{
-        Image image = new Image(file.toURI().toString());
-        if (!image.isError()) {
-            activeProject.setSourceFile(file);
-            activeProject.setProjectImage(image);
-        } else
-            throw new ImageException("open file exception");
+    //check if the active project is saved
+    private boolean isSaved(){
+        if(!ProjectListModel.containsProject(activeProject))
+            return false;
+        return true;
+    }
+
+    //restart active project
+    public void deleteImage(){
+        activeProject.setSourceFile(null);
+        setInitialProjectValues();
+    }
+
+    //set project parameters initial values
+    private void setInitialProjectValues(){
+        activeProject.setDilationValue(0.0);
+        activeProject.setContrastValue(150.0);
     }
 
     //update readyImage with parameter set using slider
     public Image dilate(Double sliderValue){
         Image updatedImage = null;
-        if(activeProject.getColouringBookImage() != null) {
+        if(createColouringBook() != null) {
             activeProject.setDilationValue(sliderValue);
             updatedImage = updateImage();
         }
@@ -186,7 +215,7 @@ public class ProjectModel {
     //update readyImage with contrast parameter set using slider
     public Image makeContrast(Double sliderValue){
         Image updatedImage =  null;
-        if(activeProject.getColouringBookImage() != null) {
+        if(createColouringBook() != null) {
             activeProject.setContrastValue(sliderValue);
             updatedImage = updateImage();
         }
@@ -195,15 +224,13 @@ public class ProjectModel {
 
     //update Image
     private Image updateImage(){
-        Image updatedImage = EdgeDetection.detectEdges(activeProject.getSourceFile(), activeProject.getDilationValue(), activeProject.getContrastValue());
-        activeProject.setColouringBookImage(updatedImage);
+        Image updatedImage = EdgeDetection.detectEdges(activeProject);
         zoom.updateZoomImage(updatedImage);
-
         return updatedImage;
     }
 
     //show zoom window
     public void showZoom(){
-        zoom.showZoom(activeProject);
+        zoom.showZoom(getProjectImage());
     }
 }

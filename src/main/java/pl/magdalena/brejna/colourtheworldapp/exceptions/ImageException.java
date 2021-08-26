@@ -7,6 +7,6 @@ public class ImageException extends Exception{
     }
 
     public void printStackTrace(){
-        System.out.println("Wrong file");
+        System.out.println("Image file error");
     }
 }
