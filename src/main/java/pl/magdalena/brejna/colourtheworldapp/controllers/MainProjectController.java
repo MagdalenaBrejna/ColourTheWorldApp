@@ -86,6 +86,8 @@ public class MainProjectController {
         this.openZoomButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
         this.saveColouringBookButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
         this.deleteImageButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
+        this.dilationSlider.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
+        this.contrastSlider.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
     }
 
     //set action listeners
