@@ -8,11 +8,13 @@ import javafx.stage.FileChooser;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
+import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ProjectModel {
 
@@ -20,11 +22,13 @@ public class ProjectModel {
 
     //ProjectModel contains an active project and zoom object
     private Project activeProject;
+    private ProjectDao activeProjectDao;
     private Zoom zoom;
 
     //class initialization
     public void init(){
         activeProject = new Project();
+        activeProjectDao = new ProjectDao();
         zoom = new Zoom();
     }
 
@@ -126,9 +130,10 @@ public class ProjectModel {
         return EdgeDetection.detectEdges(activeProject);
     }
 
-    //set name of the activeProject with a text stored in textField
+    //save activeProject with a text stored in textField
     public void saveActiveProject(StringProperty nameTextProperty){
         activeProject.setProjectName(nameTextProperty.getValue());
+        activeProjectDao.insertProject(activeProject);
         ProjectListModel.addProjectToList(activeProject);
     }
 

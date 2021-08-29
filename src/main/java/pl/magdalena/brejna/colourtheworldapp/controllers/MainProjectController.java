@@ -71,6 +71,8 @@ public class MainProjectController {
         projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
         bindings();
         setActionListeners();
+        //Connection con = DbManager.connectDB();
+        //DbManager.disconnectDB();
     }
 
     //init new project
