@@ -5,4 +5,5 @@ import java.sql.SQLException;
 
 public interface Dao {
     void insertProject(Project project) throws SQLException;
+    void deleteProject(Project project) throws SQLException;
 }

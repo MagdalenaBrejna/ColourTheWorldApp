@@ -9,4 +9,9 @@ public class ProjectDao implements Dao{
         String sql = "INSERT INTO projects (projectName, sourceFile, dilationValue, contrastValue) VALUES (?, ?, ?, ?)";
         DbManager.executeInsert(activeProject, sql);
     }
+
+    public void deleteProject(Project project){
+        String sql = "DELETE FROM projects WHERE projectName=?";
+        DbManager.executeDeletion(project, sql);
+    }
 }

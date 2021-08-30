@@ -42,14 +42,14 @@ public class DbManager {
 
     private static void insertProject(Project project, String sqlStatement) throws DatabaseException{
         try (PreparedStatement statement = dbConnection.prepareStatement(sqlStatement)) {
-            createStatement(project, statement);
+            createInsertStatement(project, statement);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DatabaseException("Insert error");
         }
     }
 
-    private static void createStatement(Project project, PreparedStatement statement) throws SQLException{
+    private static void createInsertStatement(Project project, PreparedStatement statement) throws SQLException{
         statement.setString(1, project.getProjectName());
         if (project.getSourceFile() != null)
             statement.setString(2, project.getSourceFile().toString());
@@ -57,6 +57,29 @@ public class DbManager {
             statement.setString(2, "");
         statement.setDouble(3, project.getDilationValue());
         statement.setDouble(4, project.getContrastValue());
+    }
+
+    public static void executeDeletion(Project project, String sqlStatement){
+        try {
+            connectDB();
+            deleteProject(project, sqlStatement);
+            disconnectDB();
+        }catch(DatabaseException databaseException){
+            databaseException.printStackTrace();
+        }
+    }
+
+    private static void deleteProject(Project project, String sqlStatement) throws DatabaseException{
+        try (PreparedStatement statement = dbConnection.prepareStatement(sqlStatement)) {
+            createDeleteStatement(project, statement);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DatabaseException("Deletion error");
+        }
+    }
+
+    private static void createDeleteStatement(Project project, PreparedStatement statement) throws SQLException{
+        statement.setString(1, project.getProjectName());
     }
 }
 
