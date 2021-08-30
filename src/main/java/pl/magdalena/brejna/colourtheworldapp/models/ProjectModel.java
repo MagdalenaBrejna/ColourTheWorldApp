@@ -77,6 +77,9 @@ public class ProjectModel {
             File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
             activeProject.setSourceFile(file);
             Image image = openFile(file);
+
+            if(activeProject.getProjectName() != null)
+                activeProjectDao.updateProject(activeProject);
             return image;
 
         } catch (NullPointerException e) {
@@ -199,6 +202,7 @@ public class ProjectModel {
     public void deleteImage(){
         activeProject.setSourceFile(null);
         setInitialProjectValues();
+        activeProjectDao.updateProject(activeProject);
     }
 
     //set project parameters initial values
@@ -213,6 +217,7 @@ public class ProjectModel {
         if(createColouringBook() != null) {
             activeProject.setDilationValue(sliderValue);
             updatedImage = updateImage();
+            activeProjectDao.updateProject(activeProject);
         }
         return updatedImage;
     }
@@ -223,6 +228,7 @@ public class ProjectModel {
         if(createColouringBook() != null) {
             activeProject.setContrastValue(sliderValue);
             updatedImage = updateImage();
+            activeProjectDao.updateProject(activeProject);
         }
         return updatedImage;
     }

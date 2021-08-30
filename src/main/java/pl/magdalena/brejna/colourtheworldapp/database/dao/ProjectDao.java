@@ -14,4 +14,9 @@ public class ProjectDao implements Dao{
         String sql = "DELETE FROM projects WHERE projectName=?";
         DbManager.executeDeletion(project, sql);
     }
+
+    public void updateProject(Project project){
+        String sql = "UPDATE projects SET projectName=?, sourceFile=?, dilationValue=?, contrastValue=? WHERE projectName=?";
+        DbManager.executeProjectUpdate(project, sql);
+    }
 }
