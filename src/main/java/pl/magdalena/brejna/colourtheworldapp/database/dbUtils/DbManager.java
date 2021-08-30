@@ -30,22 +30,36 @@ public class DbManager {
         }
     }
 
-    public static void executeInsert(Project project, String sqlStatement){
+    public static void executeTableUpdate(Project project, String sqlStatement){
         try {
             connectDB();
-            insertProject(project, sqlStatement);
+            executeDatabaseAction(project, sqlStatement);
             disconnectDB();
         }catch(DatabaseException databaseException){
             databaseException.printStackTrace();
         }
     }
 
-    private static void insertProject(Project project, String sqlStatement) throws DatabaseException{
+    private static void executeDatabaseAction(Project project, String sqlStatement) throws DatabaseException{
         try (PreparedStatement statement = dbConnection.prepareStatement(sqlStatement)) {
-            createInsertStatement(project, statement);
+            executeRequestedAction(project, sqlStatement, statement);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DatabaseException("Insert error");
+            throw new DatabaseException("Database error");
+        }
+    }
+
+    private static void executeRequestedAction(Project project, String sqlStatement, PreparedStatement statement) throws SQLException {
+        switch(sqlStatement.charAt(0)){
+            case 'I':
+                createInsertStatement(project, statement);
+                break;
+            case 'U':
+                createUpdateStatement(project, statement);
+                break;
+            case 'D':
+                createDeleteStatement(project, statement);
+                break;
         }
     }
 
@@ -58,59 +72,12 @@ public class DbManager {
         statement.setDouble(3, project.getDilationValue());
         statement.setDouble(4, project.getContrastValue());
     }
-
-    public static void executeDeletion(Project project, String sqlStatement){
-        try {
-            connectDB();
-            deleteProject(project, sqlStatement);
-            disconnectDB();
-        }catch(DatabaseException databaseException){
-            databaseException.printStackTrace();
-        }
+    private static void createUpdateStatement(Project project, PreparedStatement statement) throws SQLException{
+        createInsertStatement(project, statement);
+        statement.setString(5, project.getProjectName());
     }
-
-    private static void deleteProject(Project project, String sqlStatement) throws DatabaseException{
-        try (PreparedStatement statement = dbConnection.prepareStatement(sqlStatement)) {
-            createDeleteStatement(project, statement);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DatabaseException("Deletion error");
-        }
-    }
-
     private static void createDeleteStatement(Project project, PreparedStatement statement) throws SQLException{
         statement.setString(1, project.getProjectName());
     }
-
-    public static void executeProjectUpdate(Project project, String sqlStatement){
-        try {
-            connectDB();
-            updateProject(project, sqlStatement);
-            disconnectDB();
-        }catch(DatabaseException databaseException){
-            databaseException.printStackTrace();
-        }
-    }
-
-    private static void updateProject(Project project, String sqlStatement) throws DatabaseException{
-        try (PreparedStatement statement = dbConnection.prepareStatement(sqlStatement)) {
-            createUpdateStatement(project, statement);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DatabaseException("Update error");
-        }
-    }
-
-    private static void createUpdateStatement(Project project, PreparedStatement statement) throws SQLException{
-        statement.setString(1, project.getProjectName());
-        if (project.getSourceFile() != null)
-            statement.setString(2, project.getSourceFile().toString());
-        else
-            statement.setString(2, "");
-        statement.setDouble(3, project.getDilationValue());
-        statement.setDouble(4, project.getContrastValue());
-        statement.setString(5, project.getProjectName());
-    }
-
 }
 
