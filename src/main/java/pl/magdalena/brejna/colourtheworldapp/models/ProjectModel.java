@@ -9,6 +9,7 @@ import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
 import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import javax.imageio.ImageIO;
@@ -29,7 +30,16 @@ public class ProjectModel {
     public void init(){
         activeProject = new Project();
         activeProjectDao = new ProjectDao();
+        updateProjectList();
         zoom = new Zoom();
+    }
+
+    public void updateProjectList(){
+        try {
+            ProjectListModel.setProjectList(activeProjectDao.showAllProjects());
+        } catch (DatabaseException databaseException) {
+            databaseException.printStackTrace();
+        }
     }
 
     //return active project
@@ -63,7 +73,7 @@ public class ProjectModel {
 
     //check if active project contains photo
     private boolean isPhotoSelected(){
-        if(activeProject.getSourceFile() != null)
+        if(!activeProject.getSourceFile().equals(""))
             return true;
         return false;
     }
@@ -75,10 +85,10 @@ public class ProjectModel {
             setOpenFileChooserSettings(fileChooser);
 
             File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
-            activeProject.setSourceFile(file);
-            Image image = openFile(file);
+            activeProject.setSourceFile(file.toURI().toString());
+            Image image = openFile(file.toURI().toString());
 
-            if(activeProject.getProjectName() != null)
+            if(!activeProject.getSourceFile().equals(""))
                 activeProjectDao.updateProject(activeProject);
             return image;
 
@@ -99,8 +109,8 @@ public class ProjectModel {
     }
 
     //open file
-    public Image openFile(File file) throws ImageException{
-        Image image = new Image(file.toURI().toString());
+    public Image openFile(String file) throws ImageException{
+        Image image = new Image(file);
         if (!image.isError()) {
             activeProject.setSourceFile(file);
             return image;
@@ -137,7 +147,7 @@ public class ProjectModel {
     public void saveActiveProject(StringProperty nameTextProperty){
         activeProject.setProjectName(nameTextProperty.getValue());
         activeProjectDao.insertProject(activeProject);
-        ProjectListModel.addProjectToList(activeProject);
+        updateProjectList();
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
@@ -170,9 +180,9 @@ public class ProjectModel {
     //save image in computer files
     private void saveImage(FileChooser fileChooser) throws ImageException, IOException{
         File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
-        if (file != null) {
+        if (file != null)
             ImageIO.write(SwingFXUtils.fromFXImage(getProjectImage(), null), "png", file);
-        }else
+        else
             throw new ImageException("Save file exception.");
     }
 
@@ -200,7 +210,7 @@ public class ProjectModel {
 
     //restart active project
     public void deleteImage(){
-        activeProject.setSourceFile(null);
+        activeProject.setSourceFile("");
         setInitialProjectValues();
         activeProjectDao.updateProject(activeProject);
     }

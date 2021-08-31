@@ -1,6 +1,7 @@
 package pl.magdalena.brejna.colourtheworldapp.models;
 
 import javafx.collections.ObservableList;
+import java.util.ArrayList;
 
 public class ProjectListModel {
 
@@ -12,6 +13,10 @@ public class ProjectListModel {
 
     public static ObservableList getProjectList(){
         return list.getProjectObservableList();
+    }
+
+    public static void setProjectList(ArrayList<Project> projectObservableList){
+        list.setProjectObservableList(projectObservableList);
     }
 
     public static void deleteProjectOnRightClick(Project project){

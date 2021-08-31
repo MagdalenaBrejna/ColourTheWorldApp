@@ -1,13 +1,12 @@
 package pl.magdalena.brejna.colourtheworldapp.models;
 
 import javafx.beans.property.SimpleStringProperty;
-import java.io.File;
 import java.util.Objects;
 
 public class Project {
 
     private SimpleStringProperty projectName = new SimpleStringProperty();
-    private File sourceFile = null;
+    private String sourceFile = "";
     private Double dilationValue = 0.0;
     private Double contrastValue = 150.0;
 
@@ -25,11 +24,11 @@ public class Project {
     }
 
 
-    public File getSourceFile() {
+    public String getSourceFile() {
         return sourceFile;
     }
 
-    public void setSourceFile(File sourceFile) {
+    public void setSourceFile(String sourceFile) {
         this.sourceFile = sourceFile;
     }
 
@@ -72,4 +71,3 @@ public class Project {
         return projectName.getValue();
     }
 }
-

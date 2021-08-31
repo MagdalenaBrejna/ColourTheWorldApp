@@ -71,8 +71,6 @@ public class MainProjectController {
         projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
         bindings();
         setActionListeners();
-        //Connection con = DbManager.connectDB();
-        //DbManager.disconnectDB();
     }
 
     //init new project
@@ -146,6 +144,7 @@ public class MainProjectController {
         photoImageView.setImage(projectModel.getPhotoImage());
         colouringBookImageView.setImage(projectModel.getProjectImage());
         projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
+        blockNextSave();
     }
 
     //load empty project layout

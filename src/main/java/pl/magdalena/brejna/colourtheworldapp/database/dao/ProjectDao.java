@@ -1,7 +1,11 @@
 package pl.magdalena.brejna.colourtheworldapp.database.dao;
 
 import pl.magdalena.brejna.colourtheworldapp.database.dbUtils.DbManager;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
+import javax.sql.rowset.CachedRowSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProjectDao implements Dao{
 
@@ -18,5 +22,31 @@ public class ProjectDao implements Dao{
     public void updateProject(Project project){
         String sql = "UPDATE projects SET projectName=?, sourceFile=?, dilationValue=?, contrastValue=? WHERE projectName=?";
         DbManager.executeTableUpdate(project, sql);
+    }
+
+    public ArrayList showAllProjects() throws DatabaseException{
+        String sql = "SELECT projectName, sourceFile, dilationValue, contrastValue FROM projects";
+        CachedRowSet resultSet = DbManager.executeQuery(sql);
+        return getAllProjects(resultSet);
+    }
+
+    private ArrayList getAllProjects(CachedRowSet resultSet) throws DatabaseException {
+        ArrayList<Project> projectList = new ArrayList<>();
+        try {
+            while (resultSet.next())
+                projectList.add(getProject(resultSet));
+        }catch(SQLException e){
+            throw new DatabaseException("Query exception");
+        }
+        return  projectList;
+    }
+
+    private Project getProject(CachedRowSet resultSet) throws SQLException {
+        Project project = new Project();
+        project.setProjectName(resultSet.getString("projectName"));
+        project.setSourceFile(resultSet.getString("sourceFile"));
+        project.setDilationValue(resultSet.getDouble("dilationValue"));
+        project.setContrastValue(resultSet.getDouble("contrastValue"));
+        return project;
     }
 }

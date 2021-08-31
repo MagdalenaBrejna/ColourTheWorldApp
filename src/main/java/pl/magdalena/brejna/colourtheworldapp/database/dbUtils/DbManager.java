@@ -2,6 +2,10 @@ package pl.magdalena.brejna.colourtheworldapp.database.dbUtils;
 
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
+
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetFactory;
+import javax.sql.rowset.RowSetProvider;
 import java.sql.*;
 
 public class DbManager {
@@ -65,10 +69,7 @@ public class DbManager {
 
     private static void createInsertStatement(Project project, PreparedStatement statement) throws SQLException{
         statement.setString(1, project.getProjectName());
-        if (project.getSourceFile() != null)
-            statement.setString(2, project.getSourceFile().toString());
-        else
-            statement.setString(2, "");
+        statement.setString(2, project.getSourceFile());
         statement.setDouble(3, project.getDilationValue());
         statement.setDouble(4, project.getContrastValue());
     }
@@ -78,6 +79,34 @@ public class DbManager {
     }
     private static void createDeleteStatement(Project project, PreparedStatement statement) throws SQLException{
         statement.setString(1, project.getProjectName());
+    }
+
+    public static CachedRowSet executeQuery(String query){
+        CachedRowSet cachedRowSet = null;
+        try {
+            connectDB();
+            cachedRowSet = callQuery(query);
+            disconnectDB();
+        }catch(DatabaseException exception){
+            exception.printStackTrace();
+        }
+        return cachedRowSet;
+    }
+
+    private static CachedRowSet callQuery(String query) throws DatabaseException{
+        try (Statement statement = dbConnection.createStatement()) {
+            return createCachedRowSet(statement, query);
+        } catch (SQLException e) {
+            throw new DatabaseException("Query error");
+        }
+    }
+
+    private static CachedRowSet createCachedRowSet(Statement statement, String query) throws SQLException{
+        ResultSet resultSet = statement.executeQuery(query);
+        RowSetFactory factory = RowSetProvider.newFactory();
+        CachedRowSet cachedRowSet = factory.createCachedRowSet();
+        cachedRowSet.populate(resultSet);
+        return cachedRowSet;
     }
 }
 

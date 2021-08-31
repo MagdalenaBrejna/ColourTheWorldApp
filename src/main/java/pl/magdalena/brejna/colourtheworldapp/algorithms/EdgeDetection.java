@@ -9,10 +9,11 @@ import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.net.URI;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class EdgeDetection {
 
@@ -20,7 +21,7 @@ public class EdgeDetection {
     public static Image detectEdges(Project activeProject){
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        Mat dst = detect(activeProject.getSourceFile());
+        Mat dst = detect(Paths.get(URI.create(activeProject.getSourceFile())));
         Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size((2*activeProject.getDilationValue()) + 1, (2*activeProject.getDilationValue())+1), new Point(activeProject.getDilationValue(), activeProject.getDilationValue()));
         Imgproc.dilate(dst, dst, kernel);
 
@@ -34,12 +35,11 @@ public class EdgeDetection {
     }
 
     //detect edges
-    private static Mat detect(File sourceFile){
-        Mat sourceImage = Imgcodecs.imread(sourceFile.getPath());
+    private static Mat detect(Path sourceFile){
+        Mat sourceImage = Imgcodecs.imread(sourceFile.toString());
         Mat gray = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
         Mat edges = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type());
         Mat dst = new Mat(sourceImage.rows(), sourceImage.cols(), sourceImage.type(), new Scalar(0));
-
         Imgproc.cvtColor(sourceImage, gray, Imgproc.COLOR_RGB2GRAY);
         Imgproc.GaussianBlur(sourceImage, dst, new Size(3,3), 0.5);
         Imgproc.Laplacian(sourceImage, dst, -10, 3);

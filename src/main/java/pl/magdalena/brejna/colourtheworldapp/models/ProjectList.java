@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
 import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
+
+import java.util.ArrayList;
 
 public class ProjectList {
 
@@ -19,6 +22,11 @@ public class ProjectList {
         return projectObservableList;
     }
 
+    public void setProjectObservableList(ArrayList<Project> projectList) {
+        this.projectObservableList = FXCollections.observableArrayList();
+        this.projectObservableList.addAll(projectList);
+    }
+
     public void deleteProjectOnMouseClick(Project project){
         showDeleteConfirmationDialog(project);
     }
@@ -30,12 +38,15 @@ public class ProjectList {
     }
 
     private void deleteProject(Project project){
-        projectObservableList.remove(project);
-        projectDao.deleteProject(project);
+        try {
+            projectDao.deleteProject(project);
+            setProjectObservableList(projectDao.showAllProjects());
+        } catch (DatabaseException databaseException) {
+            databaseException.printStackTrace();
+        }
     }
 
     public boolean containsProject(Project project){
         return projectObservableList.contains(project);
     }
-
 }

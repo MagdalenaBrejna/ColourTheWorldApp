@@ -1,10 +1,13 @@
 package pl.magdalena.brejna.colourtheworldapp.database.dao;
 
+import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
-import java.sql.SQLException;
+
+import java.util.ArrayList;
 
 public interface Dao {
-    void insertProject(Project project) throws SQLException;
-    void deleteProject(Project project) throws SQLException;
-    void updateProject(Project project) throws SQLException;
+    void insertProject(Project project);
+    void deleteProject(Project project);
+    void updateProject(Project project);
+    ArrayList showAllProjects() throws DatabaseException;
 }
