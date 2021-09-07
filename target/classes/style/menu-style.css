@@ -1,0 +1,10 @@
+.menu-bar, .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing, .menu-bar .label{
+    -fx-background-color: #36454f;
+    -fx-opacity: 0.9;
+    -fx-text-fill: #fcfcfc;
+}
+
+.menu-item{
+    -fx-background-color: #36454f;
+    -fx-text-fill: #fcfcfc;
+}

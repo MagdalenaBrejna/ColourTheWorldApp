@@ -24,7 +24,7 @@
                               <Font name="Cooper Black" size="33.0" />
                            </font>
                         </Label>
-                        <Button layoutX="370.0" layoutY="509.0" maxHeight="477.0" maxWidth="582.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="400.0" stylesheets="@../style/styles.css" text="%my.projects" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="509.0">
+                        <Button layoutX="370.0" layoutY="509.0" maxHeight="477.0" maxWidth="582.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="400.0" stylesheets="@../style/button-style.css" text="%my.projects" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="509.0">
                            <font>
                               <Font name="Cooper Black" size="26.0" />
                            </font>
@@ -33,7 +33,7 @@
                               <String fx:value="project-buttons" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="addProject" layoutX="370.0" layoutY="429.0" maxHeight="400.0" maxWidth="647.0" mnemonicParsing="false" onAction="#openProject" prefHeight="45.0" prefWidth="400.0" styleClass="project-buttons" stylesheets="@../style/styles.css" text="%add.project" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="429.0">
+                        <Button fx:id="addProject" layoutX="370.0" layoutY="429.0" maxHeight="400.0" maxWidth="647.0" mnemonicParsing="false" onAction="#openProject" prefHeight="45.0" prefWidth="400.0" styleClass="project-buttons" stylesheets="@../style/button-style.css" text="%add.project" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="429.0">
                            <font>
                               <Font name="Cooper Black" size="26.0" />
                            </font>

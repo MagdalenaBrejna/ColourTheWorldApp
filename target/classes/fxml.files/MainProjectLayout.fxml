@@ -18,22 +18,22 @@
 
 <BorderPane fx:id="mainProjectBorderPane" prefHeight="503.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainProjectController">
    <center>
-      <AnchorPane prefHeight="445.0" prefWidth="989.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="445.0" prefWidth="989.0" styleClass="image-view" stylesheets="@../style/imageShow-style.css" BorderPane.alignment="CENTER">
          <children>
-            <SplitPane fx:id="splitPane" dividerPositions="0.481981981981982" prefHeight="365.0" prefWidth="741.0" styleClass="image-view" stylesheets="@../style/styles.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+            <SplitPane fx:id="splitPane" dividerPositions="0.481981981981982" prefHeight="365.0" prefWidth="741.0" styleClass="scroll-pane" stylesheets="@../style/styles.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
                <items>
-                  <ScrollPane fx:id="photoScrollPane" hvalue="0.5" onScroll="#scrollPhoto" styleClass="image-view" stylesheets="@../style/styles.css" vvalue="0.5">
+                  <ScrollPane fx:id="photoScrollPane" hvalue="0.5" onScroll="#scrollPhoto" styleClass="image-view" stylesheets="@../style/imageShow-style.css" vvalue="0.5">
                      <content>
-                        <AnchorPane fx:id="photoBasePane" styleClass="image-view" stylesheets="@../style/styles.css">
+                        <AnchorPane fx:id="photoBasePane" styleClass="image-view" stylesheets="@../style/imageShow-style.css">
                            <children>
                               <ImageView fx:id="photoImageView" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <ScrollPane fx:id="projectScrollPane" hvalue="0.5" onScroll="#scrollProject" prefHeight="359.0" prefWidth="412.0" styleClass="image-view" stylesheets="@../style/styles.css" vvalue="0.5">
+                  <ScrollPane fx:id="projectScrollPane" hvalue="0.5" onScroll="#scrollProject" prefHeight="359.0" prefWidth="412.0" styleClass="image-view" stylesheets="@../style/imageShow-style.css" vvalue="0.5">
                      <content>
-                        <AnchorPane fx:id="projectBasePane" styleClass="image-view" stylesheets="@../style/styles.css">
+                        <AnchorPane fx:id="projectBasePane" styleClass="image-view" stylesheets="@../style/imageShow-style.css">
                            <children>
                               <ImageView fx:id="colouringBookImageView" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -42,7 +42,7 @@
                   </ScrollPane>
                </items>
             </SplitPane>
-            <Button fx:id="openZoomButton" mnemonicParsing="false" onAction="#openZoomWindow" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
+            <Button fx:id="openZoomButton" mnemonicParsing="false" onAction="#openZoomWindow" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -50,7 +50,7 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Button fx:id="createColouringBookButton" mnemonicParsing="false" onAction="#createColouringBook" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%create.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
+            <Button fx:id="createColouringBookButton" mnemonicParsing="false" onAction="#createColouringBook" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%create.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -58,7 +58,7 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Button fx:id="openImageButton" mnemonicParsing="false" onAction="#selectImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%choose.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="10.0">
+            <Button fx:id="openImageButton" mnemonicParsing="false" onAction="#selectImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%choose.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -66,7 +66,7 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Button fx:id="saveColouringBookButton" mnemonicParsing="false" onAction="#saveColouringBook" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%saveAs.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="220.0">
+            <Button fx:id="saveColouringBookButton" mnemonicParsing="false" onAction="#saveColouringBook" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%saveAs.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="220.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -74,7 +74,7 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#deleteImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="290.0">
+            <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#deleteImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="290.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -82,7 +82,7 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Button fx:id="closeProjectButton" mnemonicParsing="false" onAction="#closeProject" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%close.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="360.0">
+            <Button fx:id="closeProjectButton" mnemonicParsing="false" onAction="#closeProject" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%close.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="360.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -109,7 +109,7 @@
                   <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="saveProjectButton" maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveProject" prefHeight="35.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%save.button">
+            <Button fx:id="saveProjectButton" maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveProject" prefHeight="35.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%save.button">
                <HBox.margin>
                   <Insets bottom="30.0" top="30.0" />
                </HBox.margin>
@@ -117,7 +117,7 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <ComboBox fx:id="projectChoiceComboBox" maxHeight="35.0" maxWidth="300.0" minWidth="140.0" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="35.0" prefWidth="200.0" promptText="Choose" styleClass="combo-box" stylesheets="@../style/styles.css">
+            <ComboBox fx:id="projectChoiceComboBox" maxHeight="35.0" maxWidth="300.0" minWidth="140.0" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="35.0" prefWidth="200.0" promptText="Choose" styleClass="combo-box" stylesheets="@../style/comboBox-style.css">
                <HBox.margin>
                   <Insets bottom="30.0" left="20.0" top="30.0" />
                </HBox.margin>

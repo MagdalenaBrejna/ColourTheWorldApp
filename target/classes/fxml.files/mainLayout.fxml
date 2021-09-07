@@ -16,7 +16,7 @@
    <top>
       <VBox prefHeight="10.0" prefWidth="602.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar styleClass="menu" stylesheets="@../style/styles.css">
+            <MenuBar styleClass="menu" stylesheets="@../style/menu-style.css">
               <menus>
                 <Menu mnemonicParsing="false" text="%file">
                   <items>

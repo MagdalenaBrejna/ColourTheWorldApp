@@ -1,0 +1,13 @@
+.buttons{
+    -fx-background-color: #36454f;
+    -fx-border-color: #36454f;
+    -fx-opacity: 0.9;
+    -fx-text-fill: #fcfcfc;
+}
+
+.project-buttons{
+    -fx-background-color: #dbdbdb;
+    -fx-border-color: #36454f;
+    -fx-border-width: 3.0;
+    -fx-text-fill: #36454f;
+}
