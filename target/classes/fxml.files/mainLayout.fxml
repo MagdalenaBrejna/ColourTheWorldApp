@@ -8,14 +8,15 @@
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainLayoutController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="704.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainLayoutController">
    <top>
       <VBox prefHeight="10.0" prefWidth="602.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
+            <MenuBar styleClass="menu" stylesheets="@../style/styles.css">
               <menus>
                 <Menu mnemonicParsing="false" text="%file">
                   <items>
@@ -41,6 +42,9 @@
                      </items>
                   </Menu>
               </menus>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" />
+               </effect>
             </MenuBar>
          </children>
          <BorderPane.margin>
@@ -49,6 +53,6 @@
       </VBox>
    </top>
    <center>
-       <fx:include fx:id="mainMenuButtons" layoutX="50.0" source="MainMenuButtonsLayout.fxml" BorderPane.alignment="CENTER_RIGHT" />
+       <fx:include fx:id="mainMenuButtons" layoutX="50.0" source="MainMenuButtonsLayout.fxml" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

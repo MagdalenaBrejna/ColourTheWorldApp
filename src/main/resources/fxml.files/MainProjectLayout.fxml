@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,62 +16,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainProjectBorderPane" prefHeight="476.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainProjectController">
-    <top>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="70.0" prefWidth="699.0">
-               <children>
-                  <TextField fx:id="projectNameTextField" minHeight="25.0" minWidth="250.0">
-                     <HBox.margin>
-                        <Insets bottom="30.0" left="40.0" right="20.0" top="30.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button fx:id="saveProjectButton" mnemonicParsing="false" onAction="#saveProject" prefHeight="25.0" prefWidth="90.0" text="%save.button">
-                     <HBox.margin>
-                        <Insets bottom="30.0" top="30.0" />
-                     </HBox.margin>
-                  </Button>
-                  <ComboBox fx:id="projectChoiceComboBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="25.0" prefWidth="250.0" promptText="Choose">
-                     <HBox.margin>
-                        <Insets bottom="30.0" left="20.0" top="30.0" />
-                     </HBox.margin>
-                  </ComboBox>
-                  <VBox prefHeight="85.0" prefWidth="261.0">
-                     <children>
-                        <Slider fx:id="dilationSlider" blockIncrement="0.5" majorTickUnit="1.0" max="3.0" minorTickCount="5" prefHeight="62.0" prefWidth="201.0" showTickMarks="true">
-                           <padding>
-                              <Insets bottom="20.0" top="15.0" />
-                           </padding>
-                        </Slider>
-                        <Slider fx:id="contrastSlider" blockIncrement="5.0" max="255.0" minorTickCount="1" showTickMarks="true" />
-                     </children>
-                     <padding>
-                        <Insets left="20.0" right="40.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </top>
+<BorderPane fx:id="mainProjectBorderPane" prefHeight="503.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainProjectController">
    <center>
-      <AnchorPane prefHeight="358.0" prefWidth="720.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="445.0" prefWidth="989.0" BorderPane.alignment="CENTER">
          <children>
-            <SplitPane fx:id="splitPane" dividerPositions="0.481981981981982" prefHeight="299.0" prefWidth="460.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+            <SplitPane fx:id="splitPane" dividerPositions="0.481981981981982" prefHeight="365.0" prefWidth="741.0" styleClass="image-view" stylesheets="@../style/styles.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
                <items>
-                  <ScrollPane fx:id="photoScrollPane" hvalue="0.5" onScroll="#scrollPhoto" vvalue="0.5">
+                  <ScrollPane fx:id="photoScrollPane" hvalue="0.5" onScroll="#scrollPhoto" styleClass="image-view" stylesheets="@../style/styles.css" vvalue="0.5">
                      <content>
-                        <AnchorPane fx:id="photoBasePane">
+                        <AnchorPane fx:id="photoBasePane" styleClass="image-view" stylesheets="@../style/styles.css">
                            <children>
                               <ImageView fx:id="photoImageView" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <ScrollPane fx:id="projectScrollPane" hvalue="0.5" onScroll="#scrollProject" vvalue="0.5">
+                  <ScrollPane fx:id="projectScrollPane" hvalue="0.5" onScroll="#scrollProject" prefHeight="359.0" prefWidth="412.0" styleClass="image-view" stylesheets="@../style/styles.css" vvalue="0.5">
                      <content>
-                        <AnchorPane fx:id="projectBasePane">
+                        <AnchorPane fx:id="projectBasePane" styleClass="image-view" stylesheets="@../style/styles.css">
                            <children>
                               <ImageView fx:id="colouringBookImageView" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -79,80 +42,130 @@
                   </ScrollPane>
                </items>
             </SplitPane>
-            <Button fx:id="openZoomButton" mnemonicParsing="false" onAction="#openZoomWindow" prefHeight="30.0" prefWidth="140.0" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="120.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/130181.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="openZoomButton" mnemonicParsing="false" onAction="#openZoomWindow" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
                <font>
                   <Font size="14.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
-            <Button fx:id="createColouringBookButton" mnemonicParsing="false" onAction="#createColouringBook" prefHeight="30.0" prefWidth="140.0" text="%create.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="70.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/126483.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="createColouringBookButton" mnemonicParsing="false" onAction="#createColouringBook" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%create.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
                <font>
                   <Font size="14.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
-            <Button fx:id="openImageButton" mnemonicParsing="false" onAction="#selectImage" prefHeight="30.0" prefWidth="140.0" text="%choose.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/129943.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="openImageButton" mnemonicParsing="false" onAction="#selectImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%choose.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font size="14.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
-            <Button fx:id="saveColouringBookButton" mnemonicParsing="false" onAction="#saveColouringBook" prefHeight="30.0" prefWidth="140.0" text="%saveAs.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="170.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/126480.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="saveColouringBookButton" mnemonicParsing="false" onAction="#saveColouringBook" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%saveAs.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="220.0">
                <font>
                   <Font size="14.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
-            <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#deleteImage" prefHeight="30.0" prefWidth="140.0" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="220.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/126468.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#deleteImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="290.0">
                <font>
                   <Font size="14.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
-            <Button fx:id="closeProjectButton" mnemonicParsing="false" onAction="#closeProject" prefHeight="30.0" prefWidth="140.0" text="%close.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="270.0">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/126469.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="closeProjectButton" mnemonicParsing="false" onAction="#closeProject" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%close.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="360.0">
                <font>
                   <Font size="14.0" />
                </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
          </children>
       </AnchorPane>
    </center>
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="40.0" top="35.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../icons/rainbow.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="projectNameTextField" maxWidth="400.0" minHeight="25.0" minWidth="250.0" prefHeight="35.0" prefWidth="301.0" styleClass="text-field" stylesheets="@../style/styles.css">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="saveProjectButton" maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" onAction="#saveProject" prefHeight="35.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/styles.css" text="%save.button">
+               <HBox.margin>
+                  <Insets bottom="30.0" top="30.0" />
+               </HBox.margin>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Button>
+            <ComboBox fx:id="projectChoiceComboBox" maxHeight="35.0" maxWidth="300.0" minWidth="140.0" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="35.0" prefWidth="200.0" promptText="Choose" styleClass="combo-box" stylesheets="@../style/styles.css">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="20.0" top="30.0" />
+               </HBox.margin>
+            </ComboBox>
+            <VBox prefHeight="95.0" prefWidth="255.0">
+               <children>
+                  <Slider fx:id="dilationSlider" blockIncrement="0.5" majorTickUnit="1.0" max="3.0" minorTickCount="5" prefHeight="47.0" prefWidth="194.0" showTickMarks="true" stylesheets="@../style/styles.css">
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                  </Slider>
+                  <Slider fx:id="contrastSlider" blockIncrement="5.0" max="255.0" minorTickCount="1" prefHeight="28.0" prefWidth="210.0" showTickMarks="true" stylesheets="@../style/styles.css">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></Slider>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
+            <VBox>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets left="10.0" top="8.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../icons/126474.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets left="10.0" top="8.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../icons/precision.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <HBox.margin>
+                  <Insets right="40.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
 
 </BorderPane>

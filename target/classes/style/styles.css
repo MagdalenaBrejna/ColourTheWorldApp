@@ -1,0 +1,107 @@
+.root{
+}
+
+.project-buttons{
+    -fx-background-color: #dbdbdb;
+    -fx-border-color: #36454f;
+    -fx-border-width: 3.0;
+    -fx-text-fill: #36454f;
+}
+
+.label{
+    -fx-background-color: transparent;
+    -fx-border-color: #36454f;
+    -fx-border-width: 3.0;
+    -fx-text-fill: #36454f;
+}
+
+.menu-bar, .menu-button:hover, .menu-bar .menu-button:focused, .menu-bar .menu-button:showing, .menu-bar .label{
+    -fx-background-color: #36454f;
+    -fx-opacity: 0.9;
+    -fx-text-fill: #fcfcfc;
+}
+
+.menu-item{
+    -fx-background-color: #36454f;
+    -fx-text-fill: #fcfcfc;
+}
+
+.split-pane{
+    -fx-background-color: transparent;
+    -fx-border-color: #36454f;
+    -fx-border-style: dotted;
+    -fx-border-width: 2.0;
+    -fx-border-insets: 0, 10;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: transparent;
+    -fx-border-color: #36454f;
+    -fx-border-style: dotted;
+    -fx-border-width: 2.0;
+}
+
+.scroll-pane .viewport, .scroll-pane .corner, .scroll-pane .track{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb{
+    -fx-background-color: #36454f;
+}
+
+.scroll-bar:horizontal *.increment-button, .scroll-bar:horizontal *.decrement-button{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical *.increment-button, .scroll-bar:vertical *.decrement-button{
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical *.increment-arrow, .scroll-bar:vertical *.decrement-arrow{
+    -fx-background-color: #36454f;
+}
+
+.scroll-bar:horizontal *.increment-arrow, .scroll-bar:horizontal *.decrement-arrow{
+    -fx-background-color: #36454f;
+}
+
+.buttons{
+    -fx-background-color: #36454f;
+    -fx-border-color: #36454f;
+    -fx-opacity: 0.9;
+    -fx-text-fill: #fcfcfc;
+}
+
+.image-view{
+    -fx-background-color: transparent;
+}
+
+.text-field{
+    -fx-border-color: #36454f;
+    -fx-border-width: 2.0;
+}
+
+.combo-box{
+    -fx-background-color: #36454f;
+    -fx-border-color: #36454f;
+    -fx-opacity: 0.9;
+    -fx-text-fill: #fcfcfc;
+}
+
+.combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell, .list-cell{
+    -fx-background-color: #36454f;
+    -fx-border-color: #36454f;
+    -fx-text-fill: #fcfcfc;
+}
+
+.combo-box .arrow{
+    -fx-background-color: #fcfcfc;
+}
+
+.slider .thumb{
+    -fx-background-color: #36454f;
+}
+
+.slider .track{
+    fx-background-color: #fcfcfc;
+}
