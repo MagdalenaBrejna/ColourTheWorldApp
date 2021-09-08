@@ -6,6 +6,7 @@ import pl.magdalena.brejna.colourtheworldapp.models.Project;
 import javax.sql.rowset.CachedRowSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ProjectDao implements Dao{
 
@@ -48,5 +49,15 @@ public class ProjectDao implements Dao{
         project.setDilationValue(resultSet.getDouble("dilationValue"));
         project.setContrastValue(resultSet.getDouble("contrastValue"));
         return project;
+    }
+
+    public boolean isProject(String projectName){
+        ArrayList<Project> projectList = showAllProjects();
+        projectList = (ArrayList)projectList.stream()
+                .filter(project -> project.getProjectName().equals(projectName))
+                .collect(Collectors.toList());
+        if(projectList.isEmpty())
+            return false;
+        return true;
     }
 }

@@ -11,6 +11,7 @@ import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.ImageSettings;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ProjectSaveException;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
@@ -203,8 +204,12 @@ public class MainProjectController {
     //save current project
     @FXML
     private void saveProject(){
-        projectModel.saveActiveProject(projectNameTextField.textProperty());
-        blockNextSave();
+        try {
+            projectModel.saveActiveProject(projectNameTextField.textProperty());
+            blockNextSave();
+        }catch(ProjectSaveException exception){
+            exception.callErrorMessage();
+        }
     }
 
     //prevent saving for the second time

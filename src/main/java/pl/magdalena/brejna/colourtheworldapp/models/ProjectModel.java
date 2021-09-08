@@ -12,6 +12,7 @@ import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ProjectSaveException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -144,10 +145,13 @@ public class ProjectModel {
     }
 
     //save activeProject with a text stored in textField
-    public void saveActiveProject(StringProperty nameTextProperty){
-        activeProject.setProjectName(nameTextProperty.getValue());
-        activeProjectDao.insertProject(activeProject);
-        updateProjectList();
+    public void saveActiveProject(StringProperty nameTextProperty) throws ProjectSaveException{
+        if(!activeProjectDao.isProject(nameTextProperty.getValue())) {
+            activeProject.setProjectName(nameTextProperty.getValue());
+            activeProjectDao.insertProject(activeProject);
+            updateProjectList();
+        }else
+            throw new ProjectSaveException("project name already exists");
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
