@@ -10,12 +10,12 @@ import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
 import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
-import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class ProjectModel {
 
@@ -38,7 +38,7 @@ public class ProjectModel {
         try {
             ProjectListModel.setProjectList(activeProjectDao.showAllProjects());
         } catch (DatabaseException databaseException) {
-            databaseException.printStackTrace();
+            databaseException.callErrorMessage();
         }
     }
 
@@ -58,8 +58,8 @@ public class ProjectModel {
     private Image tryOpenFile(){
         try {
             return openFile(activeProject.getSourceFile());
-        } catch (ImageException imageException) {
-            imageException.printStackTrace();
+        } catch (ImageLoadingException imageException) {
+            imageException.callErrorMessage();
             return null;
         }
     }
@@ -79,7 +79,7 @@ public class ProjectModel {
     }
 
     //open file chooser to let find photo (jpg or png), add it to the active project
-    public Image loadImage () throws ImageException {
+    public Image loadImage () throws ImageLoadingException {
         try {
             FileChooser fileChooser = new FileChooser();
             setOpenFileChooserSettings(fileChooser);
@@ -92,8 +92,8 @@ public class ProjectModel {
                 activeProjectDao.updateProject(activeProject);
             return image;
 
-        } catch (NullPointerException e) {
-            throw new ImageException("open file exception");
+        } catch (NullPointerException exception) {
+            throw new ImageLoadingException("loading exception");
         }
     }
 
@@ -109,13 +109,13 @@ public class ProjectModel {
     }
 
     //open file
-    public Image openFile(String file) throws ImageException{
+    public Image openFile(String file) throws ImageLoadingException{
         Image image = new Image(file);
         if (!image.isError()) {
             activeProject.setSourceFile(file);
             return image;
         } else
-            throw new ImageException("open file exception");
+            throw new ImageLoadingException("open file exception");
     }
 
     //check if current project is save. If yes update project, if not ask for a confirmation
@@ -151,7 +151,7 @@ public class ProjectModel {
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
-    public void saveColouringBook() throws ImageException, IOException{
+    public void saveColouringBook() throws ImageProcessingException {
         FileChooser fileChooser = new FileChooser();
         setSaveFileChooserSettings(fileChooser);
 
@@ -178,12 +178,13 @@ public class ProjectModel {
     }
 
     //save image in computer files
-    private void saveImage(FileChooser fileChooser) throws ImageException, IOException{
+    private void saveImage(FileChooser fileChooser) throws ImageProcessingException{
         File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
-        if (file != null)
+        try {
             ImageIO.write(SwingFXUtils.fromFXImage(getProjectImage(), null), "png", file);
-        else
-            throw new ImageException("Save file exception.");
+        } catch (IOException exception) {
+            throw new ImageProcessingException("Saving file exception");
+        }
     }
 
     //close active project

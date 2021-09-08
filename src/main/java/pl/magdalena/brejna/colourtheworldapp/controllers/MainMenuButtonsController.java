@@ -13,11 +13,6 @@ public class MainMenuButtonsController {
 
    private MainLayoutController mainLayoutController;
 
-  /* public void init(){
-       addProject = new Button();
-       addProject.setId("add-project");
-   }
-*/
    public void setMainLayoutController(MainLayoutController mainController) {
        this.mainLayoutController = mainController;
    }
@@ -25,6 +20,5 @@ public class MainMenuButtonsController {
    @FXML
    private void openProject(){
        App.setCenterLayout(MAIN_PROJECT_FXML);
-
    }
 }

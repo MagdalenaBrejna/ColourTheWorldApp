@@ -9,12 +9,11 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.ImageSettings;
-import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageException;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
-
-import java.io.IOException;
 
 public class MainProjectController {
 
@@ -68,9 +67,14 @@ public class MainProjectController {
     //class initialization - init project, set bindings, set actionListeners
     public void initialize(){
         initNewProject();
-        projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
-        bindings();
+        initProjectList();
+        setBindings();
         setActionListeners();
+    }
+
+    //set projects to the list
+    private void initProjectList(){
+        projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
     }
 
     //init new project
@@ -81,7 +85,7 @@ public class MainProjectController {
     }
 
     //set bindings - make some controls disabled in special conditions
-    private void bindings(){
+    private void setBindings(){
         this.createColouringBookButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
         this.openZoomButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
         this.saveColouringBookButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
@@ -166,8 +170,8 @@ public class MainProjectController {
             setScrollPaneLocation(photoScrollPane);
             photoImageView.setImage(projectModel.loadImage());
             openImageButton.setDisable(true);
-        }catch(ImageException e){
-            e.printStackTrace();
+        }catch(ImageLoadingException exception){
+           exception.callErrorMessage();
         }
     }
 
@@ -176,8 +180,8 @@ public class MainProjectController {
     private void saveColouringBook(){
        try {
             projectModel.saveColouringBook();
-       } catch (ImageException | IOException e) {
-            e.printStackTrace();
+       } catch (ImageProcessingException exception) {
+           exception.callErrorMessage();
        }
     }
 
@@ -206,7 +210,7 @@ public class MainProjectController {
     //prevent saving for the second time
     private void blockNextSave(){
         projectNameTextField.setDisable(true);
-        this.saveProjectButton.disableProperty().unbind();
+        saveProjectButton.disableProperty().unbind();
         saveProjectButton.setDisable(true);
     }
 

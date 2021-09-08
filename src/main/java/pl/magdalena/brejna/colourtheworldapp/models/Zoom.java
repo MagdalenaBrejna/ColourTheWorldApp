@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import pl.magdalena.brejna.colourtheworldapp.controllers.ZoomController;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 import java.io.IOException;
 
@@ -27,7 +28,12 @@ public class Zoom {
         loader = new FXMLLoader(getClass().getResource(ZOOM_FXML));
         loader.setResources(FxmlUtils.getResourceBundle());
 
-        Parent root = setRoot();
+        Parent root = null;
+        try {
+            root = setRoot();
+        } catch (ApplicationException appException) {
+            appException.callErrorMessage();
+        }
         updateZoomImage(null);
 
         newWindow = new Stage();
@@ -43,12 +49,12 @@ public class Zoom {
     }
 
     //set root (only once)
-    private Parent setRoot(){
+    private Parent setRoot() throws ApplicationException {
         Parent root = null;
         try {
             root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            throw new ApplicationException("root setting exception");
         }
         return root;
     }

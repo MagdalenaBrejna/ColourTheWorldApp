@@ -35,7 +35,7 @@ public class ProjectDao implements Dao{
         try {
             while (resultSet.next())
                 projectList.add(getProject(resultSet));
-        }catch(SQLException e){
+        }catch(SQLException databaseException){
             throw new DatabaseException("Query exception");
         }
         return  projectList;

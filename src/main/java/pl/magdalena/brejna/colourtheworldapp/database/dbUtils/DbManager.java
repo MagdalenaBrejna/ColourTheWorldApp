@@ -40,7 +40,7 @@ public class DbManager {
             executeDatabaseAction(project, sqlStatement);
             disconnectDB();
         }catch(DatabaseException databaseException){
-            databaseException.printStackTrace();
+            databaseException.callErrorMessage();
         }
     }
 
@@ -87,8 +87,8 @@ public class DbManager {
             connectDB();
             cachedRowSet = callQuery(query);
             disconnectDB();
-        }catch(DatabaseException exception){
-            exception.printStackTrace();
+        }catch(DatabaseException databaseException){
+            databaseException.callErrorMessage();
         }
         return cachedRowSet;
     }
@@ -96,7 +96,7 @@ public class DbManager {
     private static CachedRowSet callQuery(String query) throws DatabaseException{
         try (Statement statement = dbConnection.createStatement()) {
             return createCachedRowSet(statement, query);
-        } catch (SQLException e) {
+        } catch (SQLException databaseException) {
             throw new DatabaseException("Query error");
         }
     }

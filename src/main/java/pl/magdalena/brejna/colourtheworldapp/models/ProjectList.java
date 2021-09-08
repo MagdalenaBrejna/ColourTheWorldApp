@@ -42,7 +42,7 @@ public class ProjectList {
             projectDao.deleteProject(project);
             setProjectObservableList(projectDao.showAllProjects());
         } catch (DatabaseException databaseException) {
-            databaseException.printStackTrace();
+            databaseException.callErrorMessage();
         }
     }
 
