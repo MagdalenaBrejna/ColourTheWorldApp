@@ -246,4 +246,9 @@ public class MainProjectController {
     private void scrollProject(ScrollEvent mouseScrollEvent){
         ImageSettings.scrollImage(mouseScrollEvent, projectBasePane);
     }
+
+    @FXML
+    public void openNew(){
+        projectModel.openNewProject();
+    }
 }

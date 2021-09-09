@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainProjectBorderPane" prefHeight="503.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainProjectController">
+<BorderPane fx:id="mainProjectBorderPane" prefHeight="511.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainProjectController">
    <center>
       <AnchorPane prefHeight="445.0" prefWidth="989.0" styleClass="image-view" stylesheets="@../style/imageShow-style.css" BorderPane.alignment="CENTER">
          <children>
@@ -94,7 +94,7 @@
       </AnchorPane>
    </center>
    <top>
-      <HBox BorderPane.alignment="CENTER">
+      <HBox prefHeight="95.0" prefWidth="1020.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
@@ -117,7 +117,18 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <ComboBox fx:id="projectChoiceComboBox" maxHeight="35.0" maxWidth="300.0" minWidth="140.0" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="35.0" prefWidth="200.0" promptText="Choose" styleClass="combo-box" stylesheets="@../style/comboBox-style.css">
+            <Button fx:id="openButton" minWidth="42.0" mnemonicParsing="false" onAction="#openNew" prefHeight="35.0" prefWidth="35.0" styleClass="buttons" stylesheets="@../style/button-style.css">
+               <HBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/plus-xxl.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <ComboBox fx:id="projectChoiceComboBox" maxHeight="35.0" maxWidth="300.0" minWidth="140.0" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="35.0" prefWidth="200.0" promptText="Project" styleClass="combo-box" stylesheets="@../style/comboBox-style.css">
                <HBox.margin>
                   <Insets bottom="30.0" left="20.0" top="30.0" />
                </HBox.margin>

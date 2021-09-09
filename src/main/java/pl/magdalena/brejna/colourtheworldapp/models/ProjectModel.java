@@ -21,6 +21,7 @@ import java.io.IOException;
 public class ProjectModel {
 
     private final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtonsLayout.fxml";
+    private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
 
     //ProjectModel contains an active project and zoom object
     private Project activeProject;
@@ -207,7 +208,7 @@ public class ProjectModel {
     }
 
     //check if the active project is saved
-    private boolean isSaved(){
+    public boolean isSaved(){
         if(!ProjectListModel.containsProject(activeProject))
             return false;
         return true;
@@ -258,5 +259,20 @@ public class ProjectModel {
     //show zoom window
     public void showZoom(){
         zoom.showZoom(getProjectImage());
+    }
+
+    //open empty project
+    public void openNewProject(){
+        if(!isSaved())
+            showOpenNewProjectConfirmationDialog();
+        else
+            App.setCenterLayout(MAIN_PROJECT_FXML);
+    }
+
+    //show confirmation dialog and open a blank project if the answer is ok
+    private void showOpenNewProjectConfirmationDialog(){
+        DialogsUtils.showConfirmationDialog("close.title", "close.text")
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> App.setCenterLayout(MAIN_PROJECT_FXML));
     }
 }
