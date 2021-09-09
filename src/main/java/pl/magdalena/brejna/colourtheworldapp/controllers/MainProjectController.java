@@ -68,13 +68,13 @@ public class MainProjectController {
     //class initialization - init project, set bindings, set actionListeners
     public void initialize(){
         initNewProject();
-        initProjectList();
+        loadProjectList();
         setBindings();
         setActionListeners();
     }
 
     //set projects to the list
-    private void initProjectList(){
+    private void loadProjectList(){
         projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
     }
 
@@ -206,6 +206,7 @@ public class MainProjectController {
     private void saveProject(){
         try {
             projectModel.saveActiveProject(projectNameTextField.textProperty());
+            loadProjectList();
             blockNextSave();
         }catch(ProjectSaveException exception){
             exception.callErrorMessage();
@@ -228,8 +229,10 @@ public class MainProjectController {
     //delete project selected in ComboBox
     @FXML
     private void clickProjectChoiceComboBox(MouseEvent mouseClickEvent){
-        if(mouseClickEvent.getButton().equals(MouseButton.SECONDARY))
+        if(mouseClickEvent.getButton().equals(MouseButton.SECONDARY)) {
             ProjectListModel.deleteProjectOnRightClick(projectChoiceComboBox.getValue());
+            loadProjectList();
+        }
     }
 
     //set zooming a photo in the photoScrollPane
