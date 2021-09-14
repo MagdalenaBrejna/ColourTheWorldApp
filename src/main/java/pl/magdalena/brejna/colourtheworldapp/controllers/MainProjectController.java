@@ -1,12 +1,16 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.ImageSettings;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
@@ -33,15 +37,19 @@ public class MainProjectController {
     @FXML
     private ImageView photoImageView;
     @FXML
-    private ImageView colouringBookImageView;
+    private ImageView projectImageView;
     @FXML
-    private AnchorPane photoBasePane;
+    private StackPane photoBasePane;
     @FXML
-    private AnchorPane projectBasePane;
+    private StackPane projectBasePane;
     @FXML
     private ScrollPane photoScrollPane;
     @FXML
     private ScrollPane projectScrollPane;
+    @FXML
+    private Group photoGroup;
+    @FXML
+    private Group projectGroup;
 
     //controls connected with processing photo
     @FXML
@@ -88,11 +96,11 @@ public class MainProjectController {
     //set bindings - make some controls disabled in special conditions
     private void setBindings(){
         this.createColouringBookButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
-        this.openZoomButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
-        this.saveColouringBookButton.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
+        this.openZoomButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
+        this.saveColouringBookButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
         this.deleteImageButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
-        this.dilationSlider.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
-        this.contrastSlider.disableProperty().bind(this.colouringBookImageView.imageProperty().isNull());
+        this.dilationSlider.disableProperty().bind(this.projectImageView.imageProperty().isNull());
+        this.contrastSlider.disableProperty().bind(this.projectImageView.imageProperty().isNull());
     }
 
     //set action listeners
@@ -111,14 +119,14 @@ public class MainProjectController {
     //set dilationSlider listener
     private void setDilationSliderListener(){
         dilationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            colouringBookImageView.setImage(projectModel.dilate((Double) newValue));
+            projectImageView.setImage(projectModel.dilate((Double) newValue));
         });
     }
 
     //set contrastSlider listener
     private void setContrastSliderListener(){
         contrastSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            colouringBookImageView.setImage(projectModel.makeContrast((Double) newValue));
+            projectImageView.setImage(projectModel.makeContrast((Double) newValue));
         });
     }
 
@@ -132,12 +140,6 @@ public class MainProjectController {
         });
     }
 
-    //set scroll start position
-    private void setScrollPaneLocation(ScrollPane scrollPane){
-        scrollPane.setHvalue(0.5);
-        scrollPane.setVvalue(0.5);
-    }
-
     //open project selected in ComboBox
     private void loadSelectedProject(Project newProject){
         projectModel.loadProject(newProject);
@@ -147,7 +149,7 @@ public class MainProjectController {
     //set selected project values to the project layout
     private void setProjectComponents(){
         photoImageView.setImage(projectModel.getPhotoImage());
-        colouringBookImageView.setImage(projectModel.getProjectImage());
+        projectImageView.setImage(projectModel.getProjectImage());
         projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
         blockNextSave();
     }
@@ -160,16 +162,16 @@ public class MainProjectController {
     //create colouring book based on uploaded photo
     @FXML
     private void createColouringBook(){
-        setScrollPaneLocation(projectScrollPane);
-        colouringBookImageView.setImage(projectModel.createColouringBook());
+        projectImageView.setImage(projectModel.createColouringBook());
+        ImageSettings.setScrollInitialValues(projectScrollPane);
     }
 
     //set uploaded photo to the photoImageView
     @FXML
     private void selectImage(){
         try {
-            setScrollPaneLocation(photoScrollPane);
             photoImageView.setImage(projectModel.loadImage());
+            ImageSettings.setScrollInitialValues(photoScrollPane);
             openImageButton.setDisable(true);
         }catch(ImageLoadingException exception){
            exception.callErrorMessage();
@@ -191,7 +193,7 @@ public class MainProjectController {
     private void deleteImage(){
         projectModel.deleteImage();
         photoImageView.setImage(null);
-        colouringBookImageView.setImage(null);
+        projectImageView.setImage(null);
         openImageButton.setDisable(false);
     }
 
@@ -235,20 +237,45 @@ public class MainProjectController {
         }
     }
 
-    //set zooming a photo in the photoScrollPane
+    //set zooming an image in the photoScrollPane
     @FXML
     private void scrollPhoto(ScrollEvent mouseScrollEvent){
-        ImageSettings.scrollImage(mouseScrollEvent, photoBasePane);
+        ImageSettings.scrollImage(mouseScrollEvent, photoImageView);
     }
 
-    //set zooming a photo in the projectScrollPane
+    //set zooming an image in the projectScrollPane
     @FXML
     private void scrollProject(ScrollEvent mouseScrollEvent){
-        ImageSettings.scrollImage(mouseScrollEvent, projectBasePane);
+        ImageSettings.scrollImage(mouseScrollEvent, projectImageView);
     }
 
+    //set pressing a project image in the photoScrollPane
     @FXML
-    public void openNew(){
+    private void pressPhoto(MouseEvent mousePressEvent){
+        ImageSettings.pressImage(mousePressEvent);
+    }
+
+    //set pressing a project image in the projectScrollPane
+    @FXML
+    private void pressProject(MouseEvent mousePressEvent){
+        ImageSettings.pressImage(mousePressEvent);
+    }
+
+    //set dragging an image in the photoScrollPane
+    @FXML
+    private void dragPhoto(MouseEvent mousePressEvent){
+        ImageSettings.dragImage(mousePressEvent, photoScrollPane, photoGroup);
+    }
+
+    //set dragging a project image in the projectScrollPane
+    @FXML
+    private void dragProject(MouseEvent mousePressEvent){
+        ImageSettings.dragImage(mousePressEvent, projectScrollPane, projectGroup);
+    }
+
+    //open new project on a button click
+    @FXML
+    private void openNew(){
         projectModel.openNewProject();
     }
 }
