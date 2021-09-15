@@ -3,7 +3,6 @@ package pl.magdalena.brejna.colourtheworldapp.utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
-
 import java.io.IOException;
 import java.util.ResourceBundle;
 

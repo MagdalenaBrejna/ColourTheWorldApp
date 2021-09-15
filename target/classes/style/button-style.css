@@ -11,3 +11,7 @@
     -fx-border-width: 3.0;
     -fx-text-fill: #36454f;
 }
+
+.language-buttons{
+    -fx-background-color: transparent;
+}

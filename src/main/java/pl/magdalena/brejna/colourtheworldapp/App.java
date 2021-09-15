@@ -1,7 +1,8 @@
 package pl.magdalena.brejna.colourtheworldapp;
 
+import javafx.application.Platform;
 import javafx.scene.layout.BorderPane;
-import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
+import javafx.stage.Stage;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
 public class App {
@@ -10,10 +11,11 @@ public class App {
 
     public static void setCenterLayout(String fxml){
         appPane = Main.getMainPane();
-        try {
-            appPane.setCenter(FxmlUtils.fxmlLoader(fxml));
-        } catch (ApplicationException appException) {
-            appException.callErrorMessage();
-        }
+        appPane.setCenter(FxmlUtils.fxmlLoader(fxml));
+    }
+
+    public static void refresh(){
+        Main.getPrimaryStage().close();
+        Platform.runLater( () -> new Main().start(new Stage()));
     }
 }

@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
 public class Main extends Application {
@@ -43,15 +42,10 @@ public class Main extends Application {
 
     public void start(Stage stage)  {
         setPrimaryStage(stage);
-        try {
-            mainPane = FxmlUtils.fxmlLoader(MAIN_LAYOUT_FXML);
-        } catch (ApplicationException appException) {
-            appException.callErrorMessage();
-        }
+        mainPane = FxmlUtils.fxmlLoader(MAIN_LAYOUT_FXML);
         Scene scene = new Scene(mainPane);
 
         setStageStyle(stage);
-
         primaryStage.setMinHeight(500);
         primaryStage.setMinWidth(850);
         primaryStage.setScene(scene);

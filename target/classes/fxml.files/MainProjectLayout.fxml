@@ -145,7 +145,7 @@
                      </image></ImageView>
                </graphic>
             </Button>
-            <ComboBox fx:id="projectChoiceComboBox" maxHeight="35.0" maxWidth="300.0" minWidth="140.0" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="35.0" prefWidth="200.0" promptText="Project" styleClass="combo-box" stylesheets="@../style/comboBox-style.css">
+            <ComboBox fx:id="projectChoiceComboBox" maxHeight="35.0" maxWidth="300.0" minWidth="140.0" onMouseClicked="#clickProjectChoiceComboBox" prefHeight="35.0" prefWidth="200.0" promptText="%select.button" styleClass="combo-box" stylesheets="@../style/comboBox-style.css">
                <HBox.margin>
                   <Insets bottom="30.0" left="20.0" top="30.0" />
                </HBox.margin>

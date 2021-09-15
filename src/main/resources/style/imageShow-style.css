@@ -40,3 +40,7 @@
 .image-view{
     -fx-background-color: transparent;
 }
+
+.language-image-view{
+    -fx-border-color: #36454f;
+}

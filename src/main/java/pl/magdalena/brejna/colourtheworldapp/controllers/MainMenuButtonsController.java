@@ -1,15 +1,14 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import pl.magdalena.brejna.colourtheworldapp.App;
+import pl.magdalena.brejna.colourtheworldapp.utils.ResourceBundleFactory;
+
+import java.util.Locale;
 
 public class MainMenuButtonsController {
 
    private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
-
-   @FXML
-   Button addProject;
 
    private MainLayoutController mainLayoutController;
 
@@ -21,4 +20,20 @@ public class MainMenuButtonsController {
    private void openProject(){
        App.setCenterLayout(MAIN_PROJECT_FXML);
    }
+
+   @FXML
+   private void setPolishLanguage(){
+      ResourceBundleFactory.setLocale(new Locale("pl", "PL"));
+   }
+
+   @FXML
+   private void setEnglishLanguage(){
+      ResourceBundleFactory.setLocale(Locale.ENGLISH);
+   }
+
+   @FXML
+   private void setGermanLanguage(){
+      ResourceBundleFactory.setLocale(Locale.GERMAN);
+   }
+
 }
