@@ -95,7 +95,9 @@ public class MainProjectController {
 
     //set bindings - make some controls disabled in special conditions
     private void setBindings(){
-        this.createColouringBookButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
+        createColouringBookButton.setDisable(true);
+        //this.createColouringBookButton.disableProperty().bind(this.projectImageView.imageProperty().isNotNull());
+        //this.createColouringBookButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
         this.openZoomButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
         this.saveColouringBookButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
         this.deleteImageButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
@@ -167,6 +169,7 @@ public class MainProjectController {
     private void createColouringBook(){
         projectImageView.setImage(projectModel.createColouringBook());
         checkLoadingCorrectness(projectImageView);
+        createColouringBookButton.setDisable(true);
         ImageSettings.setScrollInitialValues(projectScrollPane);
     }
 
@@ -182,6 +185,7 @@ public class MainProjectController {
             photoImageView.setImage(projectModel.loadImage());
             ImageSettings.setScrollInitialValues(photoScrollPane);
             openImageButton.setDisable(true);
+            createColouringBookButton.setDisable(false);
         }catch(ImageLoadingException exception){
            exception.callErrorMessage();
         }
@@ -204,6 +208,7 @@ public class MainProjectController {
         photoImageView.setImage(null);
         projectImageView.setImage(null);
         openImageButton.setDisable(false);
+        createColouringBookButton.setDisable(true);
     }
 
     //if the project is unsaved ask for confirmation, else close project

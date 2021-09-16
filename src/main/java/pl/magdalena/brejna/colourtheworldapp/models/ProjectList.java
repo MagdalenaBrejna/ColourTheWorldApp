@@ -31,7 +31,8 @@ public class ProjectList {
     }
 
     public void deleteProjectOnMouseClick(Project project){
-        showDeleteConfirmationDialog(project);
+        if(project != null)
+            showDeleteConfirmationDialog(project);
     }
 
     private void showDeleteConfirmationDialog(Project project){

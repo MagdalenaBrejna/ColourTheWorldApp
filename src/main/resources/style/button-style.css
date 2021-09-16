@@ -5,6 +5,10 @@
     -fx-text-fill: #fcfcfc;
 }
 
+.buttons:disabled{
+    -fx-opacity: 0.5;
+}
+
 .project-buttons{
     -fx-background-color: #dbdbdb;
     -fx-border-color: #36454f;
