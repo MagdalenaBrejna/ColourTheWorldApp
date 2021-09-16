@@ -91,7 +91,7 @@
                   <ColorAdjust />
                </effect>
             </Button>
-            <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#deleteImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="290.0">
+            <Button fx:id="deleteImageButton" mnemonicParsing="false" onAction="#restartImage" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%delete.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="290.0">
                <font>
                   <Font size="14.0" />
                </font>

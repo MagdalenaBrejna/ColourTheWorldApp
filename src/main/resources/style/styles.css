@@ -5,6 +5,11 @@
     -fx-text-fill: #36454f;
 }
 
+.title-label{
+    -fx-background-color: transparent;
+    -fx-text-fill: #36454f;
+}
+
 .text-field{
     -fx-border-color: #36454f;
     -fx-border-width: 2.0;

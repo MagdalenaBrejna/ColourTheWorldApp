@@ -14,6 +14,8 @@ import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ProjectSaveException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
+import pl.magdalena.brejna.colourtheworldapp.windows.Zoom;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -142,7 +144,12 @@ public class ProjectModel {
 
     //transform the project photo to colouring book
     public Image createColouringBook(){
-        return EdgeDetection.detectEdges(activeProject);
+        try {
+            return EdgeDetection.detectEdges(activeProject);
+        } catch (ImageProcessingException exception) {
+            exception.callErrorMessage();
+            return null;
+        }
     }
 
     //save activeProject with a text stored in textField
@@ -251,7 +258,10 @@ public class ProjectModel {
 
     //update Image
     private Image updateImage(){
-        Image updatedImage = EdgeDetection.detectEdges(activeProject);
+        Image updatedImage = null;
+        try {
+            updatedImage = EdgeDetection.detectEdges(activeProject);
+        } catch (ImageProcessingException exception) {}
         zoom.updateZoomImage(updatedImage);
         return updatedImage;
     }

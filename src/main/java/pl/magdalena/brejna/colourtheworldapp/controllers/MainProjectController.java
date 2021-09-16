@@ -120,6 +120,7 @@ public class MainProjectController {
     private void setDilationSliderListener(){
         dilationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             projectImageView.setImage(projectModel.dilate((Double) newValue));
+            checkLoadingCorrectness(projectImageView);
         });
     }
 
@@ -127,6 +128,7 @@ public class MainProjectController {
     private void setContrastSliderListener(){
         contrastSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             projectImageView.setImage(projectModel.makeContrast((Double) newValue));
+            checkLoadingCorrectness(projectImageView);
         });
     }
 
@@ -149,6 +151,7 @@ public class MainProjectController {
     //set selected project values to the project layout
     private void setProjectComponents(){
         photoImageView.setImage(projectModel.getPhotoImage());
+        checkLoadingCorrectness(photoImageView);
         projectImageView.setImage(projectModel.getProjectImage());
         projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
         blockNextSave();
@@ -163,7 +166,13 @@ public class MainProjectController {
     @FXML
     private void createColouringBook(){
         projectImageView.setImage(projectModel.createColouringBook());
+        checkLoadingCorrectness(projectImageView);
         ImageSettings.setScrollInitialValues(projectScrollPane);
+    }
+
+    private void checkLoadingCorrectness(ImageView imageView){
+        if(imageView.getImage() == null)
+            restartImage();
     }
 
     //set uploaded photo to the photoImageView
@@ -190,7 +199,7 @@ public class MainProjectController {
 
     //delete photo stored in photoImageView
     @FXML
-    private void deleteImage(){
+    private void restartImage(){
         projectModel.deleteImage();
         photoImageView.setImage(null);
         projectImageView.setImage(null);

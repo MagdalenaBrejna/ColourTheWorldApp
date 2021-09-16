@@ -2,7 +2,10 @@ package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
+import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
+import pl.magdalena.brejna.colourtheworldapp.windows.AboutWindow;
+import pl.magdalena.brejna.colourtheworldapp.windows.Instruction;
 
 public class MainLayoutController {
 
@@ -23,5 +26,22 @@ public class MainLayoutController {
         DialogsUtils.showConfirmationDialog("close.title", "close.text")
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> System.exit(0));
+    }
+
+    @FXML
+    private void setAlwaysOnTop(){
+        App.setAppOnTop();
+    }
+
+    @FXML
+    private void showInstruction(){
+        Instruction instruction = new Instruction();
+        instruction.showWindow();
+    }
+
+    @FXML
+    private void showAboutSection(){
+        AboutWindow aboutWindow = new AboutWindow();
+        aboutWindow.showWindow();
     }
 }

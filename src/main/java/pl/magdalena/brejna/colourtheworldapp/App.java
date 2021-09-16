@@ -18,4 +18,8 @@ public class App {
         Main.getPrimaryStage().close();
         Platform.runLater( () -> new Main().start(new Stage()));
     }
+
+    public static void setAppOnTop(){
+        Main.getPrimaryStage().setAlwaysOnTop(true);
+    }
 }

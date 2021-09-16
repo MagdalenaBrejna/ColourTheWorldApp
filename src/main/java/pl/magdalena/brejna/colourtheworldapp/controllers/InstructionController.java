@@ -1,2 +1,5 @@
-package pl.magdalena.brejna.colourtheworldapp.controllers;public class InstructionController {
+package pl.magdalena.brejna.colourtheworldapp.controllers;
+
+public class InstructionController {
+
 }

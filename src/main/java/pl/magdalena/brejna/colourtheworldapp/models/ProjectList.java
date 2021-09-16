@@ -3,11 +3,14 @@ package pl.magdalena.brejna.colourtheworldapp.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
 import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ProjectList {
 
@@ -45,7 +48,6 @@ public class ProjectList {
             databaseException.callErrorMessage();
         }
     }
-
     public boolean containsProject(Project project){
         return projectObservableList.contains(project);
     }

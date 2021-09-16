@@ -5,9 +5,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -25,20 +22,13 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="%edit">
                      <items>
-                        <RadioMenuItem mnemonicParsing="false" selected="true" text="%styl1">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="appStyles" />
-                           </toggleGroup>
-                        </RadioMenuItem>
-                        <RadioMenuItem mnemonicParsing="false" text="%styl2" toggleGroup="$appStyles" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <CheckMenuItem mnemonicParsing="false" text="%alwaysOnTop" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
                      </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="%help">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="%instruction" />
-                    <MenuItem mnemonicParsing="false" text="%about" />
+                        <MenuItem mnemonicParsing="false" onAction="#showInstruction" text="%instruction" />
+                    <MenuItem mnemonicParsing="false" onAction="#showAboutSection" text="%about" />
                      </items>
                   </Menu>
               </menus>

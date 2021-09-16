@@ -8,6 +8,7 @@ import org.opencv.core.Point;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
 import pl.magdalena.brejna.colourtheworldapp.models.Project;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,10 +19,16 @@ import java.nio.file.Paths;
 public class EdgeDetection {
 
     //Laplacian of Gauss algorithm - edge detection
-    public static Image detectEdges(Project activeProject){
+    public static Image detectEdges(Project activeProject) throws ImageProcessingException{
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        Mat dst = detect(Paths.get(URI.create(activeProject.getSourceFile())));
+        Mat dst = null;
+        try {
+            dst = detect(Paths.get(URI.create(activeProject.getSourceFile())));
+        } catch (Exception e) {
+            throw new ImageProcessingException("wrong source file");
+        }
+
         Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size((2*activeProject.getDilationValue()) + 1, (2*activeProject.getDilationValue())+1), new Point(activeProject.getDilationValue(), activeProject.getDilationValue()));
         Imgproc.dilate(dst, dst, kernel);
 
@@ -30,7 +37,6 @@ public class EdgeDetection {
         img = makeContrastPixels(img, activeProject.getContrastValue());
 
         WritableImage readyImage = SwingFXUtils.toFXImage((BufferedImage) img, null);
-
         return readyImage;
     }
 
@@ -45,7 +51,6 @@ public class EdgeDetection {
         Imgproc.Laplacian(sourceImage, dst, -10, 3);
 
         sourceImage.copyTo(dst, edges);
-
         return dst;
     }
 

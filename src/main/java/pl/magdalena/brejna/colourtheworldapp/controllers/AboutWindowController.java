@@ -1,2 +1,4 @@
-package pl.magdalena.brejna.colourtheworldapp.controllers;public class AboutWindowController {
+package pl.magdalena.brejna.colourtheworldapp.controllers;
+
+public class AboutWindowController {
 }

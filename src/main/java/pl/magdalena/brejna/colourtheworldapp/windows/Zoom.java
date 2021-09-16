@@ -1,4 +1,4 @@
-package pl.magdalena.brejna.colourtheworldapp.models;
+package pl.magdalena.brejna.colourtheworldapp.windows;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
