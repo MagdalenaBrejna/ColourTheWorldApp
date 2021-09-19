@@ -20,5 +20,9 @@
 }
 
 .slider .track{
-    fx-background-color: #fcfcfc;
+    -fx-background-color: #fcfcfc;
+}
+
+.tile-pane{
+    -fx-background-color: transparent;
 }

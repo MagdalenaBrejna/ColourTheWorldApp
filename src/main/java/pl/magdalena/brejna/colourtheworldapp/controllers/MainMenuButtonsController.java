@@ -9,6 +9,7 @@ import java.util.Locale;
 public class MainMenuButtonsController {
 
    private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
+   private final String PROJECTS_OVERVIEW_FXML = "/fxml.files/ProjectsOverviewLayout.fxml";
 
    private MainLayoutController mainLayoutController;
 
@@ -19,6 +20,11 @@ public class MainMenuButtonsController {
    @FXML
    private void openProject(){
        App.setCenterLayout(MAIN_PROJECT_FXML);
+   }
+
+   @FXML
+   private void openProjectsOverview(){
+      App.setCenterLayout(PROJECTS_OVERVIEW_FXML);
    }
 
    @FXML

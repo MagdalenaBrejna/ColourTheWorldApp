@@ -1,7 +1,7 @@
 package pl.magdalena.brejna.colourtheworldapp.database.dao;
 
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
-import pl.magdalena.brejna.colourtheworldapp.models.Project;
+import pl.magdalena.brejna.colourtheworldapp.objects.Project;
 
 import java.util.ArrayList;
 

@@ -9,7 +9,7 @@ import org.opencv.highgui.HighGui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
-import pl.magdalena.brejna.colourtheworldapp.models.Project;
+import pl.magdalena.brejna.colourtheworldapp.objects.Project;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URI;

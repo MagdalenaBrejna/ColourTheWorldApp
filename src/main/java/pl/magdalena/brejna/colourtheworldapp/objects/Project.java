@@ -1,4 +1,4 @@
-package pl.magdalena.brejna.colourtheworldapp.models;
+package pl.magdalena.brejna.colourtheworldapp.objects;
 
 import javafx.beans.property.SimpleStringProperty;
 import java.util.Objects;

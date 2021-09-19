@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="686.0" prefWidth="1300.0" styleClass="tile-pane" stylesheets="@../style/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.ProjectsOverviewController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" stylesheets="@../style/imageShow-style.css">
+         <children>
+            <Button mnemonicParsing="false" onAction="#closeOverview" prefHeight="33.0" prefWidth="44.0" styleClass="language-buttons" stylesheets="@../style/button-style.css">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="30.0" top="20.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/arrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ScrollPane fitToWidth="true" prefHeight="712.0" prefWidth="1256.0" stylesheets="@../style/imageShow-style.css">
+               <content>
+                  <TilePane fx:id="overviewPane" hgap="15.0" prefHeight="200.0" prefWidth="200.0" styleClass="tile-pane" stylesheets="@../style/styles.css" vgap="15.0">
+                     <opaqueInsets>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </opaqueInsets>
+                  </TilePane>
+               </content>
+               <styleClass>
+                  <String fx:value="tile-pane" />
+                  <String fx:value="scroll-pane" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets bottom="40.0" left="40.0" />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+         <styleClass>
+            <String fx:value="tile-pane" />
+            <String fx:value="scroll-pane" />
+         </styleClass>
+      </VBox>
+   </center>
+</BorderPane>

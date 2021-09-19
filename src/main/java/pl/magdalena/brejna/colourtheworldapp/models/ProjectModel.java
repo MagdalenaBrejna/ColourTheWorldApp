@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.Main;
+import pl.magdalena.brejna.colourtheworldapp.objects.Project;
 import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
 import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
@@ -124,7 +125,9 @@ public class ProjectModel {
 
     //check if current project is save. If yes update project, if not ask for a confirmation
     public void loadProject(Project project){
-        if(!isSaved())
+        if(App.getStoredProject() != null)
+            updateProject(project);
+        else if(!isSaved())
             showReplaceConfirmationDialog(project);
         else
             updateProject(project);

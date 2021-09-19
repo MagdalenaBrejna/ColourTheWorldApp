@@ -1,10 +1,8 @@
-package pl.magdalena.brejna.colourtheworldapp.models;
+package pl.magdalena.brejna.colourtheworldapp.objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
-import pl.magdalena.brejna.colourtheworldapp.algorithms.EdgeDetection;
 import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
@@ -51,5 +49,14 @@ public class ProjectList {
     }
     public boolean containsProject(Project project){
         return projectObservableList.contains(project);
+    }
+
+    public Project getProjectFromList(String sourceFile){
+        ArrayList<Project> list = ((ArrayList<Project>) projectObservableList.stream()
+                .filter(project -> (project.getSourceFile().equals(sourceFile)))
+                .collect(Collectors.toList()));
+        if(!list.isEmpty())
+            return list.get(0);
+        return null;
     }
 }

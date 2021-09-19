@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
 public class Main extends Application {
@@ -37,7 +38,8 @@ public class Main extends Application {
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true))));
-        stage.setFullScreen(true);
+        stage.setMaximized(true);
+        //stage.initStyle(StageStyle.TRANSPARENT);
     }
 
     public void start(Stage stage)  {

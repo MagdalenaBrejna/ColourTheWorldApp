@@ -141,7 +141,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/plus-xxl.png" />
+                        <Image url="@../icons/plus.png" />
                      </image></ImageView>
                </graphic>
             </Button>
@@ -176,7 +176,7 @@
                         <Insets left="10.0" top="8.0" />
                      </VBox.margin>
                      <image>
-                        <Image url="@../icons/126474.png" />
+                        <Image url="@../icons/glass.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">

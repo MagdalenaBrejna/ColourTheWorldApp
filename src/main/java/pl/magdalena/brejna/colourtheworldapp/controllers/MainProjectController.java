@@ -17,7 +17,7 @@ import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ProjectSaveException;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
-import pl.magdalena.brejna.colourtheworldapp.models.Project;
+import pl.magdalena.brejna.colourtheworldapp.objects.Project;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
 
 public class MainProjectController {
@@ -75,15 +75,15 @@ public class MainProjectController {
 
     //class initialization - init project, set bindings, set actionListeners
     public void initialize(){
-        initNewProject();
-        loadProjectList();
+        initializeProjects();
         setBindings();
         setActionListeners();
     }
 
-    //set projects to the list
-    private void loadProjectList(){
-        projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
+    private void initializeProjects(){
+        initNewProject();
+        loadOverviewProject();
+        loadProjectList();
     }
 
     //init new project
@@ -93,11 +93,22 @@ public class MainProjectController {
         this.projectNameTextField.setText("newProject");
     }
 
+    //load project if selected in the overview
+    private void loadOverviewProject(){
+        if(App.getStoredProject() != null) {
+            loadSelectedProject(App.getStoredProject());
+            App.setStoredProject(null);
+        }
+    }
+
+    //set projects to the list
+    private void loadProjectList(){
+        projectChoiceComboBox.setItems(ProjectListModel.getProjectList());
+    }
+
     //set bindings - make some controls disabled in special conditions
     private void setBindings(){
         createColouringBookButton.setDisable(true);
-        //this.createColouringBookButton.disableProperty().bind(this.projectImageView.imageProperty().isNotNull());
-        //this.createColouringBookButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
         this.openZoomButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
         this.saveColouringBookButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
         this.deleteImageButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
@@ -148,6 +159,7 @@ public class MainProjectController {
     private void loadSelectedProject(Project newProject){
         projectModel.loadProject(newProject);
         setProjectComponents();
+        openImageButton.setDisable(true);
     }
 
     //set selected project values to the project layout

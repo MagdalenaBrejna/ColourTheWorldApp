@@ -2,7 +2,7 @@ package pl.magdalena.brejna.colourtheworldapp.database.dao;
 
 import pl.magdalena.brejna.colourtheworldapp.database.dbUtils.DbManager;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.DatabaseException;
-import pl.magdalena.brejna.colourtheworldapp.models.Project;
+import pl.magdalena.brejna.colourtheworldapp.objects.Project;
 import javax.sql.rowset.CachedRowSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

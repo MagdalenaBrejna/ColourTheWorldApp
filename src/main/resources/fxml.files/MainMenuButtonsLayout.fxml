@@ -25,7 +25,7 @@
                               <Font name="Cooper Black" size="33.0" />
                            </font>
                         </Label>
-                        <Button fx:id="showProjects" layoutX="370.0" layoutY="509.0" maxHeight="477.0" maxWidth="582.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="400.0" stylesheets="@../style/button-style.css" text="%my.projects" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="509.0">
+                        <Button fx:id="showProjects" layoutX="370.0" layoutY="509.0" maxHeight="477.0" maxWidth="582.0" mnemonicParsing="false" onAction="#openProjectsOverview" prefHeight="43.0" prefWidth="400.0" stylesheets="@../style/button-style.css" text="%my.projects" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="509.0">
                            <font>
                               <Font name="Cooper Black" size="26.0" />
                            </font>
