@@ -39,7 +39,7 @@ public class Main extends Application {
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true))));
         stage.setMaximized(true);
-        //stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initStyle(StageStyle.UNDECORATED);
     }
 
     public void start(Stage stage)  {

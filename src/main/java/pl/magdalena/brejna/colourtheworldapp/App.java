@@ -17,6 +17,17 @@ public class App {
         appPane.setCenter(FxmlUtils.fxmlLoader(fxml));
     }
 
+    public static void minimize(){
+        Main.getPrimaryStage().setIconified(true);
+    }
+
+    public static void switchSize(){
+        if(Main.getPrimaryStage().isMaximized())
+            Main.getPrimaryStage().setMaximized(false);
+        else
+            Main.getPrimaryStage().setMaximized(true);
+    }
+
     public static void refresh(){
         Main.getPrimaryStage().close();
         Platform.runLater( () -> new Main().start(new Stage()));

@@ -1,41 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="704.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainLayoutController">
    <top>
       <VBox prefHeight="10.0" prefWidth="602.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar styleClass="menu" stylesheets="@../style/menu-style.css">
-              <menus>
-                <Menu mnemonicParsing="false" text="%file">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#closeApplication" text="%close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="%edit">
-                     <items>
-                        <CheckMenuItem mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
-                     </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="%help">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#showInstruction" text="%instruction" />
-                    <MenuItem mnemonicParsing="false" onAction="#showAboutSection" text="%about" />
-                     </items>
-                  </Menu>
-              </menus>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #36454f;">
+               <children>
+                  <MenuBar prefHeight="32.0" prefWidth="953.0" styleClass="menu" stylesheets="@../style/menu-style.css" HBox.hgrow="ALWAYS">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="%file">
+                        <items>
+                          <MenuItem mnemonicParsing="false" onAction="#closeApplication" text="%close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="%edit">
+                           <items>
+                              <CheckMenuItem mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
+                           </items>
+                      </Menu>
+                        <Menu mnemonicParsing="false" text="%help">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#showInstruction" text="%instruction" />
+                          <MenuItem mnemonicParsing="false" onAction="#showAboutSection" text="%about" />
+                           </items>
+                        </Menu>
+                    </menus>
+                  </MenuBar>
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="908.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeApplication" opacity="0.9" prefHeight="22.0" prefWidth="25.0" style="-fx-background-color: #36454f;" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/minus_2796.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#switchApplicationSize" opacity="0.9" prefHeight="23.0" prefWidth="42.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/miniWindow.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER_RIGHT" layoutX="949.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeApplication" opacity="0.9" prefHeight="22.0" prefWidth="42.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/x.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
                <effect>
-                  <DropShadow blurType="GAUSSIAN" />
+                  <DropShadow />
                </effect>
-            </MenuBar>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets />
