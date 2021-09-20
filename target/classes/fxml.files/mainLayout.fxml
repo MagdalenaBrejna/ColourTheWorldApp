@@ -39,11 +39,11 @@
                         </Menu>
                     </menus>
                   </MenuBar>
-                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="908.0" layoutY="10.0" mnemonicParsing="false" onAction="#minimizeApplication" opacity="0.9" prefHeight="22.0" prefWidth="25.0" style="-fx-background-color: #36454f;" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="908.0" mnemonicParsing="false" onAction="#minimizeApplication" opacity="0.9" prefHeight="0.0" prefWidth="12.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/minus_2796.png" />
+                              <Image url="@../icons/minus.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -60,7 +60,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER_RIGHT" layoutX="949.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeApplication" opacity="0.9" prefHeight="22.0" prefWidth="42.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button alignment="CENTER_RIGHT" layoutX="949.0" mnemonicParsing="false" onAction="#closeApplication" opacity="0.9" prefHeight="22.0" prefWidth="42.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>

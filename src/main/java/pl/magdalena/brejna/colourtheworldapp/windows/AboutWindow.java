@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 import java.io.IOException;
@@ -14,10 +15,14 @@ public class AboutWindow {
 
     //elements necessary to serve instructionLayout
     private FXMLLoader loader;
-    private Stage newWindow;
+    private static Stage newWindow;
 
     public AboutWindow(){
         setInstructionSettings();
+    }
+
+    public static Stage getNewWindow(){
+        return newWindow;
     }
 
     //set necessary entry settings
@@ -33,7 +38,7 @@ public class AboutWindow {
         }
 
         newWindow = new Stage();
-        newWindow.setTitle("About");
+        newWindow.initStyle(StageStyle.UNDECORATED);
         newWindow.setScene(new Scene(root));
     }
 
@@ -50,8 +55,6 @@ public class AboutWindow {
 
     //show window
     public void showWindow(){
-        newWindow.setWidth(790);
-        newWindow.setHeight(440);
         newWindow.show();
     }
 }

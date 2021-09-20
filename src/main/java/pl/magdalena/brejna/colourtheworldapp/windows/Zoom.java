@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pl.magdalena.brejna.colourtheworldapp.controllers.ZoomController;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
@@ -17,10 +18,14 @@ public class Zoom {
     //elements necessary to serve zoomLayout
     private FXMLLoader loader;
     private ZoomController zoomController;
-    private Stage newWindow;
+    private static Stage newWindow;
 
     public Zoom(){
         setZoomSettings();
+    }
+
+    public static Stage getNewWindow(){
+        return newWindow;
     }
 
     //set necessary entry settings
@@ -37,7 +42,7 @@ public class Zoom {
         updateZoomImage(null);
 
         newWindow = new Stage();
-        newWindow.setTitle("Zoom");
+        newWindow.initStyle(StageStyle.UNDECORATED);
         newWindow.setScene(new Scene(root));
 
     }
