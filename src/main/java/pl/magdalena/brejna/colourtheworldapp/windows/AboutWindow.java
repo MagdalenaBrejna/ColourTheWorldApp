@@ -17,8 +17,22 @@ public class AboutWindow {
     private FXMLLoader loader;
     private static Stage newWindow;
 
+    private double xOffset;
+    private double yOffset;
+
     public AboutWindow(){
         setInstructionSettings();
+    }
+
+    private void setStageMoving(Scene scene){
+        scene.setOnMousePressed(event -> {
+            xOffset = newWindow.getX() - event.getScreenX();
+            yOffset = newWindow.getY() - event.getScreenY();
+        });
+        scene.setOnMouseDragged(event -> {
+            newWindow.setX(event.getScreenX() + xOffset);
+            newWindow.setY(event.getScreenY() + yOffset);
+        });
     }
 
     public static Stage getNewWindow(){
@@ -38,8 +52,10 @@ public class AboutWindow {
         }
 
         newWindow = new Stage();
-        newWindow.initStyle(StageStyle.UNDECORATED);
-        newWindow.setScene(new Scene(root));
+        newWindow.initStyle(StageStyle.TRANSPARENT);
+        Scene scene = new Scene(root);
+        setStageMoving(scene);
+        newWindow.setScene(scene);
     }
 
     //set root (only once)

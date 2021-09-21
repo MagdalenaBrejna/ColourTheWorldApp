@@ -108,5 +108,20 @@ public class DbManager {
         cachedRowSet.populate(resultSet);
         return cachedRowSet;
     }
+
+    public static void executeStageSizeUpdate(int sizeValue, String sqlStatement){
+        try {
+            connectDB();
+            try (PreparedStatement statement = dbConnection.prepareStatement(sqlStatement)) {
+                statement.setInt(1, sizeValue);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                throw new DatabaseException("Database error");
+            }
+            disconnectDB();
+        }catch(DatabaseException databaseException){
+            databaseException.callErrorMessage();
+        }
+    }
 }
 

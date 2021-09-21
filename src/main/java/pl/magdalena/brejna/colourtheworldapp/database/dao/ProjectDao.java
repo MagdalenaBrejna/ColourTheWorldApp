@@ -60,4 +60,26 @@ public class ProjectDao implements Dao{
             return false;
         return true;
     }
+
+    public int getMainStageSize() throws DatabaseException{
+        String sql = "SELECT isMaximized FROM stages WHERE name=\"main\"";
+        CachedRowSet resultSet = DbManager.executeQuery(sql);
+        return getMaximizedValue(resultSet);
+    }
+
+    private int getMaximizedValue(CachedRowSet resultSet) throws DatabaseException {
+        int isMaximized = 0;
+        try {
+            while(resultSet.next())
+                isMaximized = resultSet.getInt("isMaximized");
+        }catch(SQLException databaseException){
+            throw new DatabaseException("Query exception");
+        }
+        return isMaximized;
+    }
+
+    public void updateMainStageSize(int sizeValue) throws DatabaseException{
+        String sql = "UPDATE stages SET name=\"main\", isMaximized=? WHERE name=\"main\"";
+        DbManager.executeStageSizeUpdate(sizeValue, sql);
+    }
 }

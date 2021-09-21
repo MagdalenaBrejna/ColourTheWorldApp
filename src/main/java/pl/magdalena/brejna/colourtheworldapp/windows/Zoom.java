@@ -20,12 +20,26 @@ public class Zoom {
     private ZoomController zoomController;
     private static Stage newWindow;
 
+    private double xOffset;
+    private double yOffset;
+
     public Zoom(){
         setZoomSettings();
     }
 
     public static Stage getNewWindow(){
         return newWindow;
+    }
+
+    private void setStageMoving(Scene scene){
+        scene.setOnMousePressed(event -> {
+            xOffset = newWindow.getX() - event.getScreenX();
+            yOffset = newWindow.getY() - event.getScreenY();
+        });
+        scene.setOnMouseDragged(event -> {
+            newWindow.setX(event.getScreenX() + xOffset);
+            newWindow.setY(event.getScreenY() + yOffset);
+        });
     }
 
     //set necessary entry settings
@@ -42,9 +56,10 @@ public class Zoom {
         updateZoomImage(null);
 
         newWindow = new Stage();
-        newWindow.initStyle(StageStyle.UNDECORATED);
-        newWindow.setScene(new Scene(root));
-
+        newWindow.initStyle(StageStyle.TRANSPARENT);
+        Scene scene = new Scene(root);
+        setStageMoving(scene);
+        newWindow.setScene(scene);
     }
 
     //update image set in zoom window
@@ -68,7 +83,7 @@ public class Zoom {
     public void showZoom(Image projectImage){
         updateZoomImage(projectImage);
         newWindow.setWidth(projectImage.getWidth());
-        newWindow.setHeight(projectImage.getHeight());
+        newWindow.setHeight(projectImage.getHeight()+30);
         newWindow.show();
     }
 }

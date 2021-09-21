@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
 import pl.magdalena.brejna.colourtheworldapp.objects.Project;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
@@ -26,19 +27,23 @@ public class App {
     }
 
     public static void switchSize(){
-        if(Main.getPrimaryStage().isMaximized())
+        if(Main.getPrimaryStage().isMaximized()) {
             Main.getPrimaryStage().setMaximized(false);
-        else
+            setMainStageSize(0);
+        }else {
             Main.getPrimaryStage().setMaximized(true);
+            setMainStageSize(1);
+        }
     }
 
     public static void closeApplication(){
+        setMainStageSize(1);
         System.exit(0);
     }
 
     public static void refresh(){
         Main.getPrimaryStage().close();
-        Platform.runLater( () -> new Main().start(new Stage()));
+        Platform.runLater(() -> new Main().start(new Stage()));
     }
 
     public static void setAppOnTop(){
@@ -56,5 +61,10 @@ public class App {
 
     public static void setStoredProject(Project project){
         storedProject = project;
+    }
+
+    public static void setMainStageSize(int value){
+        ProjectDao dao = new ProjectDao();
+        dao.updateMainStageSize(value);
     }
 }
