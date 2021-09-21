@@ -39,13 +39,13 @@ public class MainLayoutController {
 
     @FXML
     private void showInstruction(){
-        Instruction instruction = new Instruction();
+        Instruction instruction = new Instruction("/fxml.files/InstructionLayout.fxml");
         instruction.showWindow();
     }
 
     @FXML
     private void showAboutSection(){
-        AboutWindow aboutWindow = new AboutWindow();
+        AboutWindow aboutWindow = new AboutWindow("/fxml.files/AboutWindowLayout.fxml");
         aboutWindow.showWindow();
     }
 }
