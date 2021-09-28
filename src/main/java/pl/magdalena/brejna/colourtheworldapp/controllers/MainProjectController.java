@@ -19,6 +19,7 @@ import pl.magdalena.brejna.colourtheworldapp.exceptions.ProjectSaveException;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectListModel;
 import pl.magdalena.brejna.colourtheworldapp.objects.Project;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectModel;
+import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 
 public class MainProjectController {
 
@@ -30,6 +31,10 @@ public class MainProjectController {
     private Button saveProjectButton;
     @FXML
     private TextField projectNameTextField;
+    @FXML
+    private TextField dilationTextField;
+    @FXML
+    private TextField contrastTextField;
     @FXML
     private ComboBox<Project> projectChoiceComboBox;
 
@@ -112,8 +117,22 @@ public class MainProjectController {
         this.openZoomButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
         this.saveColouringBookButton.disableProperty().bind(this.projectImageView.imageProperty().isNull());
         this.deleteImageButton.disableProperty().bind(this.photoImageView.imageProperty().isNull());
-        this.dilationSlider.disableProperty().bind(this.projectImageView.imageProperty().isNull());
-        this.contrastSlider.disableProperty().bind(this.projectImageView.imageProperty().isNull());
+        setSlidersDisabledStatus(true);
+    }
+
+    private void setSlidersDisabledStatus(boolean value){
+        setDilationSliderDisabledStatus(value);
+        setContrastSliderDisabledStatus(value);
+    }
+
+    private void setDilationSliderDisabledStatus(boolean value){
+        dilationSlider.setDisable(value);
+        dilationTextField.setDisable(value);
+    }
+
+    private void setContrastSliderDisabledStatus(boolean value){
+        contrastSlider.setDisable(value);
+        contrastTextField.setDisable(value);
     }
 
     //set action listeners
@@ -157,16 +176,22 @@ public class MainProjectController {
 
     //open project selected in ComboBox
     private void loadSelectedProject(Project newProject){
+        System.out.println(newProject.getSourceFile());
         projectModel.loadProject(newProject);
+        System.out.println("1 " + newProject.getSourceFile());
         setProjectComponents();
         openImageButton.setDisable(true);
+        setSlidersDisabledStatus(false);
     }
 
     //set selected project values to the project layout
     private void setProjectComponents(){
         photoImageView.setImage(projectModel.getPhotoImage());
+        System.out.println("2");
         checkLoadingCorrectness(photoImageView);
+        System.out.println("3");
         projectImageView.setImage(projectModel.getProjectImage());
+        System.out.println("4");
         projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
         blockNextSave();
     }
@@ -182,12 +207,15 @@ public class MainProjectController {
         projectImageView.setImage(projectModel.createColouringBook());
         checkLoadingCorrectness(projectImageView);
         createColouringBookButton.setDisable(true);
+        setSlidersDisabledStatus(false);
         ImageSettings.setScrollInitialValues(projectScrollPane);
     }
 
     private void checkLoadingCorrectness(ImageView imageView){
-        if(imageView.getImage() == null)
+        if(imageView.getImage() == null) {
             restartImage();
+            System.out.print("zerowanie");
+        }
     }
 
     //set uploaded photo to the photoImageView
@@ -199,7 +227,7 @@ public class MainProjectController {
             openImageButton.setDisable(true);
             createColouringBookButton.setDisable(false);
         }catch(ImageLoadingException exception){
-           exception.callErrorMessage();
+            exception.callErrorMessage();
         }
     }
 
@@ -221,6 +249,7 @@ public class MainProjectController {
         projectImageView.setImage(null);
         openImageButton.setDisable(false);
         createColouringBookButton.setDisable(true);
+        setSlidersDisabledStatus(true);
     }
 
     //if the project is unsaved ask for confirmation, else close project
@@ -303,5 +332,57 @@ public class MainProjectController {
     @FXML
     private void openNew(){
         projectModel.openNewProject();
+    }
+
+    @FXML
+    private void setDilationFromField(){
+        try {
+            double dilationValue = Double.valueOf(dilationTextField.getText());
+            if (dilationValue >= 0 && dilationValue <= 3) {
+                projectImageView.setImage(projectModel.dilate(dilationValue));
+                checkLoadingCorrectness(projectImageView);
+            }
+        }catch(NumberFormatException doubleException){
+            DialogsUtils.showConfirmationDialog("error.title", "numberFormatError.text");
+        }
+    }
+
+    @FXML
+    private void setContrastFromField(){
+        try {
+            double contrastValue = Double.valueOf(contrastTextField.getText());
+            if (contrastValue >= 0 && contrastValue <= 255) {
+                projectImageView.setImage(projectModel.makeContrast(contrastValue));
+                checkLoadingCorrectness(projectImageView);
+            }
+        }catch(NumberFormatException doubleException){
+            DialogsUtils.showConfirmationDialog("error.title", "numberFormatError.text");
+        }
+    }
+
+    @FXML
+    private void switchDilationImpact(){
+        Double sliderValue = projectModel.getActiveProject().getDilationValue();
+        if(!dilationSlider.isDisable()) {
+            projectImageView.setImage(projectModel.dilate(0.0));
+            projectModel.setProjectDilationValue(sliderValue);
+            setDilationSliderDisabledStatus(true);
+        }else if(projectImageView.getImage() != null){
+            projectImageView.setImage(projectModel.dilate(projectModel.getActiveProject().getDilationValue()));
+            setDilationSliderDisabledStatus(false);
+        }
+    }
+
+    @FXML
+    private void switchContrastImpact(){
+        Double sliderValue = projectModel.getActiveProject().getContrastValue();
+        if(!contrastSlider.isDisable()) {
+            projectImageView.setImage(projectModel.makeContrast(150.0));
+            projectModel.setProjectContrastValue(sliderValue);
+            setContrastSliderDisabledStatus(true);
+        }else if(projectImageView.getImage() != null){
+            projectImageView.setImage(projectModel.makeContrast(projectModel.getActiveProject().getContrastValue()));
+            setContrastSliderDisabledStatus(false);
+        }
     }
 }

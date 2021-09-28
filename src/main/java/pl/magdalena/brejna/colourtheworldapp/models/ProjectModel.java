@@ -93,8 +93,10 @@ public class ProjectModel {
             activeProject.setSourceFile(file.toURI().toString());
             Image image = openFile(file.toURI().toString());
 
-            if(!activeProject.getSourceFile().equals(""))
+            if(!activeProject.getSourceFile().equals("")) {
                 activeProjectDao.updateProject(activeProject);
+                updateProjectList();
+            }
             return image;
 
         } catch (NullPointerException exception) {
@@ -237,6 +239,10 @@ public class ProjectModel {
         activeProject.setContrastValue(150.0);
     }
 
+    public void setProjectDilationValue(double dilationValue){
+        activeProject.setDilationValue(dilationValue);
+    }
+
     //update readyImage with parameter set using slider
     public Image dilate(Double sliderValue){
         Image updatedImage = null;
@@ -246,6 +252,10 @@ public class ProjectModel {
             activeProjectDao.updateProject(activeProject);
         }
         return updatedImage;
+    }
+
+    public void setProjectContrastValue(double contrastValue){
+        activeProject.setContrastValue(contrastValue);
     }
 
     //update readyImage with contrast parameter set using slider

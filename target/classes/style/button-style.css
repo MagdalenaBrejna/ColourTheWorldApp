@@ -19,3 +19,12 @@
 .language-buttons{
     -fx-background-color: transparent;
 }
+
+.radio-button .radio{
+    -fx-background-color: #36454f;
+}
+
+.radio-button .dot{
+    -fx-background-color: white;
+    -fx-opacity: 0.9;
+}

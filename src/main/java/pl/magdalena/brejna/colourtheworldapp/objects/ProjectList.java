@@ -48,6 +48,8 @@ public class ProjectList {
         }
     }
     public boolean containsProject(Project project){
+        if(!projectObservableList.contains(project))
+            System.out.println("nie");
         return projectObservableList.contains(project);
     }
 

@@ -50,7 +50,6 @@ public class Project {
         this.contrastValue = contrastValue;
     }
 
-
     public boolean equals(Object object) {
         if (this == object)
             return true;
