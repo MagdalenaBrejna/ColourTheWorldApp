@@ -9,43 +9,48 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainMenuButtonsController">
+<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainMenuButtonsController">
    <center>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="anchorPane" prefHeight="676.0" prefWidth="1200.0" stylesheets="@../style/styles.css">
+                  <StackPane prefHeight="550.0" prefWidth="478.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="345.0" layoutY="35.0" prefHeight="592.0" prefWidth="450.0" stylesheets="@../style/styles.css" text="ColourTheWorld" AnchorPane.bottomAnchor="30.0" AnchorPane.topAnchor="25.0">
-                           <font>
-                              <Font name="Cooper Black" size="33.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="showProjects" layoutX="370.0" layoutY="509.0" maxHeight="477.0" maxWidth="582.0" mnemonicParsing="false" onAction="#openProjectsOverview" prefHeight="43.0" prefWidth="400.0" stylesheets="@../style/button-style.css" text="%my.projects" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="509.0">
-                           <font>
-                              <Font name="Cooper Black" size="26.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="my-projects-button" />
-                              <String fx:value="project-buttons" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="addProject" layoutX="370.0" layoutY="429.0" maxHeight="400.0" maxWidth="647.0" mnemonicParsing="false" onAction="#openProject" prefHeight="45.0" prefWidth="400.0" styleClass="project-buttons" stylesheets="@../style/button-style.css" text="%add.project" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="429.0">
-                           <font>
-                              <Font name="Cooper Black" size="26.0" />
-                           </font>
-                        </Button>
-                        <ImageView fitHeight="254.0" fitWidth="250.0" layoutX="460.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/rainbow.png" />
-                           </image>
-                        </ImageView>
+                        <AnchorPane fx:id="anchorPane" prefHeight="538.0" prefWidth="496.0" stylesheets="@../style/styles.css">
+                           <children>
+                              <ImageView fitHeight="206.0" fitWidth="206.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="50.0">
+                                 <image>
+                                    <Image url="@../icons/rainbow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="5.0" prefHeight="553.0" prefWidth="492.0" stylesheets="@../style/styles.css" text="ColourTheWorld">
+                                 <font>
+                                    <Font name="Cooper Black" size="33.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="showProjects" layoutX="47.0" layoutY="406.0" maxHeight="477.0" maxWidth="582.0" mnemonicParsing="false" onAction="#openProjectsOverview" prefHeight="43.0" prefWidth="400.0" stylesheets="@../style/button-style.css" text="%my.projects" AnchorPane.topAnchor="450.0">
+                                 <font>
+                                    <Font name="Cooper Black" size="26.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="my-projects-button" />
+                                    <String fx:value="project-buttons" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="addProject" layoutX="47.0" layoutY="321.0" maxHeight="400.0" maxWidth="647.0" mnemonicParsing="false" onAction="#openProject" prefHeight="45.0" prefWidth="400.0" styleClass="project-buttons" stylesheets="@../style/button-style.css" text="%add.project" AnchorPane.topAnchor="360.0">
+                                 <font>
+                                    <Font name="Cooper Black" size="26.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
                      </children>
-                  </AnchorPane>
+                  </StackPane>
                </children>
             </VBox>
          </children>

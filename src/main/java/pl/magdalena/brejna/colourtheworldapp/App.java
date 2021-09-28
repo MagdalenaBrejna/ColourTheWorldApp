@@ -50,11 +50,6 @@ public class App {
         Main.getPrimaryStage().setAlwaysOnTop(true);
     }
 
-    public static void resize(){
-        Main.getPrimaryStage().setWidth(Screen.getPrimary().getVisualBounds().getWidth());
-        Main.getPrimaryStage().setHeight(Screen.getPrimary().getVisualBounds().getHeight());
-    }
-
     public static Project getStoredProject(){
         return storedProject;
     }

@@ -11,7 +11,6 @@ public class ProjectsOverviewController {
     TilePane overviewPane;
 
     public void initialize(){
-        App.resize();
         ProjectsOverviewModel.presentOverview(overviewPane);
     }
 

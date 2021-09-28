@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="686.0" prefWidth="1300.0" styleClass="tile-pane" stylesheets="@../style/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.ProjectsOverviewController">
+<BorderPane prefHeight="686.0" prefWidth="1000.0" styleClass="tile-pane" stylesheets="@../style/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.ProjectsOverviewController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" stylesheets="@../style/imageShow-style.css">
          <children>
