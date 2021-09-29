@@ -61,13 +61,6 @@ public class ProjectDao implements Dao{
         return true;
     }
 
-    public int getFactorsStatus(Project project){
-        String projectName = project.getProjectName();
-        String sql = "SELECT factorStatus FROM projects WHERE name=" + projectName;
-        CachedRowSet resultSet = DbManager.executeQuery(sql);
-        return getMaximizedValue(resultSet);
-    }
-
     public int getMainStageSize() throws DatabaseException{
         String sql = "SELECT isMaximized FROM stages WHERE name=\"main\"";
         CachedRowSet resultSet = DbManager.executeQuery(sql);

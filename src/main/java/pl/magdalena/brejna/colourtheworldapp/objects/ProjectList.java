@@ -48,9 +48,14 @@ public class ProjectList {
         }
     }
     public boolean containsProject(Project project){
-        if(!projectObservableList.contains(project))
-            System.out.println("nie");
         return projectObservableList.contains(project);
+    }
+
+    public void presentProjects(){
+        System.out.print("\n");
+        for(Project project : projectObservableList)
+            System.out.print(project.getProjectName() + " + " + project.getSourceFile() + "\n");
+        System.out.print("\n");
     }
 
     public Project getProjectFromList(String sourceFile){

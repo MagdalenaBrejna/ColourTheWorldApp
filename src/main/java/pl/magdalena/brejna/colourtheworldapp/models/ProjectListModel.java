@@ -33,4 +33,8 @@ public class ProjectListModel {
     public static boolean containsProject(Project project){
         return list.containsProject(project);
     }
+
+    public static void presentProjects(){
+        list.presentProjects();
+    }
 }

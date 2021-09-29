@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -80,8 +81,8 @@ public class MainProjectController {
 
     //class initialization - init project, set bindings, set actionListeners
     public void initialize(){
-        initializeProjects();
         setBindings();
+        initializeProjects();
         setActionListeners();
     }
 
@@ -96,6 +97,8 @@ public class MainProjectController {
         this.projectModel = new ProjectModel();
         this.projectModel.init();
         this.projectNameTextField.setText("newProject");
+        ImageSettings.setScrollInitialValues(photoScrollPane);
+        ImageSettings.setScrollInitialValues(projectScrollPane);
     }
 
     //load project if selected in the overview
@@ -167,6 +170,7 @@ public class MainProjectController {
     //set projectChoiceComboBox listener
     private void setProjectChoiceComboBoxListener(){
         projectChoiceComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            loadProjectList();
             if(oldValue == null || ProjectListModel.containsProject(oldValue))
                 loadSelectedProject(newValue);
             else
@@ -176,24 +180,23 @@ public class MainProjectController {
 
     //open project selected in ComboBox
     private void loadSelectedProject(Project newProject){
-        System.out.println(newProject.getSourceFile());
         projectModel.loadProject(newProject);
-        System.out.println("1 " + newProject.getSourceFile());
-        setProjectComponents();
         openImageButton.setDisable(true);
         setSlidersDisabledStatus(false);
+        setProjectComponents();
     }
 
     //set selected project values to the project layout
     private void setProjectComponents(){
-        photoImageView.setImage(projectModel.getPhotoImage());
-        System.out.println("2");
-        checkLoadingCorrectness(photoImageView);
-        System.out.println("3");
-        projectImageView.setImage(projectModel.getProjectImage());
-        System.out.println("4");
-        projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
-        blockNextSave();
+        try {
+            projectNameTextField.setText(projectModel.getActiveProject().getProjectName());
+            photoImageView.setImage(projectModel.getPhotoImage());
+            projectImageView.setImage(projectModel.getProjectImage());
+            blockNextSave();
+        }catch(ImageLoadingException imageLoadingException) {
+            imageLoadingException.callErrorMessage();
+            restartImage();
+        }
     }
 
     //load empty project layout
@@ -208,14 +211,11 @@ public class MainProjectController {
         checkLoadingCorrectness(projectImageView);
         createColouringBookButton.setDisable(true);
         setSlidersDisabledStatus(false);
-        ImageSettings.setScrollInitialValues(projectScrollPane);
     }
 
     private void checkLoadingCorrectness(ImageView imageView){
-        if(imageView.getImage() == null) {
+        if(imageView.getImage() == null)
             restartImage();
-            System.out.print("zerowanie");
-        }
     }
 
     //set uploaded photo to the photoImageView
@@ -223,10 +223,10 @@ public class MainProjectController {
     private void selectImage(){
         try {
             photoImageView.setImage(projectModel.loadImage());
-            ImageSettings.setScrollInitialValues(photoScrollPane);
             openImageButton.setDisable(true);
             createColouringBookButton.setDisable(false);
         }catch(ImageLoadingException exception){
+            restartImage();
             exception.callErrorMessage();
         }
     }
@@ -237,6 +237,7 @@ public class MainProjectController {
        try {
             projectModel.saveColouringBook();
        } catch (ImageProcessingException exception) {
+           restartImage();
            exception.callErrorMessage();
        }
     }

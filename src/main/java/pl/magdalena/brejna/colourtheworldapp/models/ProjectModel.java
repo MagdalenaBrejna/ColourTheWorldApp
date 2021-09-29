@@ -53,7 +53,7 @@ public class ProjectModel {
     }
 
     //return loaded photo
-    public Image getPhotoImage(){
+    public Image getPhotoImage() throws ImageLoadingException{
         if(isPhotoSelected())
             return tryOpenFile();
         return null;
@@ -61,12 +61,7 @@ public class ProjectModel {
 
     //get loaded photo
     private Image tryOpenFile(){
-        try {
-            return openFile(activeProject.getSourceFile());
-        } catch (ImageLoadingException imageException) {
-            imageException.callErrorMessage();
-            return null;
-        }
+        return openFile(activeProject.getSourceFile());
     }
 
     //return colouring book
@@ -91,7 +86,7 @@ public class ProjectModel {
 
             File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
             activeProject.setSourceFile(file.toURI().toString());
-            Image image = openFile(file.toURI().toString());
+            Image image = openFile(activeProject.getSourceFile());
 
             if(!activeProject.getSourceFile().equals("")) {
                 activeProjectDao.updateProject(activeProject);
@@ -118,10 +113,9 @@ public class ProjectModel {
     //open file
     public Image openFile(String file) throws ImageLoadingException{
         Image image = new Image(file);
-        if (!image.isError()) {
-            activeProject.setSourceFile(file);
+        if (!image.isError())
             return image;
-        } else
+        else
             throw new ImageLoadingException("open file exception");
     }
 
@@ -249,7 +243,8 @@ public class ProjectModel {
         if(createColouringBook() != null) {
             activeProject.setDilationValue(sliderValue);
             updatedImage = updateImage();
-            activeProjectDao.updateProject(activeProject);
+            if(isSaved())
+                activeProjectDao.updateProject(activeProject);
         }
         return updatedImage;
     }
@@ -264,7 +259,8 @@ public class ProjectModel {
         if(createColouringBook() != null) {
             activeProject.setContrastValue(sliderValue);
             updatedImage = updateImage();
-            activeProjectDao.updateProject(activeProject);
+            if(isSaved())
+                activeProjectDao.updateProject(activeProject);
         }
         return updatedImage;
     }
