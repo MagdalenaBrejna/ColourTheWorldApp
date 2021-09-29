@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -288,7 +287,7 @@ public class MainProjectController {
     @FXML
     private void clickProjectChoiceComboBox(MouseEvent mouseClickEvent){
         if(mouseClickEvent.getButton().equals(MouseButton.SECONDARY)) {
-            ProjectListModel.deleteProjectOnRightClick(projectChoiceComboBox.getValue());
+            ProjectListModel.deleteProjectOnMouseClick(projectChoiceComboBox.getValue());
             loadProjectList();
         }
     }
@@ -385,5 +384,12 @@ public class MainProjectController {
             projectImageView.setImage(projectModel.makeContrast(projectModel.getActiveProject().getContrastValue()));
             setContrastSliderDisabledStatus(false);
         }
+    }
+
+    @FXML
+    private void deleteActiveProject(){
+        ProjectListModel.deleteProjectOnMouseClick(projectModel.getActiveProject());
+        loadProjectList();
+        loadBlankProject();
     }
 }

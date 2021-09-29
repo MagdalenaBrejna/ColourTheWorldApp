@@ -47,6 +47,7 @@ public class ProjectList {
             databaseException.callErrorMessage();
         }
     }
+
     public boolean containsProject(Project project){
         return projectObservableList.contains(project);
     }

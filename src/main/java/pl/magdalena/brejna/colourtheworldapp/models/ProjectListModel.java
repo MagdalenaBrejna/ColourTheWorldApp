@@ -26,7 +26,7 @@ public class ProjectListModel {
         return list.getProjectFromList(sourceFile);
     }
 
-    public static void deleteProjectOnRightClick(Project project){
+    public static void deleteProjectOnMouseClick(Project project){
         list.deleteProjectOnMouseClick(project);
     }
 
