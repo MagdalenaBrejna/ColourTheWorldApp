@@ -295,13 +295,13 @@ public class MainProjectController {
     //set zooming an image in the photoScrollPane
     @FXML
     private void scrollPhoto(ScrollEvent mouseScrollEvent){
-        ImageSettings.scrollImage(mouseScrollEvent, photoImageView);
+        ImageSettings.scrollImage(mouseScrollEvent, photoImageView, projectImageView);
     }
 
     //set zooming an image in the projectScrollPane
     @FXML
     private void scrollProject(ScrollEvent mouseScrollEvent){
-        ImageSettings.scrollImage(mouseScrollEvent, projectImageView);
+        ImageSettings.scrollImage(mouseScrollEvent, projectImageView, photoImageView);
     }
 
     //set pressing a project image in the photoScrollPane

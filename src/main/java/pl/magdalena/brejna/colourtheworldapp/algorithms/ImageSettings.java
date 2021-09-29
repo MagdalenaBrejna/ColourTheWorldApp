@@ -21,9 +21,12 @@ public class ImageSettings {
     }
 
     //scroll given image
-    public static void scrollImage(ScrollEvent mouseScrollEvent,  ImageView imageView){
+    public static void scrollImage(ScrollEvent mouseScrollEvent,  ImageView imageView, ImageView bindedImageView){
+        if (!mouseScrollEvent.isControlDown())
+            return;
         double zoomFactor = setZoomFactor(mouseScrollEvent);
         scaleImage(zoomFactor, imageView);
+        scaleImage(zoomFactor, bindedImageView);
         mouseScrollEvent.consume();
     }
 

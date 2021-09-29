@@ -9,7 +9,7 @@ import java.util.Locale;
 public class MainMenuButtonsController {
 
    private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
-   private final String PROJECTS_OVERVIEW_FXML = "/fxml.files/ProjectsOverviewLayout.fxml";
+   private final String PROJECTS_OVERVIEW_FXML = "/fxml.files/ProjectsOverViewLayout.fxml";
 
    private MainLayoutController mainLayoutController;
 

@@ -51,7 +51,6 @@ public class ProjectsOverview {
         Button projectButton = makeButton(imageView);
         if(!isProjectEmpty(imageView) && isPhotoCorrected(imageView))
             tile.getChildren().addAll(projectButton);
-
         return projectButton;
     }
 
@@ -80,8 +79,8 @@ public class ProjectsOverview {
         try{
             Project project = ProjectListModel.getProjectFromList(imageView.getImage().getUrl());
             Image image = EdgeDetection.detectEdges(project);
-            return true;
-        }catch(ImageLoadingException e){
+            return  true;
+        }catch(Exception e){
             return false;
         }
     }
