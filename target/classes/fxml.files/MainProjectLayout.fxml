@@ -61,7 +61,7 @@
                   </ScrollPane>
                </items>
             </SplitPane>
-            <Button fx:id="openZoomButton" mnemonicParsing="false" onAction="#openZoomWindow" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
+            <Button fx:id="openZoomButton" mnemonicParsing="false" onAction="#openFullViewWindow" prefHeight="50.0" prefWidth="140.0" styleClass="buttons" stylesheets="@../style/button-style.css" text="%newWindow.button" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -128,7 +128,7 @@
                   <Insets bottom="30.0" left="20.0" top="30.0" />
                </HBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#deleteActiveProject" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+            <Button mnemonicParsing="false" onAction="#deleteActiveProject" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                <HBox.margin>
                   <Insets right="15.0" top="34.0" />
                </HBox.margin>

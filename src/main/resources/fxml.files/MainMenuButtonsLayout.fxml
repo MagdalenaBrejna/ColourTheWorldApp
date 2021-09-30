@@ -60,7 +60,7 @@
                   <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setPolishLanguage" stylesheets="@../style/button-style.css">
                      <styleClass>
                         <String fx:value="language-image-view" />
-                        <String fx:value="language-buttons" />
+                        <String fx:value="transparent-buttons" />
                      </styleClass>
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="language-image-view">
@@ -69,14 +69,14 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setEnglishLanguage" styleClass="language-buttons" stylesheets="@../style/button-style.css">
+                  <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setEnglishLanguage" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/uk.jpg" />
                            </image></ImageView>
                      </graphic></Button>
-                  <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setGermanLanguage" styleClass="language-buttons" stylesheets="@../style/button-style.css">
+                  <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setGermanLanguage" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -39,7 +39,7 @@
                         </Menu>
                     </menus>
                   </MenuBar>
-                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="908.0" mnemonicParsing="false" onAction="#minimizeApplication" opacity="0.9" prefHeight="0.0" prefWidth="12.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="908.0" mnemonicParsing="false" onAction="#minimizeApplication" opacity="0.9" prefHeight="0.0" prefWidth="12.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -51,7 +51,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#switchApplicationSize" opacity="0.9" prefHeight="23.0" prefWidth="42.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#switchApplicationSize" opacity="0.9" prefHeight="23.0" prefWidth="42.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -60,7 +60,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER_RIGHT" layoutX="949.0" mnemonicParsing="false" onAction="#closeApplication" opacity="0.9" prefHeight="22.0" prefWidth="42.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button alignment="CENTER_RIGHT" layoutX="949.0" mnemonicParsing="false" onAction="#closeApplication" opacity="0.9" prefHeight="22.0" prefWidth="42.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>

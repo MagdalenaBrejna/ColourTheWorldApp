@@ -7,45 +7,55 @@ import pl.magdalena.brejna.colourtheworldapp.Main;
 import pl.magdalena.brejna.colourtheworldapp.windows.AboutWindow;
 import pl.magdalena.brejna.colourtheworldapp.windows.Instruction;
 
-public class MainLayoutController {
+public final class MainLayoutController {
+
+    private final String INSTRUCTION_LAYOUT_FXML = "/fxml.files/InstructionLayout.fxml";
+    private final String ABOUT_WINDOW_LAYOUT_FXML = "/fxml.files/AboutWindowLayout.fxml";
 
     @FXML
     private MainMenuButtonsController mainMenuButtonsController;
 
+    //initialize main application layout
     @FXML
-    private void initialize() {
+    private final void initialize() {
         mainMenuButtonsController.setMainLayoutController(this);
     }
 
+    //close application layout
     @FXML
-    private void closeApplication() {
+    private final void closeApplication() {
         App.closeApplication();
     }
 
+    //minimize application layout
     @FXML
-    private void minimizeApplication(ActionEvent evt){
+    private final void minimizeApplication(final ActionEvent event){
         App.minimize(Main.getPrimaryStage());
     }
 
+    //switch application size
     @FXML
-    private void switchApplicationSize(){
+    private final void switchApplicationSize(){
         App.switchSize();
     }
 
+    //make application always on top
     @FXML
-    private void setAlwaysOnTop(){
+    private final void setAlwaysOnTop(){
         App.setAppOnTop();
     }
 
+    //open instruction window
     @FXML
-    private void showInstruction(){
-        Instruction instruction = new Instruction("/fxml.files/InstructionLayout.fxml");
+    private final void showInstruction(){
+        Instruction instruction = new Instruction(INSTRUCTION_LAYOUT_FXML);
         instruction.showWindow();
     }
 
+    //open about window
     @FXML
-    private void showAboutSection(){
-        AboutWindow aboutWindow = new AboutWindow("/fxml.files/AboutWindowLayout.fxml");
+    private final void showAboutSection(){
+        AboutWindow aboutWindow = new AboutWindow(ABOUT_WINDOW_LAYOUT_FXML);
         aboutWindow.showWindow();
     }
 }

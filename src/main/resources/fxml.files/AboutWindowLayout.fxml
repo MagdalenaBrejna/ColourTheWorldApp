@@ -19,7 +19,7 @@
             <HBox style="-fx-background-color: #36454f;">
                <children>
                   <MenuBar HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#minimizeAboutWindow" prefHeight="30.0" prefWidth="40.0" styleClass="language-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button mnemonicParsing="false" onAction="#minimizeAboutWindow" prefHeight="30.0" prefWidth="40.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -28,7 +28,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="741.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeAboutWindow" prefHeight="30.0" prefWidth="40.0" styleClass="language-buttons" stylesheets="@../style/button-style.css">
+                  <Button layoutX="741.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeAboutWindow" prefHeight="30.0" prefWidth="40.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>

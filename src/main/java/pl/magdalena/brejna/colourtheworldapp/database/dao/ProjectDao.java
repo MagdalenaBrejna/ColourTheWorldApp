@@ -8,42 +8,48 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class ProjectDao implements Dao{
+public final class ProjectDao {
 
-    public void insertProject(Project activeProject){
-        String sql = "INSERT INTO projects (projectName, sourceFile, dilationValue, contrastValue) VALUES (?, ?, ?, ?)";
-        DbManager.executeTableUpdate(activeProject, sql);
-    }
-
-    public void deleteProject(Project project){
-        String sql = "DELETE FROM projects WHERE projectName=?";
+    //add given project to the projects table
+    public final void insertProject(final Project project){
+        final String sql = "INSERT INTO projects (projectName, sourceFile, dilationValue, contrastValue) VALUES (?, ?, ?, ?)";
         DbManager.executeTableUpdate(project, sql);
     }
 
-    public void updateProject(Project project){
-        String sql = "UPDATE projects SET projectName=?, sourceFile=?, dilationValue=?, contrastValue=? WHERE projectName=?";
+    //delete given project from the table
+    public final void deleteProject(final Project project){
+        final String sql = "DELETE FROM projects WHERE projectName=?";
         DbManager.executeTableUpdate(project, sql);
     }
 
-    public ArrayList showAllProjects() throws DatabaseException{
-        String sql = "SELECT projectName, sourceFile, dilationValue, contrastValue FROM projects";
-        CachedRowSet resultSet = DbManager.executeQuery(sql);
+    //update given project in the table
+    public final void updateProject(final Project project){
+        final String sql = "UPDATE projects SET projectName=?, sourceFile=?, dilationValue=?, contrastValue=? WHERE projectName=?";
+        DbManager.executeTableUpdate(project, sql);
+    }
+
+    //get all projects from the table
+    public final ArrayList showAllProjects() throws DatabaseException{
+        final String sql = "SELECT projectName, sourceFile, dilationValue, contrastValue FROM projects";
+        final CachedRowSet resultSet = DbManager.executeQuery(sql);
         return getAllProjects(resultSet);
     }
 
-    private ArrayList getAllProjects(CachedRowSet resultSet) throws DatabaseException {
-        ArrayList<Project> projectList = new ArrayList<>();
+    //get projects from the query result
+    private final ArrayList getAllProjects(final CachedRowSet resultSet) throws DatabaseException {
+        final ArrayList<Object> projectList = new ArrayList<>();
         try {
             while (resultSet.next())
                 projectList.add(getProject(resultSet));
         }catch(SQLException databaseException){
             throw new DatabaseException("Query exception");
         }
-        return  projectList;
+        return projectList;
     }
 
-    private Project getProject(CachedRowSet resultSet) throws SQLException {
-        Project project = new Project();
+    //create a project from the row of the query result set
+    private final Project getProject(final CachedRowSet resultSet) throws SQLException {
+        final Project project = new Project();
         project.setProjectName(resultSet.getString("projectName"));
         project.setSourceFile(resultSet.getString("sourceFile"));
         project.setDilationValue(resultSet.getDouble("dilationValue"));
@@ -51,7 +57,8 @@ public class ProjectDao implements Dao{
         return project;
     }
 
-    public boolean isProject(String projectName){
+    //check whether the given project is in the table or not
+    public final boolean isProject(final String projectName){
         ArrayList<Project> projectList = showAllProjects();
         projectList = (ArrayList)projectList.stream()
                 .filter(project -> project.getProjectName().equals(projectName))
@@ -59,27 +66,5 @@ public class ProjectDao implements Dao{
         if(projectList.isEmpty())
             return false;
         return true;
-    }
-
-    public int getMainStageSize() throws DatabaseException{
-        String sql = "SELECT isMaximized FROM stages WHERE name=\"main\"";
-        CachedRowSet resultSet = DbManager.executeQuery(sql);
-        return getMaximizedValue(resultSet);
-    }
-
-    private int getMaximizedValue(CachedRowSet resultSet) throws DatabaseException {
-        int isMaximized = 0;
-        try {
-            while(resultSet.next())
-                isMaximized = resultSet.getInt("isMaximized");
-        }catch(SQLException databaseException){
-            throw new DatabaseException("Query exception");
-        }
-        return isMaximized;
-    }
-
-    public void updateMainStageSize(int sizeValue) throws DatabaseException{
-        String sql = "UPDATE stages SET name=\"main\", isMaximized=? WHERE name=\"main\"";
-        DbManager.executeStageSizeUpdate(sizeValue, sql);
     }
 }

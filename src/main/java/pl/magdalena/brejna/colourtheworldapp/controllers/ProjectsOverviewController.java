@@ -2,20 +2,21 @@ package pl.magdalena.brejna.colourtheworldapp.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.TilePane;
-import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.models.ProjectsOverviewModel;
 
-public class ProjectsOverviewController {
+public final class ProjectsOverviewController {
 
     @FXML
-    TilePane overviewPane;
+    private TilePane overviewPane;
 
-    public void initialize(){
+    //open projects' overview stage
+    public final void initialize(){
         ProjectsOverviewModel.presentOverview(overviewPane);
     }
 
+    //close projects' overview stage
     @FXML
-    private void closeOverview(){
+    private final void closeOverview(){
         ProjectsOverviewModel.closeOverview();
     }
 }

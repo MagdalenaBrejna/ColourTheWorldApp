@@ -6,10 +6,11 @@ import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class FxmlUtils {
+public final class FxmlUtils {
 
-    public static BorderPane fxmlLoader(String fxmlPath) throws ApplicationException {
-        FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
+    //load fxml and set bundles resources
+    public final static BorderPane fxmlLoader(final String fxmlPath) throws ApplicationException {
+        final FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
         loader.setResources(getResourceBundle());
         try {
             return loader.load();
@@ -18,8 +19,9 @@ public class FxmlUtils {
         }
     }
 
-    public static FXMLLoader getLoader(String fxmlPath) {
-        FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
+    //get FXML loader
+    public final static FXMLLoader getLoader(final String fxmlPath) {
+        final FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
         loader.setResources(getResourceBundle());
         return loader;
     }

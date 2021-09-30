@@ -3,26 +3,20 @@ package pl.magdalena.brejna.colourtheworldapp.objects;
 import javafx.beans.property.SimpleStringProperty;
 import java.util.Objects;
 
-public class Project {
+public final class Project {
 
     private SimpleStringProperty projectName = new SimpleStringProperty();
     private String sourceFile = "";
     private Double dilationValue = 0.0;
     private Double contrastValue = 150.0;
 
-
     public String getProjectName() {
         return projectName.get();
-    }
-
-    public SimpleStringProperty projectNameProperty() {
-        return projectName;
     }
 
     public void setProjectName(String projectName) {
         this.projectName.set(projectName);
     }
-
 
     public String getSourceFile() {
         return sourceFile;
@@ -32,7 +26,6 @@ public class Project {
         this.sourceFile = sourceFile;
     }
 
-
     public void setDilationValue(Double newValue){
         dilationValue = newValue;
     }
@@ -40,7 +33,6 @@ public class Project {
     public Double getDilationValue(){
         return dilationValue;
     }
-
 
     public Double getContrastValue() {
         return contrastValue;
@@ -66,7 +58,7 @@ public class Project {
         return Objects.hash(getProjectName(), getSourceFile(), getDilationValue(), getContrastValue());
     }
 
-    public String toString() {
+    public final String toString() {
         return projectName.getValue();
     }
 }

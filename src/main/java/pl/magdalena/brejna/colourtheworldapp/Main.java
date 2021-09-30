@@ -7,14 +7,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import pl.magdalena.brejna.colourtheworldapp.database.dao.ProjectDao;
+import pl.magdalena.brejna.colourtheworldapp.database.dao.StageDao;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
-import pl.magdalena.brejna.colourtheworldapp.utils.ResizeHandler;
+import pl.magdalena.brejna.colourtheworldapp.utils.ResizeHelper;
 
 public class Main extends Application {
 
     private static final String MAIN_LAYOUT_FXML = "/fxml.files/MainLayout.fxml";
-
     private static Stage primaryStage;
     private static BorderPane mainPane;
     private double xOffset;
@@ -36,8 +35,9 @@ public class Main extends Application {
         launch(args);
     }
 
-    private void setStageStyle(Stage stage){
-        Image image = new Image ("https://img.freepik.com/free-photo/recycled-crumpled-white-paper-texture-paper-background_34070-1016.jpg?size=626&ext=jpg");
+    //set stage style
+    private final void setStageStyle(final Stage stage){
+        final Image image = new Image ("https://img.freepik.com/free-photo/recycled-crumpled-white-paper-texture-paper-background_34070-1016.jpg?size=626&ext=jpg");
         mainPane.setBackground(new Background(new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -46,8 +46,9 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
     }
 
-    private void setStageMoving(Scene scene){
-        ResizeHandler resizeHelper = new ResizeHandler(primaryStage);
+    //enable stage moving
+    private final void setStageMoving(final Scene scene){
+        final ResizeHelper resizeHelper = new ResizeHelper(primaryStage);
         primaryStage.getScene().addEventFilter(MouseEvent.ANY, resizeHelper);
 
         scene.setOnMousePressed(event -> {
@@ -60,10 +61,11 @@ public class Main extends Application {
         });
     }
 
-    private void setStageSize(){
+    //set stage size
+    private final void setStageSize(){
         primaryStage.setMinHeight(800);
         primaryStage.setMinWidth(1050);
-        ProjectDao dao = new ProjectDao();
+        StageDao dao = new StageDao();
         if(dao.getMainStageSize() == 1)
             primaryStage.setMaximized(true);
         else

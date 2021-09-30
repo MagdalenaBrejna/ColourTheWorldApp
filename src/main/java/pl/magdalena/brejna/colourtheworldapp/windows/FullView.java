@@ -6,32 +6,32 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import pl.magdalena.brejna.colourtheworldapp.controllers.ZoomController;
+import pl.magdalena.brejna.colourtheworldapp.controllers.FullViewController;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException;
 import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 import java.io.IOException;
 
-public class Zoom {
+public final class FullView {
 
-    private final String ZOOM_FXML = "/fxml.files/ZoomLayout.fxml";
+    private final String FULL_VIEW_FXML = "/fxml.files/FullViewLayout.fxml";
 
     //elements necessary to serve zoomLayout
     private FXMLLoader loader;
-    private ZoomController zoomController;
+    private FullViewController fullViewController;
     private static Stage newWindow;
-
     private double xOffset;
     private double yOffset;
 
-    public Zoom(){
-        setZoomSettings();
+    public FullView(){
+        setFullViewSettings();
     }
 
-    public static Stage getNewWindow(){
+    public final static Stage getNewWindow(){
         return newWindow;
     }
 
-    private void setStageMoving(Scene scene){
+    //enable full view stage moving
+    private final void setStageMoving(final Scene scene){
         scene.setOnMousePressed(event -> {
             xOffset = newWindow.getX() - event.getScreenX();
             yOffset = newWindow.getY() - event.getScreenY();
@@ -43,8 +43,8 @@ public class Zoom {
     }
 
     //set necessary entry settings
-    private void setZoomSettings(){
-        loader = new FXMLLoader(getClass().getResource(ZOOM_FXML));
+    private final void setFullViewSettings(){
+        loader = new FXMLLoader(getClass().getResource(FULL_VIEW_FXML));
         loader.setResources(FxmlUtils.getResourceBundle());
 
         Parent root = null;
@@ -53,7 +53,7 @@ public class Zoom {
         } catch (ApplicationException appException) {
             appException.callErrorMessage();
         }
-        updateZoomImage(null);
+        updateFullViewImage(null);
 
         newWindow = new Stage();
         newWindow.initStyle(StageStyle.TRANSPARENT);
@@ -63,13 +63,13 @@ public class Zoom {
     }
 
     //update image set in zoom window
-    public void updateZoomImage(Image image){
-        zoomController = loader.getController();
-        zoomController.setZoomImage(image);
+    public final void updateFullViewImage(final Image image){
+        fullViewController = loader.getController();
+        fullViewController.setZoomImage(image);
     }
 
     //set root (only once)
-    private Parent setRoot() throws ApplicationException {
+    private final Parent setRoot() throws ApplicationException {
         Parent root = null;
         try {
             root = loader.load();
@@ -79,9 +79,9 @@ public class Zoom {
         return root;
     }
 
-    //show created zoom image
-    public void showZoom(Image projectImage){
-        updateZoomImage(projectImage);
+    //show created full view image
+    public final void showFullView(final Image projectImage){
+        updateFullViewImage(projectImage);
         newWindow.setWidth(projectImage.getWidth());
         newWindow.setHeight(projectImage.getHeight()+30);
         newWindow.show();

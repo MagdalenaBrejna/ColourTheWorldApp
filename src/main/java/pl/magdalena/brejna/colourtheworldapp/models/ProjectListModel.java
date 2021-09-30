@@ -6,35 +6,35 @@ import pl.magdalena.brejna.colourtheworldapp.objects.ProjectList;
 
 import java.util.ArrayList;
 
-public class ProjectListModel {
+public final class ProjectListModel {
 
-    private static ProjectList list = new ProjectList();
+    private final static ProjectList list = new ProjectList();
 
-    public static void addProjectToList(Project project){
+    public final static void addProjectToList(final Project project){
         list.addNewProject(project);
     }
 
-    public static ObservableList getProjectList(){
+    public final static ObservableList getProjectList(){
         return list.getProjectObservableList();
     }
 
-    public static void setProjectList(ArrayList<Project> projectObservableList){
+    public final static void setProjectList(final ArrayList<Project> projectObservableList){
         list.setProjectObservableList(projectObservableList);
     }
 
-    public static Project getProjectFromList(String sourceFile){
+    public final static Project getProjectFromList(final String sourceFile){
         return list.getProjectFromList(sourceFile);
     }
 
-    public static void deleteProjectOnMouseClick(Project project){
+    public final static void deleteProjectOnMouseClick(final Project project){
         list.deleteProjectOnMouseClick(project);
     }
 
-    public static boolean containsProject(Project project){
+    public final static boolean containsProject(final Project project){
         return list.containsProject(project);
     }
 
-    public static void presentProjects(){
+    public final static void presentProjects(){
         list.presentProjects();
     }
 }

@@ -14,7 +14,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" stylesheets="@../style/imageShow-style.css">
          <children>
-            <Button mnemonicParsing="false" onAction="#closeOverview" prefHeight="33.0" prefWidth="44.0" styleClass="language-buttons" stylesheets="@../style/button-style.css">
+            <Button mnemonicParsing="false" onAction="#closeOverview" prefHeight="33.0" prefWidth="44.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
                <VBox.margin>
                   <Insets bottom="20.0" left="30.0" top="20.0" />
                </VBox.margin>

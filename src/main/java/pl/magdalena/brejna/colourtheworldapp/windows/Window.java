@@ -25,7 +25,8 @@ public abstract class Window {
         setInstructionSettings();
     }
 
-    public void setStageMoving(Scene scene){
+    //enable stage moving
+    public final void setStageMoving(final Scene scene){
         scene.setOnMousePressed(event -> {
             xOffset = newWindow.getX() - event.getScreenX();
             yOffset = newWindow.getY() - event.getScreenY();
@@ -36,12 +37,12 @@ public abstract class Window {
         });
     }
 
-    public static Stage getNewWindow(){
+    public final static Stage getNewWindow(){
         return newWindow;
     }
 
     //set necessary entry settings
-    private void setInstructionSettings(){
+    private final void setInstructionSettings(){
         loader = new FXMLLoader(getClass().getResource(FXML));
         loader.setResources(FxmlUtils.getResourceBundle());
 
@@ -60,7 +61,7 @@ public abstract class Window {
     }
 
     //set root (only once)
-    private Parent setRoot() throws ApplicationException {
+    private final Parent setRoot() throws ApplicationException {
         Parent root = null;
         try {
             root = loader.load();
@@ -71,7 +72,7 @@ public abstract class Window {
     }
 
     //show window
-    public void showWindow(){
+    public final void showWindow(){
         newWindow.show();
     }
 }

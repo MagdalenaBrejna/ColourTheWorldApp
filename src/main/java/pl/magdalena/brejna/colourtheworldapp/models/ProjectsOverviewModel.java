@@ -3,15 +3,17 @@ package pl.magdalena.brejna.colourtheworldapp.models;
 import javafx.scene.layout.TilePane;
 import pl.magdalena.brejna.colourtheworldapp.objects.ProjectsOverview;
 
-public class ProjectsOverviewModel {
+public final class ProjectsOverviewModel {
 
-    private static ProjectsOverview projectsOverview = new ProjectsOverview();
+    private final static ProjectsOverview projectsOverview = new ProjectsOverview();
 
-    public static void closeOverview(){
+    //close overview stage
+    public final static void closeOverview(){
         projectsOverview.closeOverview();
     }
 
-    public static void presentOverview(TilePane tile){
+    //show overview stage
+    public final static void presentOverview(final TilePane tile){
         projectsOverview.presentOverview(tile);
     }
 }

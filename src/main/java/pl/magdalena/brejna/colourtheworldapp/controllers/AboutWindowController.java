@@ -4,15 +4,17 @@ import javafx.fxml.FXML;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.windows.AboutWindow;
 
-public class AboutWindowController {
+public final class AboutWindowController {
 
+    //close AboutWindow's stage
     @FXML
-    private void closeAboutWindow(){
+    private final void closeAboutWindow(){
         App.closeWindow(AboutWindow.getNewWindow());
     }
 
+    //minimize AboutWindow's stage
     @FXML
-    private void minimizeAboutWindow(){
+    private final void minimizeAboutWindow(){
         App.minimize(AboutWindow.getNewWindow());
     }
 }

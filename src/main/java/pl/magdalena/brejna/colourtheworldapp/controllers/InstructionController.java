@@ -4,15 +4,17 @@ import javafx.fxml.FXML;
 import pl.magdalena.brejna.colourtheworldapp.App;
 import pl.magdalena.brejna.colourtheworldapp.windows.Instruction;
 
-public class InstructionController {
+public final class InstructionController {
 
+    //close instruction's stage
     @FXML
-    private void closeInstruction(){
+    private final void closeInstruction(){
         App.closeWindow(Instruction.getNewWindow());
     }
 
+    //minimize instruction's stage
     @FXML
-    private void minimizeInstruction(){
+    private final void minimizeInstruction(){
         App.minimize(Instruction.getNewWindow());
     }
 }

@@ -15,13 +15,12 @@ import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageLoadingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ImageProcessingException;
 import pl.magdalena.brejna.colourtheworldapp.exceptions.ProjectSaveException;
 import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
-import pl.magdalena.brejna.colourtheworldapp.windows.Zoom;
-
+import pl.magdalena.brejna.colourtheworldapp.windows.FullView;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class ProjectModel {
+public final class ProjectModel {
 
     private final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtonsLayout.fxml";
     private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
@@ -29,17 +28,18 @@ public class ProjectModel {
     //ProjectModel contains an active project and zoom object
     private Project activeProject;
     private ProjectDao activeProjectDao;
-    private Zoom zoom;
+    private FullView fullView;
 
     //class initialization
-    public void init(){
+    public final void init(){
         activeProject = new Project();
         activeProjectDao = new ProjectDao();
+        fullView = new FullView();
         updateProjectList();
-        zoom = new Zoom();
     }
 
-    public void updateProjectList(){
+    //update the list of projects stored in the application with the list stored in the database
+    public final void updateProjectList(){
         try {
             ProjectListModel.setProjectList(activeProjectDao.showAllProjects());
         } catch (DatabaseException databaseException) {
@@ -48,45 +48,40 @@ public class ProjectModel {
     }
 
     //return active project
-    public Project getActiveProject(){
+    public final Project getActiveProject(){
         return activeProject;
     }
 
     //return loaded photo
-    public Image getPhotoImage() throws ImageLoadingException{
+    public final Image getPhotoImage() throws ImageLoadingException{
         if(isPhotoSelected())
             return tryOpenFile();
         return null;
     }
 
-    //get loaded photo
-    private Image tryOpenFile(){
-        return openFile(activeProject.getSourceFile());
-    }
-
     //return colouring book
-    public Image getProjectImage(){
+    public final Image getProjectImage(){
         if(isPhotoSelected())
             return createColouringBook();
         return null;
     }
 
     //check if active project contains photo
-    private boolean isPhotoSelected(){
+    private final boolean isPhotoSelected(){
         if(!activeProject.getSourceFile().equals(""))
             return true;
         return false;
     }
 
     //open file chooser to let find photo (jpg or png), add it to the active project
-    public Image loadImage () throws ImageLoadingException {
+    public final Image loadImage () throws ImageLoadingException {
         try {
-            FileChooser fileChooser = new FileChooser();
+            final FileChooser fileChooser = new FileChooser();
             setOpenFileChooserSettings(fileChooser);
 
-            File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
+            final File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
             activeProject.setSourceFile(file.toURI().toString());
-            Image image = openFile(activeProject.getSourceFile());
+            final Image image = openFile(activeProject.getSourceFile());
 
             if(!activeProject.getSourceFile().equals("")) {
                 activeProjectDao.updateProject(activeProject);
@@ -100,18 +95,21 @@ public class ProjectModel {
     }
 
     //set settings of FileChooser
-    private void setOpenFileChooserSettings(FileChooser fileChooser){
-        File directory = new File(System.getProperty("user.home"), "Pictures");
+    private final void setOpenFileChooserSettings(final FileChooser fileChooser){
+        final File directory = new File(System.getProperty("user.home"), "Pictures");
         fileChooser.setInitialDirectory(directory);
-
         fileChooser.setTitle("Open picture...");
-
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
     }
 
-    //open file
-    public Image openFile(String file) throws ImageLoadingException{
+    //get loaded photo
+    private final Image tryOpenFile(){
+        return openFile(activeProject.getSourceFile());
+    }
+
+    //open file given as string
+    public final Image openFile(final String file) throws ImageLoadingException{
         Image image = new Image(file);
         if (!image.isError())
             return image;
@@ -119,8 +117,8 @@ public class ProjectModel {
             throw new ImageLoadingException("open file exception");
     }
 
-    //check if current project is save. If yes update project, if not ask for a confirmation
-    public void loadProject(Project project){
+    //check if current project is save. If yes update project, else ask for a confirmation
+    public final void loadProject(final Project project){
         if(App.getStoredProject() != null)
             updateProject(project);
         else if(!isSaved())
@@ -129,20 +127,20 @@ public class ProjectModel {
             updateProject(project);
     }
 
-    //ask for confirmation
-    private void showReplaceConfirmationDialog(Project project){
+    //ask for close project confirmation
+    private final void showReplaceConfirmationDialog(final Project project){
         DialogsUtils.showConfirmationDialog("close.title", "close.text")
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> updateProject(project));
     }
 
     //set project selected in ComboBox as activeProject
-    private void updateProject(Project project){
+    private final void updateProject(final Project project){
         activeProject = project;
     }
 
     //transform the project photo to colouring book
-    public Image createColouringBook(){
+    public final Image createColouringBook(){
         try {
             return EdgeDetection.detectEdges(activeProject);
         } catch (ImageProcessingException exception) {
@@ -152,7 +150,7 @@ public class ProjectModel {
     }
 
     //save activeProject with a text stored in textField
-    public void saveActiveProject(StringProperty nameTextProperty) throws ProjectSaveException{
+    public final void saveActiveProject(final StringProperty nameTextProperty) throws ProjectSaveException{
         if(!activeProjectDao.isProject(nameTextProperty.getValue())) {
             activeProject.setProjectName(nameTextProperty.getValue());
             activeProjectDao.insertProject(activeProject);
@@ -162,8 +160,8 @@ public class ProjectModel {
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
-    public void saveColouringBook() throws ImageProcessingException {
-        FileChooser fileChooser = new FileChooser();
+    public final void saveColouringBook() throws ImageProcessingException {
+        final FileChooser fileChooser = new FileChooser();
         setSaveFileChooserSettings(fileChooser);
 
         if(activeProject.getProjectName() != null)
@@ -173,24 +171,24 @@ public class ProjectModel {
         saveImage(fileChooser);
     }
 
-    //set settings of FileChooser
-    private void setSaveFileChooserSettings(FileChooser fileChooser){
+    //set settings of the FileChooser
+    private final void setSaveFileChooserSettings(final FileChooser fileChooser){
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png"));
         fileChooser.setTitle("Save project...");
     }
 
-    //set settings of Directory
-    private void setDirectorySettings(FileChooser fileChooser){
-        File directory = new File(System.getProperty("user.home"), "Pictures/ColourTheWorld");
+    //set settings of a Directory
+    private final void setDirectorySettings(final FileChooser fileChooser){
+        final File directory = new File(System.getProperty("user.home"), "Pictures/ColourTheWorld");
         if(!directory.exists())
             directory.mkdirs();
         fileChooser.setInitialDirectory(directory);
     }
 
-    //save image in computer files
-    private void saveImage(FileChooser fileChooser) throws ImageProcessingException{
-        File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
+    //save an image in the computer files
+    private final void saveImage(final FileChooser fileChooser) throws ImageProcessingException{
+        final File file = fileChooser.showSaveDialog(Main.getPrimaryStage());
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(getProjectImage(), null), "png", file);
         } catch (IOException exception) {
@@ -198,8 +196,8 @@ public class ProjectModel {
         }
     }
 
-    //close active project
-    public void closeProject(){
+    //close the active project
+    public final void closeProject(){
         if(!isSaved())
             showCloseConfirmationDialog();
         else
@@ -207,38 +205,38 @@ public class ProjectModel {
     }
 
     //ask for close confirmation
-    private void showCloseConfirmationDialog(){
+    private final void showCloseConfirmationDialog(){
         DialogsUtils.showConfirmationDialog("close.title", "close.text")
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
     }
 
     //check if the active project is saved
-    public boolean isSaved(){
+    public final boolean isSaved(){
         if(!ProjectListModel.containsProject(activeProject))
             return false;
         return true;
     }
 
     //restart active project
-    public void deleteImage(){
+    public final void deleteImage(){
         activeProject.setSourceFile("");
         setInitialProjectValues();
         activeProjectDao.updateProject(activeProject);
     }
 
     //set project parameters initial values
-    private void setInitialProjectValues(){
+    private final void setInitialProjectValues(){
         activeProject.setDilationValue(0.0);
         activeProject.setContrastValue(150.0);
     }
 
-    public void setProjectDilationValue(double dilationValue){
+    public final void setProjectDilationValue(final double dilationValue){
         activeProject.setDilationValue(dilationValue);
     }
 
     //update readyImage with parameter set using slider
-    public Image dilate(Double sliderValue){
+    public final Image dilate(final Double sliderValue){
         Image updatedImage = null;
         if(createColouringBook() != null) {
             activeProject.setDilationValue(sliderValue);
@@ -249,12 +247,12 @@ public class ProjectModel {
         return updatedImage;
     }
 
-    public void setProjectContrastValue(double contrastValue){
+    public final void setProjectContrastValue(final double contrastValue){
         activeProject.setContrastValue(contrastValue);
     }
 
     //update readyImage with contrast parameter set using slider
-    public Image makeContrast(Double sliderValue){
+    public final Image makeContrast(final Double sliderValue){
         Image updatedImage =  null;
         if(createColouringBook() != null) {
             activeProject.setContrastValue(sliderValue);
@@ -265,23 +263,23 @@ public class ProjectModel {
         return updatedImage;
     }
 
-    //update Image
-    private Image updateImage(){
+    //update project Image with new dilation and contrast values
+    private final Image updateImage(){
         Image updatedImage = null;
         try {
             updatedImage = EdgeDetection.detectEdges(activeProject);
         } catch (ImageProcessingException exception) {}
-        zoom.updateZoomImage(updatedImage);
+        fullView.updateFullViewImage(updatedImage);
         return updatedImage;
     }
 
-    //show zoom window
-    public void showZoom(){
-        zoom.showZoom(getProjectImage());
+    //show full view window
+    public final void showFullView(){
+        fullView.showFullView(getProjectImage());
     }
 
     //open empty project
-    public void openNewProject(){
+    public final void openNewProject(){
         if(!isSaved())
             showOpenNewProjectConfirmationDialog();
         else
@@ -289,7 +287,7 @@ public class ProjectModel {
     }
 
     //show confirmation dialog and open a blank project if the answer is ok
-    private void showOpenNewProjectConfirmationDialog(){
+    private final void showOpenNewProjectConfirmationDialog(){
         DialogsUtils.showConfirmationDialog("close.title", "close.text")
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> App.setCenterLayout(MAIN_PROJECT_FXML));
