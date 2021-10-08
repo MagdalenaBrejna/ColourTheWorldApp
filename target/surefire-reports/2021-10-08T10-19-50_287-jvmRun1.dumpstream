@@ -1,0 +1,15 @@
+# Created at 2021-10-08T10:21:13.795
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream '#'.
+
+# Created at 2021-10-08T10:21:13.797
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream '# There is insufficient memory for the Java Runtime Environment to continue.'.
+
+# Created at 2021-10-08T10:21:13.798
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream '# Native memory allocation (mmap) failed to map 12582912 bytes for Failed to commit area from 0x00000000aa400000 to 0x00000000ab000000 of length 12582912.'.
+
+# Created at 2021-10-08T10:21:13.799
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream '# An error report file with more information is saved as:'.
+
+# Created at 2021-10-08T10:21:13.799
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream '# C:\Moje dokumenty\STUDIA\NAUKA\JAVA\ColourTheWorldApp\hs_err_pid5456.log'.
+

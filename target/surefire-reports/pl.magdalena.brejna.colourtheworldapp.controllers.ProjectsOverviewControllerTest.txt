@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: pl.magdalena.brejna.colourtheworldapp.controllers.ProjectsOverviewControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.275 s <<< FAILURE! - in pl.magdalena.brejna.colourtheworldapp.controllers.ProjectsOverviewControllerTest
+pl.magdalena.brejna.colourtheworldapp.controllers.ProjectsOverviewControllerTest.backToMainLayoutTest  Time elapsed: 1.25 s  <<< ERROR!
+java.lang.RuntimeException: pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException: FXMLLoader exception
+	at ColourTheWorldApp@1.0-SNAPSHOT/pl.magdalena.brejna.colourtheworldapp.controllers.ProjectsOverviewControllerTest.lambda$backToMainLayoutTest$0(ProjectsOverviewControllerTest.java:41)
+

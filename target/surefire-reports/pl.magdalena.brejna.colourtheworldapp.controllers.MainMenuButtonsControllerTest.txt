@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: pl.magdalena.brejna.colourtheworldapp.controllers.MainMenuButtonsControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.135 s <<< FAILURE! - in pl.magdalena.brejna.colourtheworldapp.controllers.MainMenuButtonsControllerTest
+pl.magdalena.brejna.colourtheworldapp.controllers.MainMenuButtonsControllerTest.OpenOverviewTest  Time elapsed: 1.324 s  <<< ERROR!
+java.lang.RuntimeException: java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+Caused by: java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+Caused by: java.lang.reflect.InvocationTargetException
+Caused by: pl.magdalena.brejna.colourtheworldapp.exceptions.ApplicationException: FXMLLoader exception
+

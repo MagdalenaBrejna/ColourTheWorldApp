@@ -1,0 +1,4 @@
+--patch-module
+ColourTheWorldApp=_
+--add-reads
+ColourTheWorldApp=ALL-UNNAMED

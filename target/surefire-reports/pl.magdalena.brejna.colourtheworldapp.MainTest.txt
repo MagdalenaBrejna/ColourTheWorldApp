@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: pl.magdalena.brejna.colourtheworldapp.MainTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.793 s - in pl.magdalena.brejna.colourtheworldapp.MainTest
