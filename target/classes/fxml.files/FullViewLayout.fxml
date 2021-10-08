@@ -17,7 +17,7 @@
             <HBox style="-fx-background-color: #36454f;" VBox.vgrow="ALWAYS">
                <children>
                   <MenuBar HBox.hgrow="ALWAYS" />
-                  <Button minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeZoom" prefHeight="28.0" prefWidth="25.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button fx:id="minimizeFullViewButton" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#minimizeFullView" prefHeight="28.0" prefWidth="25.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -26,7 +26,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="569.0" layoutY="10.0" minHeight="25.0" mnemonicParsing="false" onAction="#closeZoom" prefHeight="30.0" prefWidth="41.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button layoutX="569.0" layoutY="10.0" minHeight="25.0" mnemonicParsing="false" onAction="#closeFullView" prefHeight="30.0" prefWidth="41.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -40,7 +40,7 @@
                   <DropShadow />
                </effect>
             </HBox>
-            <ImageView fx:id="zoomImageView" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="fullImageView" pickOnBounds="true" preserveRatio="true" />
          </children>
       </VBox>
    </children>

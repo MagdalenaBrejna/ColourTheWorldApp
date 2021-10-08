@@ -212,12 +212,12 @@
             </VBox>
             <VBox prefHeight="95.0" prefWidth="255.0">
                <children>
-                  <Slider fx:id="dilationSlider" blockIncrement="0.1" majorTickUnit="1.0" max="3.0" minorTickCount="5" prefHeight="47.0" prefWidth="194.0" showTickMarks="true" stylesheets="@../style/styles.css">
+                  <Slider fx:id="dilationSlider" blockIncrement="0.1" majorTickUnit="1.0" max="3.0" minorTickCount="5" onMouseReleased="#getDilationValueFromSlider" prefHeight="47.0" prefWidth="194.0" showTickMarks="true" stylesheets="@../style/styles.css">
                      <padding>
                         <Insets top="23.0" />
                      </padding>
                   </Slider>
-                  <Slider fx:id="contrastSlider" blockIncrement="5.0" max="255.0" minorTickCount="1" prefHeight="28.0" prefWidth="210.0" showTickMarks="true" stylesheets="@../style/styles.css">
+                  <Slider fx:id="contrastSlider" blockIncrement="5.0" max="255.0" minorTickCount="1" onMouseReleased="#getContrastValueFromSlider" prefHeight="28.0" prefWidth="210.0" showTickMarks="true" stylesheets="@../style/styles.css">
                      <VBox.margin>
                         <Insets top="14.0" />
                      </VBox.margin></Slider>

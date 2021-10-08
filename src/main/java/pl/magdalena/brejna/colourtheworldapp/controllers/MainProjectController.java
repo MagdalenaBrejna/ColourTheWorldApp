@@ -1,5 +1,6 @@
 package pl.magdalena.brejna.colourtheworldapp.controllers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.*;
@@ -23,7 +24,20 @@ import pl.magdalena.brejna.colourtheworldapp.utils.DialogsUtils;
 public final class MainProjectController {
 
     private ProjectModel projectModel;
+
     private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
+    private final String PROJECT_NAME = "newProject";
+
+    private final String ERROR_TITLE = "error.title";
+    private final String NUMBER_ERROR_MESSAGE = "numberFormatError.text";
+    private final String LOADING_EXCEPTION_MESSAGE = "wrong source file";
+
+    private final double DEFAULT_DILATION_VALUE = 0.0;
+    private final double MIN_DILATION_VALUE = 0.0;
+    private final double MAX_DILATION_VALUE = 3.0;
+    private final double DEFAULT_CONTRAST_VALUE = 150.0;
+    private final double MIN_CONTRAST_VALUE = 1.0;
+    private final double MAX_CONTRAST_VALUE = 255.0;
 
     //controls connected with saving new project
     @FXML
@@ -89,7 +103,7 @@ public final class MainProjectController {
     private final void initNewProject(){
         this.projectModel = new ProjectModel();
         this.projectModel.init();
-        this.projectNameTextField.setText("newProject");
+        this.projectNameTextField.setText(PROJECT_NAME);
     }
 
     //load project if selected in the project overview
@@ -135,8 +149,6 @@ public final class MainProjectController {
     //set action listeners
     private final void setActionListeners(){
         setSplitPaneListener();
-        setDilationSliderListener();
-        setContrastSliderListener();
         setProjectChoiceComboBoxListener();
     }
 
@@ -145,20 +157,18 @@ public final class MainProjectController {
         splitPane.getDividers().get(0).positionProperty().addListener((obs, oldVal, newVal) -> {});
     }
 
-    //set dilationSlider listener
-    private final void setDilationSliderListener(){
-        dilationSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            projectImageView.setImage(projectModel.dilate((Double) newValue));
-            checkLoadingCorrectness(projectImageView);
-        });
+    //set dilation value when slider released
+    @FXML
+    private void getDilationValueFromSlider(Event event){
+        projectImageView.setImage(projectModel.dilate(dilationSlider.getValue()));
+        checkLoadingCorrectness(projectImageView);
     }
 
-    //set contrastSlider listener
-    private final void setContrastSliderListener(){
-        contrastSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            projectImageView.setImage(projectModel.makeContrast((Double) newValue));
-            checkLoadingCorrectness(projectImageView);
-        });
+    //set contrast value when slider released
+    @FXML
+    private void getContrastValueFromSlider(){
+        projectImageView.setImage(projectModel.makeContrast(contrastSlider.getValue()));
+        checkLoadingCorrectness(projectImageView);
     }
 
     //set projectChoiceComboBox listener
@@ -210,7 +220,7 @@ public final class MainProjectController {
     //check if a project contains a valid source file
     private final void checkLoadingCorrectness(final ImageView imageView){
         if(imageView.getImage() == null) {
-            final ImageLoadingException imageLoadingException = new ImageLoadingException("wrong source file");
+            final ImageLoadingException imageLoadingException = new ImageLoadingException(LOADING_EXCEPTION_MESSAGE);
             imageLoadingException.callErrorMessage();
             restartImage();
         }
@@ -338,25 +348,26 @@ public final class MainProjectController {
     private final void setDilationFromField(){
         try {
             final double dilationValue = Double.valueOf(dilationTextField.getText());
-            if (dilationValue >= 0 && dilationValue <= 3) {
+            if (dilationValue >= MIN_DILATION_VALUE && dilationValue <= MAX_DILATION_VALUE) {
                 projectImageView.setImage(projectModel.dilate(dilationValue));
                 checkLoadingCorrectness(projectImageView);
             }
         }catch(NumberFormatException doubleException){
-            DialogsUtils.showConfirmationDialog("error.title", "numberFormatError.text");
+            DialogsUtils.showConfirmationDialog(ERROR_TITLE, NUMBER_ERROR_MESSAGE);
         }
     }
 
+    //get project contrast value from the text field and update image
     @FXML
     private final void setContrastFromField(){
         try {
             final double contrastValue = Double.valueOf(contrastTextField.getText());
-            if (contrastValue >= 0 && contrastValue <= 255) {
+            if (contrastValue >= MIN_CONTRAST_VALUE && contrastValue <= MAX_CONTRAST_VALUE) {
                 projectImageView.setImage(projectModel.makeContrast(contrastValue));
                 checkLoadingCorrectness(projectImageView);
             }
         }catch(NumberFormatException doubleException){
-            DialogsUtils.showConfirmationDialog("error.title", "numberFormatError.text");
+            DialogsUtils.showConfirmationDialog(ERROR_TITLE, NUMBER_ERROR_MESSAGE);
         }
     }
 
@@ -365,7 +376,7 @@ public final class MainProjectController {
     private final void switchDilationImpact(){
         final Double sliderValue = projectModel.getActiveProject().getDilationValue();
         if(!dilationSlider.isDisable()) {
-            projectImageView.setImage(projectModel.dilate(0.0));
+            projectImageView.setImage(projectModel.dilate(DEFAULT_DILATION_VALUE));
             projectModel.setProjectDilationValue(sliderValue);
             setDilationSliderDisabledStatus(true);
         }else if(projectImageView.getImage() != null){
@@ -379,7 +390,7 @@ public final class MainProjectController {
     private final void switchContrastImpact(){
         final Double sliderValue = projectModel.getActiveProject().getContrastValue();
         if(!contrastSlider.isDisable()) {
-            projectImageView.setImage(projectModel.makeContrast(150.0));
+            projectImageView.setImage(projectModel.makeContrast(DEFAULT_CONTRAST_VALUE));
             projectModel.setProjectContrastValue(sliderValue);
             setContrastSliderDisabledStatus(true);
         }else if(projectImageView.getImage() != null){

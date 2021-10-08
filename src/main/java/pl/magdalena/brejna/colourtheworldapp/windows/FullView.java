@@ -14,9 +14,11 @@ import java.io.IOException;
 public final class FullView {
 
     private final String FULL_VIEW_FXML = "/fxml.files/FullViewLayout.fxml";
+    private final String APPLICATION_EXCEPTION_MESSAGE = "root setting exception";
+    private final int BORDER = 30;
 
     //elements necessary to serve zoomLayout
-    private FXMLLoader loader;
+    private static FXMLLoader loader;
     private FullViewController fullViewController;
     private static Stage newWindow;
     private double xOffset;
@@ -28,6 +30,10 @@ public final class FullView {
 
     public final static Stage getNewWindow(){
         return newWindow;
+    }
+
+    public final static FXMLLoader getLoader(){
+        return loader;
     }
 
     //enable full view stage moving
@@ -62,10 +68,16 @@ public final class FullView {
         newWindow.setScene(scene);
     }
 
-    //update image set in zoom window
+    //update image set in the full view
     public final void updateFullViewImage(final Image image){
         fullViewController = loader.getController();
-        fullViewController.setZoomImage(image);
+        fullViewController.setFullViewImage(image);
+    }
+
+    //get image stored in the full view
+    public final Image getFullViewImage(){
+        fullViewController = loader.getController();
+        return fullViewController.getFullViewImage();
     }
 
     //set root (only once)
@@ -74,7 +86,7 @@ public final class FullView {
         try {
             root = loader.load();
         } catch (IOException exception) {
-            throw new ApplicationException("root setting exception");
+            throw new ApplicationException(APPLICATION_EXCEPTION_MESSAGE);
         }
         return root;
     }
@@ -83,7 +95,7 @@ public final class FullView {
     public final void showFullView(final Image projectImage){
         updateFullViewImage(projectImage);
         newWindow.setWidth(projectImage.getWidth());
-        newWindow.setHeight(projectImage.getHeight()+30);
+        newWindow.setHeight(projectImage.getHeight() + BORDER);
         newWindow.show();
     }
 }

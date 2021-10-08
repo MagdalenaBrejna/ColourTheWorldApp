@@ -8,6 +8,9 @@ import java.util.ResourceBundle;
 
 public final class FxmlUtils {
 
+    private final static String APPLICATION_EXCEPTION_MESSAGE = "FXMLLoader exception";
+    private final static String BUNDLE = "bundles.messages";
+
     //load fxml and set bundles resources
     public final static BorderPane fxmlLoader(final String fxmlPath) throws ApplicationException {
         final FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
@@ -15,7 +18,7 @@ public final class FxmlUtils {
         try {
             return loader.load();
         } catch (IOException exception) {
-            throw new ApplicationException("FXMLLoader exception");
+            throw new ApplicationException(APPLICATION_EXCEPTION_MESSAGE);
         }
     }
 
@@ -27,6 +30,6 @@ public final class FxmlUtils {
     }
 
     public static ResourceBundle getResourceBundle() {
-        return ResourceBundle.getBundle("bundles.messages");
+        return ResourceBundle.getBundle(BUNDLE);
     }
 }

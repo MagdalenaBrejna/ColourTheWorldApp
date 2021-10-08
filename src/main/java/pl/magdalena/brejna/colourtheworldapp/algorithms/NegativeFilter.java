@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 public final class NegativeFilter {
 
+    private static final int MAX_COLOR = 255;
+
     //create negative image
     public final static BufferedImage makeNegativeImage(final BufferedImage image){
         for (int y = 0; y < image.getHeight(); y++)
@@ -19,9 +21,9 @@ public final class NegativeFilter {
     //create negative pixel
     private static final Color makeNewPixelColor(final int pixel){
         final Color color = new Color(pixel, true);
-        final int red = 255 - color.getRed();
-        final int green = 255 - color.getGreen();
-        final int blue = 255 - color.getBlue();
+        final int red = MAX_COLOR - color.getRed();
+        final int green = MAX_COLOR - color.getGreen();
+        final int blue = MAX_COLOR - color.getBlue();
         return new Color(red, green, blue);
     }
 }

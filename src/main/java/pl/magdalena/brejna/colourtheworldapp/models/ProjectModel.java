@@ -25,6 +25,20 @@ public final class ProjectModel {
     private final String MAIN_MENU_BUTTONS_FXML = "/fxml.files/MainMenuButtonsLayout.fxml";
     private final String MAIN_PROJECT_FXML = "/fxml.files/MainProjectLayout.fxml";
 
+    private final String LOADING_EXCEPTION_MESSAGE = "loading exception";
+    private final String SAVE_EXCEPTION_MESSAGE = "loading exception";
+    private final String CLOSE_TITLE = "close.title";
+    private final String CLOSE_TEXT = "close.text";
+    private final String SYSTEM_PROPERTY = "user.home";
+    private final String CHILD_DIRECTORY_FILE = "Pictures/ColourTheWorld";
+    private final String SAVE_FILE_CHOOSER_TITLE = "Save project...";
+    private final String OPEN_FILE_CHOOSER_TITLE = "Open picture...";
+    private final String FILE_CHOOSER_FILTER_DESCRIPTION = "Image Files";
+    private final String FILE_CHOOSER_CHILD = "Pictures";
+
+    private final double DEFAULT_DILATION_VALUE = 0.0;
+    private final double DEFAULT_CONTRAST_VALUE = 150.0;
+
     //ProjectModel contains an active project and zoom object
     private Project activeProject;
     private ProjectDao activeProjectDao;
@@ -90,17 +104,17 @@ public final class ProjectModel {
             return image;
 
         } catch (NullPointerException exception) {
-            throw new ImageLoadingException("loading exception");
+            throw new ImageLoadingException(LOADING_EXCEPTION_MESSAGE);
         }
     }
 
     //set settings of FileChooser
     private final void setOpenFileChooserSettings(final FileChooser fileChooser){
-        final File directory = new File(System.getProperty("user.home"), "Pictures");
+        final File directory = new File(System.getProperty(SYSTEM_PROPERTY), FILE_CHOOSER_CHILD);
         fileChooser.setInitialDirectory(directory);
-        fileChooser.setTitle("Open picture...");
+        fileChooser.setTitle(OPEN_FILE_CHOOSER_TITLE);
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+                new FileChooser.ExtensionFilter(FILE_CHOOSER_FILTER_DESCRIPTION, "*.png", "*.jpg"));
     }
 
     //get loaded photo
@@ -114,7 +128,7 @@ public final class ProjectModel {
         if (!image.isError())
             return image;
         else
-            throw new ImageLoadingException("open file exception");
+            throw new ImageLoadingException(LOADING_EXCEPTION_MESSAGE);
     }
 
     //check if current project is save. If yes update project, else ask for a confirmation
@@ -129,7 +143,7 @@ public final class ProjectModel {
 
     //ask for close project confirmation
     private final void showReplaceConfirmationDialog(final Project project){
-        DialogsUtils.showConfirmationDialog("close.title", "close.text")
+        DialogsUtils.showConfirmationDialog(CLOSE_TITLE, CLOSE_TEXT)
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> updateProject(project));
     }
@@ -156,7 +170,7 @@ public final class ProjectModel {
             activeProjectDao.insertProject(activeProject);
             updateProjectList();
         }else
-            throw new ProjectSaveException("project name already exists");
+            throw new ProjectSaveException(SAVE_EXCEPTION_MESSAGE);
     }
 
     //open file chooser to let choose location and name of saving file, save photo as a png
@@ -174,13 +188,13 @@ public final class ProjectModel {
     //set settings of the FileChooser
     private final void setSaveFileChooserSettings(final FileChooser fileChooser){
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files", "*.png"));
-        fileChooser.setTitle("Save project...");
+                new FileChooser.ExtensionFilter(FILE_CHOOSER_FILTER_DESCRIPTION, "*.png"));
+        fileChooser.setTitle(SAVE_FILE_CHOOSER_TITLE);
     }
 
     //set settings of a Directory
     private final void setDirectorySettings(final FileChooser fileChooser){
-        final File directory = new File(System.getProperty("user.home"), "Pictures/ColourTheWorld");
+        final File directory = new File(System.getProperty(SYSTEM_PROPERTY), CHILD_DIRECTORY_FILE);
         if(!directory.exists())
             directory.mkdirs();
         fileChooser.setInitialDirectory(directory);
@@ -192,7 +206,7 @@ public final class ProjectModel {
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(getProjectImage(), null), "png", file);
         } catch (IOException exception) {
-            throw new ImageProcessingException("Saving file exception");
+            throw new ImageProcessingException(SAVE_EXCEPTION_MESSAGE);
         }
     }
 
@@ -206,7 +220,7 @@ public final class ProjectModel {
 
     //ask for close confirmation
     private final void showCloseConfirmationDialog(){
-        DialogsUtils.showConfirmationDialog("close.title", "close.text")
+        DialogsUtils.showConfirmationDialog(CLOSE_TITLE, CLOSE_TEXT)
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> App.setCenterLayout(MAIN_MENU_BUTTONS_FXML));
     }
@@ -227,8 +241,8 @@ public final class ProjectModel {
 
     //set project parameters initial values
     private final void setInitialProjectValues(){
-        activeProject.setDilationValue(0.0);
-        activeProject.setContrastValue(150.0);
+        activeProject.setDilationValue(DEFAULT_DILATION_VALUE);
+        activeProject.setContrastValue(DEFAULT_CONTRAST_VALUE);
     }
 
     public final void setProjectDilationValue(final double dilationValue){
@@ -288,7 +302,7 @@ public final class ProjectModel {
 
     //show confirmation dialog and open a blank project if the answer is ok
     private final void showOpenNewProjectConfirmationDialog(){
-        DialogsUtils.showConfirmationDialog("close.title", "close.text")
+        DialogsUtils.showConfirmationDialog(CLOSE_TITLE, CLOSE_TEXT)
                 .filter(response -> response == ButtonType.OK)
                 .ifPresent(response -> App.setCenterLayout(MAIN_PROJECT_FXML));
     }

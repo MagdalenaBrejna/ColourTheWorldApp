@@ -9,6 +9,9 @@ import pl.magdalena.brejna.colourtheworldapp.utils.FxmlUtils;
 
 public final class App {
 
+    private final static int MAXIMIZED_VALUE = 1;
+    private final static int NOT_MAXIMIZED_VALUE = 0;
+
     private static BorderPane appPane;
     private static Project storedProject;
 
@@ -16,6 +19,11 @@ public final class App {
     public final static void setCenterLayout(final String fxml){
         appPane = Main.getMainPane();
         appPane.setCenter(FxmlUtils.fxmlLoader(fxml));
+    }
+
+    //return main pane
+    public final static BorderPane getMainPane(){
+        return Main.getMainPane();
     }
 
     //minimize the given stage
@@ -32,17 +40,17 @@ public final class App {
     public final static void switchSize(){
         if(Main.getPrimaryStage().isMaximized()) {
             Main.getPrimaryStage().setMaximized(false);
-            setMainStageSize(0);
+            setMainStageSize(NOT_MAXIMIZED_VALUE);
         }else {
             Main.getPrimaryStage().setMaximized(true);
-            setMainStageSize(1);
+            setMainStageSize(MAXIMIZED_VALUE);
         }
     }
 
     //close the application
     public final static void closeApplication(){
-        setMainStageSize(1);
-        System.exit(0);
+        setMainStageSize(MAXIMIZED_VALUE);
+        System.exit(NOT_MAXIMIZED_VALUE);
     }
 
     //reload the application

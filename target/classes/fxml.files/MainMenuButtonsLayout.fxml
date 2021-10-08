@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainMenuButtonsController">
+<BorderPane fx:id="mainMenuButtonsPane" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.magdalena.brejna.colourtheworldapp.controllers.MainMenuButtonsController">
    <center>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -57,7 +57,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0">
                <children>
-                  <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setPolishLanguage" stylesheets="@../style/button-style.css">
+                  <Button fx:id="polishButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setPolishLanguage" stylesheets="@../style/button-style.css">
                      <styleClass>
                         <String fx:value="language-image-view" />
                         <String fx:value="transparent-buttons" />
@@ -69,14 +69,14 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setEnglishLanguage" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
+                  <Button fx:id="englishButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setEnglishLanguage" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../icons/uk.jpg" />
                            </image></ImageView>
                      </graphic></Button>
-                  <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setGermanLanguage" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
+                  <Button fx:id="germanButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#setGermanLanguage" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>

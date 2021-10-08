@@ -10,6 +10,15 @@ public final class Project {
     private Double dilationValue = 0.0;
     private Double contrastValue = 150.0;
 
+    public Project(){ }
+
+    public Project(SimpleStringProperty projectName, String sourceFile, Double dilationValue, Double contrastValue){
+        this.projectName = projectName;
+        this.sourceFile = sourceFile;
+        this.dilationValue = dilationValue;
+        this.contrastValue = contrastValue;
+    }
+
     public String getProjectName() {
         return projectName.get();
     }

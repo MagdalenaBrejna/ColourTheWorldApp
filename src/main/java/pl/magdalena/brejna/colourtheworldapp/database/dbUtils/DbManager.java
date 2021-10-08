@@ -9,6 +9,9 @@ import java.sql.*;
 
 public final class DbManager {
 
+    private final static String CONNECTION_ERROR_MESSAGE = "Connection error";
+    private final static String DATABASE_ERROR_MESSAGE = "Database error";
+
     private final static String CONNECTION_URL = "jdbc:mysql://localhost:3306/colourtheworlddatabase";
     private final static String CONNECTION_USER = "root";
     private final static String CONNECTION_PASSWORD = "Magda2001";
@@ -21,7 +24,7 @@ public final class DbManager {
             dbConnection = DriverManager.getConnection(CONNECTION_URL, CONNECTION_USER, CONNECTION_PASSWORD);
             return dbConnection;
         } catch (SQLException sqlException) {
-            throw new DatabaseException("Connection error");
+            throw new DatabaseException(CONNECTION_ERROR_MESSAGE);
         }
     }
 
@@ -31,7 +34,7 @@ public final class DbManager {
             if (dbConnection != null && !dbConnection.isClosed())
                 dbConnection.close();
         } catch (SQLException sqlException){
-            throw new DatabaseException("Disconnection error");
+            throw new DatabaseException(CONNECTION_ERROR_MESSAGE);
         }
     }
 
@@ -52,7 +55,7 @@ public final class DbManager {
             executeRequestedAction(project, sqlStatement, statement);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DatabaseException("Database error");
+            throw new DatabaseException(DATABASE_ERROR_MESSAGE);
         }
     }
 
@@ -108,7 +111,7 @@ public final class DbManager {
         try (Statement statement = dbConnection.createStatement()) {
             return createCachedRowSet(statement, query);
         } catch (SQLException databaseException) {
-            throw new DatabaseException("Query error");
+            throw new DatabaseException(DATABASE_ERROR_MESSAGE);
         }
     }
 
@@ -129,7 +132,7 @@ public final class DbManager {
                 statement.setInt(1, sizeValue);
                 statement.executeUpdate();
             } catch (SQLException e) {
-                throw new DatabaseException("Database error");
+                throw new DatabaseException(DATABASE_ERROR_MESSAGE);
             }
             disconnectDB();
         }catch(DatabaseException databaseException){

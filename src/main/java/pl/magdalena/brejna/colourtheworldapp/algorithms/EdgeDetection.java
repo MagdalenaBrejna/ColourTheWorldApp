@@ -19,6 +19,13 @@ import java.nio.file.Paths;
 
 public final class EdgeDetection {
 
+    private static final int ALGORITHM_SIZE_CONST = 3;
+    private static final int LAPLACIAN_DEPTH_CONST = -10;
+    private static final double GAUSSIAN_SIGMA_X_CONST = 0.5;
+
+    private static final Color BLACK = new Color(0, 0 , 0);
+    private static final Color WHITE = new Color(255, 255 , 255);
+
     //Laplacian of Gauss algorithm - edge detection
     public static final Image detectEdges(final Project activeProject) throws ImageProcessingException{
         try {
@@ -45,8 +52,8 @@ public final class EdgeDetection {
     //process image using Laplacian of Gauss algorithm
     private static final void processImageWithAlgorithms(final Mat sourceImage, final Mat gray, final Mat dst){
         Imgproc.cvtColor(sourceImage, gray, Imgproc.COLOR_RGB2GRAY);
-        Imgproc.GaussianBlur(sourceImage, dst, new Size(3,3), 0.5);
-        Imgproc.Laplacian(sourceImage, dst, -10, 3);
+        Imgproc.GaussianBlur(sourceImage, dst, new Size(ALGORITHM_SIZE_CONST, ALGORITHM_SIZE_CONST), GAUSSIAN_SIGMA_X_CONST);
+        Imgproc.Laplacian(sourceImage, dst, LAPLACIAN_DEPTH_CONST, ALGORITHM_SIZE_CONST);
     }
 
     //create final image
@@ -64,7 +71,9 @@ public final class EdgeDetection {
     }
 
     private static final void imposeImageDilation(final Project activeProject, final Mat dst){
-        final Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size((2*activeProject.getDilationValue()) + 1, (2*activeProject.getDilationValue())+1), new Point(activeProject.getDilationValue(), activeProject.getDilationValue()));
+        final double pointSideSize = activeProject.getDilationValue();
+        final double anchorSideSize = 2*pointSideSize + 1;
+        final Mat kernel = Imgproc.getStructuringElement(Imgproc.CV_SHAPE_RECT, new Size(anchorSideSize, anchorSideSize), new Point(pointSideSize, pointSideSize));
         Imgproc.dilate(dst, dst, kernel);
     }
 
@@ -88,8 +97,8 @@ public final class EdgeDetection {
     private static final Color makePixelBlackOrWhite(final int pixelRgbColor, final Double contrastFactor){
         final Color pixelColor = new Color(pixelRgbColor, true);
         if(pixelColor.getRed() >= contrastFactor)
-            return new Color(255, 255, 255);
+            return WHITE;
         else
-            return new Color(0, 0, 0);
+            return BLACK;
     }
 }

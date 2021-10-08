@@ -13,7 +13,12 @@ import pl.magdalena.brejna.colourtheworldapp.utils.ResizeHelper;
 
 public class Main extends Application {
 
+    private final int MAXIMIZED_VALUE = 1;
+    private final int STAGE_MIN_HEIGHT = 800;
+    private final int STAGE_MIN_WIDTH = 1050;
+    private final String IMAGE_FILE = "https://img.freepik.com/free-photo/recycled-crumpled-white-paper-texture-paper-background_34070-1016.jpg?size=626&ext=jpg";
     private static final String MAIN_LAYOUT_FXML = "/fxml.files/MainLayout.fxml";
+
     private static Stage primaryStage;
     private static BorderPane mainPane;
     private double xOffset;
@@ -37,7 +42,7 @@ public class Main extends Application {
 
     //set stage style
     private final void setStageStyle(final Stage stage){
-        final Image image = new Image ("https://img.freepik.com/free-photo/recycled-crumpled-white-paper-texture-paper-background_34070-1016.jpg?size=626&ext=jpg");
+        final Image image = new Image (IMAGE_FILE);
         mainPane.setBackground(new Background(new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -63,10 +68,10 @@ public class Main extends Application {
 
     //set stage size
     private final void setStageSize(){
-        primaryStage.setMinHeight(800);
-        primaryStage.setMinWidth(1050);
+        primaryStage.setMinHeight(STAGE_MIN_HEIGHT);
+        primaryStage.setMinWidth(STAGE_MIN_WIDTH);
         StageDao dao = new StageDao();
-        if(dao.getMainStageSize() == 1)
+        if(dao.getMainStageSize() == MAXIMIZED_VALUE)
             primaryStage.setMaximized(true);
         else
             primaryStage.setMaximized(false);

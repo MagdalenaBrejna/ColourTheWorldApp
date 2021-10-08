@@ -30,11 +30,11 @@ public final class ProjectListModel {
         list.deleteProjectOnMouseClick(project);
     }
 
-    public final static boolean containsProject(final Project project){
-        return list.containsProject(project);
+    public final static void deleteProject(){
+        list.delete();
     }
 
-    public final static void presentProjects(){
-        list.presentProjects();
+    public final static boolean containsProject(final Project project){
+        return list.containsProject(project);
     }
 }

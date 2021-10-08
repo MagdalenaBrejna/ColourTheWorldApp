@@ -12,12 +12,19 @@ import javafx.scene.transform.Scale;
 
 public final class ImageSettings {
 
+    private static final double SLIDER_HALF_VALUE = 0.5;
+    private static final double MINIMIZE_FACTOR_VALUE = 0.95;
+    private static final double MAXIMIZE_FACTOR_VALUE = 1.05;
     private static ObjectProperty<Point2D> lastMouseCoordinates = new SimpleObjectProperty<>();
+
+    public static ObjectProperty<Point2D> getLastMouseCoordinates(){
+        return lastMouseCoordinates;
+    }
 
     //set start settings of a ScrollPane
     public static final void setScrollInitialValues(final ScrollPane scrollPane){
-        scrollPane.setHvalue(0.5);
-        scrollPane.setVvalue(0.5);
+        scrollPane.setHvalue(SLIDER_HALF_VALUE);
+        scrollPane.setVvalue(SLIDER_HALF_VALUE);
     }
 
     //scroll given images
@@ -33,9 +40,9 @@ public final class ImageSettings {
     //choose value of zoom value
     private static final double setZoomFactor(final ScrollEvent mouseScrollEvent){
         if(mouseScrollEvent.getDeltaY() < 0)
-            return 0.95;
+            return MINIMIZE_FACTOR_VALUE;
         else
-            return 1.05;
+            return MAXIMIZE_FACTOR_VALUE;
     }
 
     //transform image using calculated zoom factor

@@ -10,28 +10,36 @@ import java.util.stream.Collectors;
 
 public final class ProjectDao {
 
+    private final String INSERT_SQL = "INSERT INTO projects (projectName, sourceFile, dilationValue, contrastValue) VALUES (?, ?, ?, ?)";
+    private final String UPDATE_SQL = "UPDATE projects SET projectName=?, sourceFile=?, dilationValue=?, contrastValue=? WHERE projectName=?";
+    private final String DELETE_SQL = "DELETE FROM projects WHERE projectName=?";
+    private final String QUERY_SQL = "SELECT projectName, sourceFile, dilationValue, contrastValue FROM projects";
+
+    private final String COLUMN_NAME = "projectName";
+    private final String COLUMN_SOURCE_FILE = "sourceFile";
+    private final String COLUMN_DILATION_VALUE = "dilationValue";
+    private final String COLUMN_CONTRAST_VALUE = "contrastValue";
+
+    private final String DATABASE_ERROR_MESSAGE = "Query exception";
+
     //add given project to the projects table
     public final void insertProject(final Project project){
-        final String sql = "INSERT INTO projects (projectName, sourceFile, dilationValue, contrastValue) VALUES (?, ?, ?, ?)";
-        DbManager.executeTableUpdate(project, sql);
+        DbManager.executeTableUpdate(project, INSERT_SQL);
     }
 
     //delete given project from the table
     public final void deleteProject(final Project project){
-        final String sql = "DELETE FROM projects WHERE projectName=?";
-        DbManager.executeTableUpdate(project, sql);
+        DbManager.executeTableUpdate(project, DELETE_SQL);
     }
 
     //update given project in the table
     public final void updateProject(final Project project){
-        final String sql = "UPDATE projects SET projectName=?, sourceFile=?, dilationValue=?, contrastValue=? WHERE projectName=?";
-        DbManager.executeTableUpdate(project, sql);
+        DbManager.executeTableUpdate(project, UPDATE_SQL);
     }
 
     //get all projects from the table
     public final ArrayList showAllProjects() throws DatabaseException{
-        final String sql = "SELECT projectName, sourceFile, dilationValue, contrastValue FROM projects";
-        final CachedRowSet resultSet = DbManager.executeQuery(sql);
+        final CachedRowSet resultSet = DbManager.executeQuery(QUERY_SQL);
         return getAllProjects(resultSet);
     }
 
@@ -42,7 +50,7 @@ public final class ProjectDao {
             while (resultSet.next())
                 projectList.add(getProject(resultSet));
         }catch(SQLException databaseException){
-            throw new DatabaseException("Query exception");
+            throw new DatabaseException(DATABASE_ERROR_MESSAGE);
         }
         return projectList;
     }
@@ -50,10 +58,10 @@ public final class ProjectDao {
     //create a project from the row of the query result set
     private final Project getProject(final CachedRowSet resultSet) throws SQLException {
         final Project project = new Project();
-        project.setProjectName(resultSet.getString("projectName"));
-        project.setSourceFile(resultSet.getString("sourceFile"));
-        project.setDilationValue(resultSet.getDouble("dilationValue"));
-        project.setContrastValue(resultSet.getDouble("contrastValue"));
+        project.setProjectName(resultSet.getString(COLUMN_NAME));
+        project.setSourceFile(resultSet.getString(COLUMN_SOURCE_FILE));
+        project.setDilationValue(resultSet.getDouble(COLUMN_DILATION_VALUE));
+        project.setContrastValue(resultSet.getDouble(COLUMN_CONTRAST_VALUE));
         return project;
     }
 

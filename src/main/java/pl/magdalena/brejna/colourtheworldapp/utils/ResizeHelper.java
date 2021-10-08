@@ -15,8 +15,8 @@ public final class ResizeHelper implements EventHandler<MouseEvent> {
     private double startX = 0;
     private double startY = 0;
 
-    public ResizeHelper(Stage stageTmp) {
-        stage = stageTmp;
+    public ResizeHelper(Stage tempStage) {
+        stage = tempStage;
     }
 
     @Override

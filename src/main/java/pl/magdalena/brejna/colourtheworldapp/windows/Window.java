@@ -13,9 +13,10 @@ import java.io.IOException;
 public abstract class Window {
 
     private String FXML = "";
+    private final String APPLICATION_EXCEPTION_MESSAGE = "root setting exception";
 
     //elements necessary to serve instructionLayout
-    private FXMLLoader loader;
+    private static FXMLLoader loader;
     private static Stage newWindow;
     private double xOffset;
     private double yOffset;
@@ -26,7 +27,7 @@ public abstract class Window {
     }
 
     //enable stage moving
-    public final void setStageMoving(final Scene scene){
+    protected final void setStageMoving(final Scene scene){
         scene.setOnMousePressed(event -> {
             xOffset = newWindow.getX() - event.getScreenX();
             yOffset = newWindow.getY() - event.getScreenY();
@@ -39,6 +40,10 @@ public abstract class Window {
 
     public final static Stage getNewWindow(){
         return newWindow;
+    }
+
+    public final static FXMLLoader getLoader(){
+        return loader;
     }
 
     //set necessary entry settings
@@ -66,7 +71,7 @@ public abstract class Window {
         try {
             root = loader.load();
         } catch (IOException exception) {
-            throw new ApplicationException("root setting exception");
+            throw new ApplicationException(APPLICATION_EXCEPTION_MESSAGE);
         }
         return root;
     }

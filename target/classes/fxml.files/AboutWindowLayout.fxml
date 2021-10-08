@@ -28,7 +28,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="741.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeAboutWindow" prefHeight="30.0" prefWidth="40.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
+                  <Button fx:id="minimizeAboutWindowButton" layoutX="741.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeAboutWindow" prefHeight="30.0" prefWidth="40.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>

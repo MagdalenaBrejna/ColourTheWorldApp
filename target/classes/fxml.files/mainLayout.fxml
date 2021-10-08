@@ -23,23 +23,23 @@
                     <menus>
                       <Menu mnemonicParsing="false" text="%file">
                         <items>
-                          <MenuItem mnemonicParsing="false" onAction="#closeApplication" text="%close" />
+                          <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#closeApplication" text="%close" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="%edit">
                            <items>
-                              <CheckMenuItem mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
+                              <CheckMenuItem fx:id="onTopMenuItem" mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
                            </items>
                       </Menu>
                         <Menu mnemonicParsing="false" text="%help">
                            <items>
-                              <MenuItem mnemonicParsing="false" onAction="#showInstruction" text="%instruction" />
-                          <MenuItem mnemonicParsing="false" onAction="#showAboutSection" text="%about" />
+                              <MenuItem fx:id="instructionMenuItem" mnemonicParsing="false" onAction="#showInstruction" text="%instruction" />
+                          <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#showAboutSection" text="%about" />
                            </items>
                         </Menu>
                     </menus>
                   </MenuBar>
-                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="908.0" mnemonicParsing="false" onAction="#minimizeApplication" opacity="0.9" prefHeight="0.0" prefWidth="12.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button fx:id="minimizeButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="908.0" mnemonicParsing="false" onAction="#minimizeApplication" opacity="0.9" prefHeight="0.0" prefWidth="12.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -51,7 +51,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#switchApplicationSize" opacity="0.9" prefHeight="23.0" prefWidth="42.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button fx:id="winodwResizeButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#switchApplicationSize" opacity="0.9" prefHeight="23.0" prefWidth="42.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -60,7 +60,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER_RIGHT" layoutX="949.0" mnemonicParsing="false" onAction="#closeApplication" opacity="0.9" prefHeight="22.0" prefWidth="42.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
+                  <Button fx:id="closeAppButton" alignment="CENTER_RIGHT" layoutX="949.0" mnemonicParsing="false" onAction="#closeApplication" opacity="0.9" prefHeight="22.0" prefWidth="42.0" styleClass="transparent-buttons" stylesheets="@../style/button-style.css" HBox.hgrow="NEVER">
                      <graphic>
                         <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
