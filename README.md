@@ -22,7 +22,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The idea of the application was born in my head during the second wave of the coronavirus pandemic, when stationery and book stores were deemed not essential for survival and closed. I decided to improve my programming skills while creating the tool that let all users to create their own coloring books based on personal photos.
+The idea of the application was born in my head during the second wave of the coronavirus pandemic, when stationery and book stores were deemed not essential for survival and closed. I decided to improve my programming skills while creating the tool that let all users create their own coloring books based on personal photos.
 
 The application’s name is strongly related to its main goal: You can color your world with your own colors – make it light or dark, happy or sad. Just take a photo, upload it, personalize and be happy with the final effect. It is a fantastic way to let your child color its own dog or de-stress after daily tasks. You can have as detailed coloring book as you want and no more pay for it. Isn’t it a great deal?
 
@@ -45,8 +45,8 @@ The two main buttons on the front page let you create a new project and see the 
 
 <br/>
 <div align="center">  
-<img alt="engProject" title="engProject" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/engProject.png" width="430">
-<img alt="overview" title="overview" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/overview.png" width="433">
+<img alt="engProject" title="engProject" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/engProject.png" width="400">
+<img alt="overview" title="overview" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/overview.png" width="400">
 </div>
 <br/>
 
@@ -65,8 +65,8 @@ You can personalize your project using sliders. Activate/disactivate algorithms'
 
 <br/>
 <div align="center">  
-<img alt="project2" title="project2" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project2.png" width="450">
-<img alt="project3" title="project3" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project3.png" width="450">
+<img alt="project2" title="project2" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project2.png" width="400">
+<img alt="project3" title="project3" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project3.png" width="400">
 </div>
 <br/>
 
@@ -74,9 +74,9 @@ Using ctrl + mouse scroll let you scale the image.
 
 <br/>
 <div align="center">  
-<img alt="project4" title="project4" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project4.png" width="450">
-<img alt="project5" title="project5" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project5.png" width="450">
-<img alt="project6" title="project6" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project6.png" width="450">
+<img alt="project4" title="project4" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project4.png" width="400">
+<img alt="project5" title="project5" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project5.png" width="400">
+<img alt="project6" title="project6" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/project6.png" width="400">
 </div>
 <br/>
 
@@ -84,8 +84,8 @@ Save your project using the button "Save As". If the project is saved, dialog pr
 
 <br/>
 <div align="center">  
-<img alt="save1" title="save1" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/save1.png" width="450">
-<img alt="save2" title="save2" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/save2.png" width="450">
+<img alt="save1" title="save1" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/save1.png" width="400">
+<img alt="save2" title="save2" src="https://github.com/MagdalenaBrejna/ColourTheWorldApp/blob/master/src/main/resources/readmeScreenshots/save2.png" width="400">
 </div>
 <br/>
 
